@@ -209,25 +209,42 @@ class DbAdapter_mysql extends DbAdapter{
 		return $this->getAll('DESCRIBE '.$table);
 	}
 	
-	// ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
+	/**
+	 * ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
+	 * в текущей базе данных
+	 * @return array - массив-список таблиц
+	 */
 	public function showTables(){
 	
 		return $this->getCol('SHOW TABLES');
 	}
 	
-	// ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
+	/**
+	 * ПОЛУЧИТЬ СПИСОК БД
+	 * @return array - массив-список баз данных
+	 */
 	public function showDatabases(){
 	
 		return $this->getCol('SHOW DATABASES');
 	}
 	
-	// ПОКАЗАТЬ СТРОКУ CREATE TABLE
+	/**
+	 * ПОКАЗАТЬ СТРОКУ CREATE TABLE
+	 * @param string $table - имя таблицы
+	 * @return string - строка CREATE TABLE
+	 */
 	public function showCreateTable($table){
 	
 		return $this->getCell('SHOW CREATE TABLE '.$table, 0, 1);
 	}
 	
-	// СОЗДАТЬ ДАМП ДАННЫХ
+	/**
+	 * СОЗДАТЬ ДАМП БАЗЫ ДАННЫХ
+	 * @param string|null $database - база данных (или дефолтная, если null)
+	 * @param array|null $tables - список таблиц (или все, если null)
+	 * @output выдает текст sql-дампа
+	 * @return void
+	 */
 	public function makeDump($database = null, $tables = null){
 
 		$lf = "\n";

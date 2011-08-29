@@ -77,6 +77,21 @@ class FrontController extends Controller{
 			->render();
 	}
 	
+	public function display_test_db(){
+			
+			$dbs = db::get()->showDatabases();
+			$tables = db::get()->showTables();
+			
+			$content = ''
+				.'<h1>Базы данных</h1><pre>'.print_r($dbs, 1).'</pre>'
+				.'<h1>Таблицы текущей БД</h1><pre>'.print_r($tables, 1).'</pre>';
+				
+			Layout::get()
+				->setTitle('Тест базы данных')
+				->setContent($content)
+				->render();
+	}
+	
 	public function display_404($method = ''){
 		
 		if(AJAX_MODE){
