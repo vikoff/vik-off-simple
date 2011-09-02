@@ -2,7 +2,7 @@
 
 class DbAdapter_mysql extends DbAdapter{ 
 	
-	// ПОДКЛЮЧИТЬСЯ К БАЗЕ ДАННЫХ
+	/** ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ */
 	public function connect(){
 	
 		$this->_dbrs = mysql_connect($this->connHost, $this->connUser, $this->connPass, $new_link = TRUE) or $this->error('Невозможно подключиться к серверу MySQL');
@@ -14,7 +14,7 @@ class DbAdapter_mysql extends DbAdapter{
 		$this->_connected = TRUE;
 	}
 	
-	// УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ
+	/** УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ */
 	public function setEncoding($encoding){
 		
 		$this->_encoding = $encoding;
@@ -23,25 +23,33 @@ class DbAdapter_mysql extends DbAdapter{
 			$this->query('SET NAMES '.$this->_encoding);
 	}
 	
+	/** ВЫБРАТЬ БАЗУ ДАННЫХ */
 	public function selectDb($db){
 		
 		$this->connDatabase = $db;
 		mysql_select_db($this->connDatabase, $this->_dbrs)or $this->error('Невозможно выбрать базу данных');
 	}
 	
-	// ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY
+	/** ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY */
 	public function getLastId(){
 	
 		return mysql_insert_id($this->_dbrs);
 	}
 	
-	// ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ
+	/** ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ */
 	public function getAffectedNum(){
 		
 		return mysql_affected_rows($this->_dbrs);
 	}
-
-	// REPLACE
+	
+	/**
+	 * REPLACE
+	 * вставка данных в таблицу (аналогично INSERT). Но если в таблице уже присутствует PRIMARY KEY
+	 * или UNIQUE с тем же значением, что и переданное, то старая запись будет удалена.
+	 * @param string $table - имя таблицы
+	 * @param array $fieldsValues - массив пар (поле => значение) для вставки
+	 * @return integer последний вставленный id 
+	 */
 	public function replace($table, $fieldsValues){
 		
 		$insert_arr = array();
@@ -56,7 +64,11 @@ class DbAdapter_mysql extends DbAdapter{
 		return $id;
 	}
 
-	// QUERY
+	/**
+	 * ВЫПОЛНИТЬ ЗАПРОС
+	 * @param string $query - SQL-запрос
+	 * @return resource - ресурс ответа базы данных
+	 */
 	public function query($query){
 		
 		$sql = $query;
@@ -70,7 +82,13 @@ class DbAdapter_mysql extends DbAdapter{
 		return $rs;
 	}
 	
-	//функция GET ONE выполняет запрос и возвращает единственное значение (первая строка, первый столбец)
+	/**
+	 * GET ONE
+	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return mixed|$default_value
+	 */
 	public function getOne($query, $default_value = null){
 		
 		$rs = $this->query($query);
@@ -82,8 +100,16 @@ class DbAdapter_mysql extends DbAdapter{
 		return $cell;
 	}
 	
-	//функция GET CELL выполняет запрос и возвращает единственное значение (указанные строка и столбец)
-	public function getCell($query, $row, $column, $default_value = 0){
+	/**
+	 * GET CELL
+	 * выполнить запрос и вернуть единственное значение (указанные строка и столбец)
+	 * @param string $query - SQL-запрос
+	 * @param integer $row - номер строки, значение которой будет возвращено
+	 * @param integer $column - номер столбца, значение которого будет возвращено
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return mixed|$default_value
+	 */
+	public function getCell($query, $row, $column, $default_value = null){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -94,8 +120,17 @@ class DbAdapter_mysql extends DbAdapter{
 		return $cell;
 	}
 	
-	// GET STATIC ONE возвращает единственную строку, а если строка не найдена, то вставляет ее в таблицу
-	public function getStaticOne($query, $table, $fieldsvalues, $default_value = array()){
+	/**
+	 * GET STATIC ONE
+	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+	 * а если строка не найдена, то вставить ее в таблицу
+	 * @param string $query - SQL-запрос
+	 * @param string $table - таблица для вставки
+	 * @param array $fieldsvalues - ассоциативный массив данных для вставки
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return mixed|$default_value
+	 */
+	public function getStaticOne($query, $table, $fieldsvalues, $default_value = null){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs)){
@@ -107,7 +142,13 @@ class DbAdapter_mysql extends DbAdapter{
 		return $row;
 	}
 	
-	// GET COL возвращает единственный столбец (первый в наборе)
+	/**
+	 * GET COL
+	 * выполнить запрос и вернуть единственный столбец (первый)
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getCol($query, $default_value = array()){
 		
 		$rs = $this->query($query);
@@ -128,7 +169,7 @@ class DbAdapter_mysql extends DbAdapter{
 	 * @param mixed $default_value
 	 * @return array|$default_value
 	 */
-	public function getColIndexed($query, $default_value = 0){
+	public function getColIndexed($query, $default_value = array()){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -139,7 +180,13 @@ class DbAdapter_mysql extends DbAdapter{
 		return $col;
 	}
 	
-	// GET ROW возвращает единственную строку (первую в наборе)
+	/**
+	 * GET ROW
+	 * выполнить запрос и вернуть единственную строку (первую)
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getRow($query, $default_value = array()){
 		
 		$rs = $this->query($query);
@@ -151,20 +198,35 @@ class DbAdapter_mysql extends DbAdapter{
 		return $row;
 	}
 	
-	// GET STATIC ROW возвращает единственную строку, а если строка не найдена, то вставляет ее в таблицу
-	public function getStaticRow($query, $table, $fieldsvalues, $default_value = array()){
+	/**
+	 * GET STATIC ROW
+	 * выполнить запрос и вернуть единственную строку (первую)
+	 * а если строка не найдена, то вставить ее в таблицу
+	 * @param string $query - SQL-запрос
+	 * @param string $table - таблица для вставки
+	 * @param array $fieldsvalues - ассоциативный массив данных для вставки
+	 * @return array|$fieldsvalues
+	 */
+	public function getStaticRow($query, $table, $fieldsvalues){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs)){
 			$row = mysql_fetch_assoc($rs);
 		}else{
 			$this->insert($table, $fieldsvalues);
-			$row = $default_value;
+			$row = $fieldsvalues;
 		}
+		$this->freeResult($rs);
 		return $row;
 	}
 	
-	// GET ALL формирует многомерный ассоциативный массив
+	/**
+	 * GET ALL
+	 * выполнить запрос и вернуть многомерный ассоциативный массив данных
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getAll($query, $default_value = array()){
 		
 		$rs = $this->query($query);
@@ -176,7 +238,16 @@ class DbAdapter_mysql extends DbAdapter{
 		return $data;
 	}
 	
-	// GET ALL INDEXED формирует многомерный индексированный ассоциативный массив 
+	/**
+	 * GET ALL INDEXED
+	 * выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных
+	 * @param string $query - SQL-запрос
+	 * @param string $index - имя поля, по которому будет индексироваться массив результатов.
+	 *        Важно проследить, чтобы значение у индекса было уникальным у каждой строки,
+	 *        иначе дублирующиеся строки будут затерты.
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getAllIndexed($query, $index, $default_value = 0){
 		
 		$rs = $this->query($query);
@@ -187,7 +258,12 @@ class DbAdapter_mysql extends DbAdapter{
 		return $data;
 	}
 	
-	// ESCAPE
+	/**
+	 * ЭКРАНИРОВАНИЕ ДАННЫХ
+	 * выполняется с учетом типа данных для предотвращения SQL-инъекций
+	 * @param mixed строка для экранирования
+	 * @param mixed - безопасная строка
+	 */
 	public function escape($str){
 		
 		if(!in_array(strtolower(gettype($str)), array('integer', 'double', 'boolean', 'null'))){
@@ -198,12 +274,22 @@ class DbAdapter_mysql extends DbAdapter{
 		return $str;
 	}
 	
-	// ЗАКЛЮЧЕНИЕ ИМЕНИ ПОЛЯ В КАВЫЧКИ
+	/**
+	 * ЗАКЛЮЧЕНИЕ ИМЕНИ ПОЛЯ В КАВЫЧКИ
+	 * для полей, имена которых совпадают с ключевыми словами
+	 * @param string $fieldname - имя поля
+	 * @param string - имя поля, заключенное в кавычки
+	 */
 	public function quoteFieldName($fieldname){
 		return "`".$fieldname."`";
 	}
 	
-	// DESCRIBE
+	/**
+	 * DESCRIBE
+	 * получить массив, описывающий структуру таблицы
+	 * @param string $table - имя таблицы
+	 * @return array - структура таблицы
+	 */
 	public function describe($table){
 		
 		return $this->getAll('DESCRIBE '.$table);
@@ -298,7 +384,7 @@ class DbAdapter_mysql extends DbAdapter{
 				
 			echo $lf;
 			
-			$numRows = $this->getOne('SELECT COUNT(*) FROM '.$table);
+			$numRows = $this->getOne('SELECT COUNT(1) FROM '.$table);
 			
 			if($numRows){
 				

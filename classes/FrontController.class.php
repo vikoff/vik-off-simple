@@ -92,6 +92,21 @@ class FrontController extends Controller{
 				->render();
 	}
 	
+	public function display_test(){
+				
+			Layout::get()
+				->setTitle('Тест')
+				->setContentPhpFile('test.php')
+				->render();
+	}
+	
+	public function display_ajax(){
+				
+			Layout::get()
+				->setContentPhpFile('ajax.php')
+				->render();
+	}
+	
 	public function display_404($method = ''){
 		
 		if(AJAX_MODE){
@@ -124,12 +139,20 @@ class FrontController extends Controller{
 		$_SESSION['logged'] = 0;
 		reload();
 	}
+	
+	public function action_test(){
+		
+		echo '<pre>'; print_r($_POST);
+	}
 
 	////////////////////
 	//////  AJAX  //////
 	////////////////////
 	
-	
+	public function ajax_test(){
+		
+		print_r($_GET);
+	}
 
 	////////////////////
 	//////  MODEL  /////

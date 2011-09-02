@@ -2,7 +2,7 @@
 
 class DbAdapter_postgres extends DbAdapter{ 
 
-	// ПОДКЛЮЧИТЬСЯ К БАЗЕ ДАННЫХ
+	/** ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ */
 	public function connect(){
 		
 		$connString = 'host='.$this->connHost.' port='.$this->connPort.' user='.$this->connUser.' password='.$this->connPass.' dbname='.$this->connDatabase;
@@ -14,7 +14,7 @@ class DbAdapter_postgres extends DbAdapter{
 		$this->_connected = TRUE;
 	}
 	
-	// УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ
+	/** УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ */
 	public function setEncoding($encoding){
 		
 		$this->_encoding = $encoding;
@@ -23,7 +23,7 @@ class DbAdapter_postgres extends DbAdapter{
 			// $this->query('SET NAMES '.$this->_encoding);
 	}
 	
-	// ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY
+	/** ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY */
 	public function getLastId($tablename = null, $fieldname = null){
 		
 		if(is_null($tablename) || is_null($fieldname))
@@ -32,13 +32,19 @@ class DbAdapter_postgres extends DbAdapter{
 		return $this->getOne('SELECT last_value FROM '.$tablename.'_'.$fieldname.'_seq');
 	}
 	
-	// ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ
+	/** ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ */
 	public function getAffectedNum(){
 		
 		return pg_affected_rows($this->_dbrs);
 	}
 
-	// INSERT
+	/**
+	 * INSERT
+	 * вставка данных в таблицу
+	 * @param string $table - имя таблицы
+	 * @param array $fieldsValues - массив пар (поле => значение) для вставки
+	 * @return integer последний вставленный id 
+	 */
 	public function insert($table, $fieldsValues, $autoIncrementField = null){
 		
 		$insert_arr = array();
@@ -56,7 +62,11 @@ class DbAdapter_postgres extends DbAdapter{
 		}
 	}
 
-	// QUERY
+	/**
+	 * ВЫПОЛНИТЬ ЗАПРОС
+	 * @param string $query - SQL-запрос
+	 * @return resource - ресурс ответа базы данных
+	 */
 	public function query($sql){
 		
 		$this->saveQuery($sql);
@@ -65,7 +75,12 @@ class DbAdapter_postgres extends DbAdapter{
 
 	}
 	
-	// QUERY PARAMS
+	/**
+	 * ВЫПОЛНИТЬ ПАРАМЕТРИЗОВАННЫЙ ЗАПРОС
+	 * @param string $query - SQL-запрос
+	 * @param array $params - массив подстановщиков
+	 * @return resource - ресурс ответа базы данных
+	 */
 	public function query_prepared($sql, $params){
 		
 		// замена '?' на '$1', '$2' и т.д.
@@ -88,7 +103,13 @@ class DbAdapter_postgres extends DbAdapter{
 			pg_free_result($rs);
 	}
 
-	//функция GET ONE выполняет запрос и возвращает единственное значение (первая строка, первый столбец)
+	/**
+	 * GET ONE
+	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return mixed|$default_value
+	 */
 	public function getOne($query, $default_value = null){
 		
 		$rs = $this->query($query);
@@ -101,7 +122,15 @@ class DbAdapter_postgres extends DbAdapter{
 		return $cell;
 	}
 	
-	//функция GET CELL выполняет запрос и возвращает единственное значение (указанные строка и столбец)
+	/**
+	 * GET CELL
+	 * выполнить запрос и вернуть единственное значение (указанные строка и столбец)
+	 * @param string $query - SQL-запрос
+	 * @param integer $row - номер строки, значение которой будет возвращено
+	 * @param integer $column - номер столбца, значение которого будет возвращено
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return mixed|$default_value
+	 */
 	public function getCell($query, $row, $column, $default_value = 0){
 		
 		$rs = $this->query($query);
@@ -114,7 +143,16 @@ class DbAdapter_postgres extends DbAdapter{
 		return $cell;
 	}
 	
-	// GET STATIC ONE возвращает единственную строку, а если строка не найдена, то вставляет ее в таблицу
+	/**
+	 * GET STATIC ONE
+	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+	 * а если строка не найдена, то вставить ее в таблицу
+	 * @param string $query - SQL-запрос
+	 * @param string $table - таблица для вставки
+	 * @param array $fieldsvalues - ассоциативный массив данных для вставки
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return mixed|$default_value
+	 */
 	public function getStaticOne($query, $table, $fieldsvalues, $default_value = array()){
 		
 		$rs = $this->query($query);
@@ -129,7 +167,13 @@ class DbAdapter_postgres extends DbAdapter{
 		return $row;
 	}
 	
-	// GET COL возвращает единственный столбец (первый в наборе)
+	/**
+	 * GET COL
+	 * выполнить запрос и вернуть единственный столбец (первый)
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getCol($query, $default_value = array()){
 		
 		$rs = $this->query($query);
@@ -153,7 +197,7 @@ class DbAdapter_postgres extends DbAdapter{
 	 * @param mixed $default_value
 	 * @return array
 	 */
-	public function getColIndexed($query, $default_value = 0){
+	public function getColIndexed($query, $default_value = array()){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && pg_num_rows($rs))
@@ -165,7 +209,13 @@ class DbAdapter_postgres extends DbAdapter{
 		return $col;
 	}
 	
-	// GET ROW возвращает единственную строку (первую в наборе)
+	/**
+	 * GET ROW
+	 * выполнить запрос и вернуть единственную строку (первую)
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getRow($query, $default_value = array()){
 		
 		$rs = $this->query($query);
@@ -178,21 +228,35 @@ class DbAdapter_postgres extends DbAdapter{
 		return $row;
 	}
 	
-	// GET STATIC ROW возвращает единственную строку, а если строка не найдена, то вставляет ее в таблицу
-	public function getStaticRow($query, $table, $fieldsvalues, $default_value = array()){
+	/**
+	 * GET STATIC ROW
+	 * выполнить запрос и вернуть единственную строку (первую)
+	 * а если строка не найдена, то вставить ее в таблицу
+	 * @param string $query - SQL-запрос
+	 * @param string $table - таблица для вставки
+	 * @param array $fieldsvalues - ассоциативный массив данных для вставки
+	 * @return array|$fieldsvalues
+	 */
+	public function getStaticRow($query, $table, $fieldsvalues){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && pg_num_rows($rs)){
 			$row = pg_fetch_assoc($rs);
 		}else{
 			$this->insert($table, $fieldsvalues);
-			$row = $default_value;
+			$row = $fieldsvalues;
 		}
 		$this->freeResult($rs);
 		return $row;
 	}
 	
-	// GET ALL формирует многомерный ассоциативный массив
+	/**
+	 * GET ALL
+	 * выполнить запрос и вернуть многомерный ассоциативный массив данных
+	 * @param string $query - SQL-запрос
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getAll($query, $default_value = array()){
 		
 		$rs = $this->query($query);
@@ -205,7 +269,16 @@ class DbAdapter_postgres extends DbAdapter{
 		return $data;
 	}
 	
-	// GET ALL INDEXED формирует многомерный индексированный ассоциативный массив 
+	/**
+	 * GET ALL INDEXED
+	 * выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных
+	 * @param string $query - SQL-запрос
+	 * @param string $index - имя поля, по которому будет индексироваться массив результатов.
+	 *        Важно проследить, чтобы значение у индекса было уникальным у каждой строки,
+	 *        иначе дублирующиеся строки будут затерты.
+	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
+	 * @return array|$default_value
+	 */
 	public function getAllIndexed($query, $index, $default_value = 0){
 		
 		$rs = $this->query($query);
@@ -298,7 +371,12 @@ class DbAdapter_postgres extends DbAdapter{
 		return $data;
 	}
 	
-	// ESCAPE
+	/**
+	 * ЭКРАНИРОВАНИЕ ДАННЫХ
+	 * выполняется с учетом типа данных для предотвращения SQL-инъекций
+	 * @param mixed строка для экранирования
+	 * @param mixed - безопасная строка
+	 */
 	public function escape($str){
 		
 		if(!in_array(strtolower(gettype($str)), array('integer', 'double', 'boolean', 'null'))){
@@ -328,7 +406,12 @@ class DbAdapter_postgres extends DbAdapter{
 		trigger_error('showDatabases not implemented', E_USER_ERROR);
 	}
 	
-	// DESCRIBE
+	/**
+	 * DESCRIBE
+	 * получить массив, описывающий структуру таблицы
+	 * @param string $table - имя таблицы
+	 * @return array - структура таблицы
+	 */
 	public function describe($table){
 		
 		return $this->getAll('DESCRIBE '.$table);

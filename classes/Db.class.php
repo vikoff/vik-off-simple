@@ -110,25 +110,25 @@ class db{
 
 abstract class DbAdapter{
 	
-	// флаг, что соединение установлено
+	/** флаг, что соединение установлено */
 	protected $_connected = FALSE;
 	
-	// флаг о необходимости логирования sql в файл
+	/** флаг о необходимости логирования sql в файл */
 	protected $_keepFileLog = FALSE;
 	
-	// массив сохраненных SQL запросов
+	/** массив сохраненных SQL запросов */
 	protected $_sqls = array();
 	
-	// время выполнения каждого запроса
+	/** время выполнения каждого запроса */
 	protected $_queriesTime = array();
 
-	// число выполненных запросов
+	/** число выполненных запросов */
 	protected $_queriesNum = 0;
 	
-	// массив сохранения сообщений об ошибках
+	/** массив сохранения сообщений об ошибках */
 	protected $_error = array();
 	
-	// режим накопления сообщений об ошибках
+	/** режим накопления сообщений об ошибках */
 	protected $_errorHandlingMode = FALSE;
 	
 	/**
@@ -138,7 +138,7 @@ abstract class DbAdapter{
 	 */
 	private $_errorHandler = null;
 	
-	// ресурс соединения с базой данных
+	/** ресурс соединения с базой данных */
 	protected $_dbrs = null;
 	
 	// параметры подключения к БД
@@ -147,7 +147,7 @@ abstract class DbAdapter{
 	protected $connPass = '';
 	protected $connDatabase = '';
 	
-	// дополнительные параметры
+	/** кодировка соединения */
 	protected $_encoding = null;
 	
 
@@ -164,6 +164,7 @@ abstract class DbAdapter{
 	abstract public function getAll($query, $default_value = array());
 	abstract public function getAllIndexed($query, $index, $default_value = 0);
 	abstract public function escape($str);
+	
 	/**
 	 * ЗАКЛЮЧЕНИЕ ИМЕН ПОЛЕЙ В НУЖНЫЙ ТИП КОВЫЧЕК
 	 * метод индивидуален для каждого db-адапрета
@@ -175,7 +176,7 @@ abstract class DbAdapter{
 	abstract public function showTables();
 	abstract public function showCreateTable($table);
 	
-	// КОНСТРУКТОР
+	/** КОНСТРУКТОР */
 	public function __construct($host, $user, $pass, $database){
 		
 		$this->connHost = $host;
@@ -184,12 +185,12 @@ abstract class DbAdapter{
 		$this->connDatabase = $database;
 	}
 	
-	// ВКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК
+	/** ВКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК */
 	public function enableErrorHandlingMode(){
 		$this->_errorHandlingMode = TRUE;
 	}
 	
-	// ОТКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК
+	/** ОТКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК */
 	public function disableErrorHandlingMode(){
 		$this->_errorHandlingMode = TRUE;
 	}
@@ -204,13 +205,13 @@ abstract class DbAdapter{
 		$this->_errorHandler = $handler;
 	}
 	
-	// ВЫПОЛНЕНО ЛИ ПОДКЛЮЧЕНИЕ К БД
+	/** ВЫПОЛНЕНО ЛИ ПОДКЛЮЧЕНИЕ К БД */
 	public function isConnected(){
 		
 		return $this->_connected;
 	}
 	
-	// KEEP FILE LOG
+	/** ВЕСТИ ЛОГ SQL ЗАПРОСОВ */
 	public function keepFileLog($boolEnable){
 		
 		$this->_keepFileLog = $boolEnable;
@@ -241,7 +242,13 @@ abstract class DbAdapter{
 		return $this->_encoding;
 	}
 	
-	// функция INSERT
+	/**
+	 * INSERT
+	 * вставка данных в таблицу
+	 * @param string $table - имя таблицы
+	 * @param array $fieldsValues - массив пар (поле => значение) для вставки
+	 * @return integer последний вставленный id 
+	 */
 	public function insert($table, $fieldsValues){
 		
 		$fields = array();
@@ -257,7 +264,15 @@ abstract class DbAdapter{
 		return $this->getLastId();
 	}
 
-	// INSERT MULTI
+	/**
+	 * INSERT MULTI
+	 * вставка в таблицу нескольких строк за раз
+	 * @param string $table - имя таблицы
+	 * @param array $fields - массив-список полей таблиц. Например: array('field1', 'field2')
+	 * @param array $valuesArrArr - список списков, каждый из которых содержит в себе
+	 *        данные для вставки одной строки. Например: array( array(val1, val2), array(val3, val4) )
+	 * @return integer колечество вставленных строк
+	 */
 	public function insertMulti($table, $fields, $valuesArrArr){
 		
 		$valuesArrStr = array();
@@ -274,7 +289,14 @@ abstract class DbAdapter{
 		return $this->getOne($sql);
 	}
 	
-	// UPDATE
+	/**
+	 * UPDATE
+	 * обновление записей в таблице
+	 * @param string $table - имя таблицы
+	 * @param array $fieldsValues - массив пар (поле => значение) для обновления
+	 * @param string $conditions - SQL строка условия (без слова WHERE). Не должно быть пустой строкой.
+	 * @return integer количество затронутых строк
+	 */
 	public function update($table, $fieldsValues, $conditions) {
 		
 		$update_arr = array();
@@ -303,7 +325,7 @@ abstract class DbAdapter{
 	 * @param string $table - имя таблицы
 	 * @param array $fieldsValues - поля для обновление
 	 * @param array $conditionFieldsValues - поля, задающие условие обновления
-	 * @return int количество затронутых строк
+	 * @return integer количество затронутых строк
 	 */
 	public function updateInsert($table, $fieldsValues, $conditionFieldsValues){
 		
@@ -338,8 +360,15 @@ abstract class DbAdapter{
 			return 0;
 		}
 	}
-
-	// функция DELETE
+	
+	/**
+	 * DELETE
+	 * обновление записей в таблице
+	 * @param string $table - имя таблицы
+	 * @param array $fieldsValues - массив пар (поле => значение) для обновления
+	 * @param string $conditions - SQL строка условия (без слова WHERE). Не должно быть пустой строкой.
+	 * @return integer количество затронутых строк
+	 */
 	public function delete($table, $conditions) {
 		
 		$conditions = trim(str_replace('WHERE', '', $conditions));
@@ -383,37 +412,43 @@ abstract class DbAdapter{
 		return $this->quote($this->escape($cell));
 	}
 	
-	// СОХРАНИТЬ ЗАПРОС
+	/** 
+	 * СОХРАНИТЬ ЗАПРОС
+	 * @access protected
+	 */
 	protected function _saveQuery($sql){
 		
 		$this->_sqls[] = $sql;
 	}
 	
-	// СОХРАНИТЬ ВРЕМЯ ИСПОЛНЕНИЯ ЗАПРОСА
+	/** 
+	 * СОХРАНИТЬ ВРЕМЯ ИСПОЛНЕНИЯ ЗАПРОСА
+	 * @access protected
+	 */
 	protected function _saveQueryTime($t){
 	
 		$this->_queriesTime[] = $t;
 	}
 	
-	// ПОЛУЧИТЬ ЧИСЛО ВЫПОЛНЕННЫХ SQL ЗАПРОСОВ
+	/** ПОЛУЧИТЬ ЧИСЛО ВЫПОЛНЕННЫХ SQL ЗАПРОСОВ */
 	public function getQueriesNum(){
 		
 		return $this->_queriesNum;
 	}
 	
-	// ПОЛУЧИТЬ ВЫПОЛНЕННЫЕ SQL ЗАПРОСЫ
+	/** ПОЛУЧИТЬ ВЫПОЛНЕННЫЕ SQL ЗАПРОСЫ */
 	public function getQueries(){
 		
 		return $this->_sqls;
 	}
 	
-	// ПОЛУЧИТЬ ОБЩЕЕ ВРЕМЯ ВЫПОЛНЕНИЯ SQL ЗАПРОСОВ
+	/** ПОЛУЧИТЬ ОБЩЕЕ ВРЕМЯ ВЫПОЛНЕНИЯ SQL ЗАПРОСОВ */
 	public function getQueriesTime(){
 		
 		return array_sum($this->_queriesTime);
 	}
 	
-	// ПОЛУЧИТЬ АССОЦИАТИВНЫЙ МАССИВ ЗАПРОС + ВРЕМЯ
+	/** ПОЛУЧИТЬ ВЫПОЛЕННЫЕ ЗАПРОСЫ В ВИДЕ МАССИВА (ЗАПРОС => ВРЕМЯ) */
 	public function getQueriesWithTime(){
 		
 		$output = array();
@@ -425,10 +460,10 @@ abstract class DbAdapter{
 		return $output;
 	}
 	
-	
 	/**
 	 * ПЕРЕХВАТ ОШИБОК ВЫПОЛНЕНИЯ SQL-ЗАПРОСОВ
 	 * Дальнейший путь ошибки зависит от установки _errorHandlingMode
+	 * @access protected
 	 * @param string $msg - сообщение, сгенерированное СУБД
 	 * @param string $sql - SQL-запрос, в котором возникла ошибка
 	 * @return void
@@ -523,7 +558,10 @@ abstract class DbAdapter{
 		return TRUE;
 	}
 	
-	/** ДЕСТРУКОТР */
+	/**
+	 * ДЕСТРУКОТР
+	 * запись лога выполненных sql-запросов в файл (если требуется)
+	 */
 	public function __destruct(){
 		
 		if($this->_keepFileLog){

@@ -27,6 +27,6 @@ db::create(array(
 	'encoding' => 'utf8',
 	'fileLog' => FALSE,
 ));
-	
-	
+
+
 ?>
