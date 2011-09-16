@@ -15,7 +15,7 @@ date_default_timezone_set('Europe/Kiev');
 define('CHECK_FORM_DUPLICATION', 0);
 
 // название сайта
-define('CFG_SITE_NAME', 'site-utilit');
+define('CFG_SITE_NAME', 'vik-off simple');
 
 // конфигурация подключения к БД
 db::create(array(

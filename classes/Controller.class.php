@@ -28,10 +28,15 @@ class Controller {
 		
 		$method = $this->getDisplayMethodName($this->requestMethod);
 		
-		if(!method_exists($this, $method))
-			$this->display_404($method);
+		// если метод не найден
+		if(!method_exists($this, $method)){
+			if(!AJAX_MODE)
+				$this->display_404($method);
+			return FALSE;
+		}
 		
 		$this->$method($this->requestParams);
+		return TRUE;
 	}
 	
 	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ AJAX */

@@ -3,7 +3,7 @@
  * 
  * 
  * @using:
- * 		const: CFG_SITE_NAME, FS_ROOT, WWW_ROOT
+ * 		const: CFG_SITE_NAME, FS_ROOT, WWW_ROOT, AJAX_MODE
  * 
  */
 class Layout{
@@ -15,6 +15,8 @@ class Layout{
 	protected $_breadcrumbs = array();
 	protected $_isAutoBreadcrumbsAdded = FALSE;
 	protected $_htmlContent = '';
+	
+	protected $_layoutRender = 'auto';
 	
 	private static $_instance = null;
 	
@@ -138,6 +140,31 @@ class Layout{
 		return $this;
 	}
 	
+	/** 
+	 * ТИП ОТОБРАЖЕНИЯ КОНТЕНТА ВЫБИРАЕТСЯ АВТОМАТИЧЕСКИ
+	 * внутри макета для обычных запросов;
+	 * без макета для AJAX-запросов.
+	 */
+	public function autoLayout(){
+		
+		$this->_layoutRender = 'auto';
+		return $this;
+	}
+	
+	/** ВСЕГДА ОТОБРАЖАТЬ КОНТЕНТ ВНУТРИ МАКЕТА */
+	public function enableLayout(){
+		
+		$this->_layoutRender = 'on';
+		return $this;
+	}
+	
+	/** ВСЕГДА ОТОБРАЖАТЬ КОНТЕНТ БЕЗ МАКЕТА */
+	public function disableLayout(){
+		
+		$this->_layoutRender = 'off';
+		return $this;
+	}
+	
 	protected function _getHtmlTitle(){
 		
 		return !empty($this->_htmlTitle)
@@ -228,6 +255,37 @@ class Layout{
 	/** RENDER ALL */
 	public function render($boolReturn = FALSE){
 		
+		// вывод без макета
+		if($this->_layoutRender == 'off' || ($this->_layoutRender == 'auto' && AJAX_MODE))
+			return $this->_renderNoLayout($boolReturn);
+		
+		// вывод с макетом
+		else
+			return $this->_renderWithLayout($boolReturn);
+	}
+	
+	/**
+	 * ВЫВЕСТИ/ВЕРНУТЬ КОНТЕНТ БЕЗ МАКЕТА
+	 * @access protected
+	 * @param bool $boolReturn - флаг, возвращать контент, или выводить
+	 * @param void|string контент
+	 */
+	protected function _renderNoLayout($boolReturn){
+		
+		if($boolReturn)
+			return $this->_getHtmlContent();
+		else
+			echo $this->_getHtmlContent();
+	}
+	
+	/**
+	 * ВЫВЕСТИ/ВЕРНУТЬ КОНТЕНТ В МАКЕТЕ
+	 * @access protected
+	 * @param bool $boolReturn - флаг, возвращать контент, или выводить
+	 * @param void|string контент
+	 */
+	protected function _renderWithLayout($boolReturn){
+		
 		if($boolReturn)
 			ob_start();
 			
@@ -235,8 +293,6 @@ class Layout{
 		
 		if($boolReturn)
 			return ob_get_clean();
-		else
-			return $this;
 	}
 	
 	public function __get($name){

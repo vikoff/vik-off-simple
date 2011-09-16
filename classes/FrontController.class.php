@@ -51,6 +51,9 @@ class FrontController extends Controller{
 		
 		if($this->_checkAction())
 			exit;
+		
+		if($this->_checkDisplay())
+			exit;
 			
 		$this->_checkAjax();
 	}
