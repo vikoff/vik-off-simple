@@ -80,6 +80,28 @@ class FrontController extends Controller{
 			->render();
 	}
 	
+	public function display_docs($params = array()){
+		
+		$page = getVar($params[0], 'index');
+		
+		if(!preg_match('/^[\w]+$/', $page))
+			$this->display_404();
+		
+		$page = FS_ROOT.'templates/docs/'.$page.'.php';
+		
+		if(!file_exists($page))
+			$this->display_404();
+		
+		$variables = array(
+			'page' => $page,
+		);
+		
+		Layout::get()
+			->setTitle('Документация к vik-off simple')
+			->setContentPhpFile('docs.php', $variables)
+			->render();
+	}
+	
 	public function display_test_db(){
 			
 			$dbs = db::get()->showDatabases();

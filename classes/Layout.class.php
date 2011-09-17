@@ -115,28 +115,36 @@ class Layout{
 		$this->_breadcrumbs = array();
 	}
 	
+	/** ОЧИСТИТЬ КОНТЕНТ */
+	public function clearContent(){
+	
+		$this->_htmlContent = '';
+		return $this;
+	}
+	
+	/** ЗАДАТЬ КОНТЕНТ */
 	public function setContent($content){
 	
-		$this->_htmlContent = $content;
+		$this->_htmlContent .= $content;
 		return $this;
 	}
 	
+	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ ПРОИЗВОЛЬНОГО ФАЙЛА (БЕЗ ИНТЕРПРЕТАЦИИ) */
 	public function setContentHtmlFile($file){
 		
-		$this->_htmlContent = file_get_contents($this->_tplPath.$file);
+		$this->_htmlContent .= file_get_contents($this->_tplPath.$file);
 		return $this;
 	}
 	
+	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ PHP-ФАЙЛА */
 	public function setContentPhpFile($file, $variables = array()){
-		
-		extract($variables);
 		
 		foreach($variables as $k => $v)
 			$this->$k = $v;
 			
 		ob_start();
 		include($this->_tplPath.$file);
-		$this->_htmlContent = ob_get_clean();
+		$this->_htmlContent .= ob_get_clean();
 		return $this;
 	}
 	
