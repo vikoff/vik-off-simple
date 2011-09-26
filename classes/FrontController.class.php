@@ -117,12 +117,19 @@ class FrontController extends Controller{
 				->render();
 	}
 	
-	public function display_test(){
-				
-			Layout::get()
-				->setTitle('Тест')
-				->setContentPhpFile('test.php')
-				->render();
+	public function display_tabs(){
+		
+		$layout = Layout::get();
+		
+		$variables = array(
+			'tab_1' => $layout->getContentPhpFile('tabs/tab1.php', array('param' => 'ololo')),
+			'tab_2' => $layout->getContentHtmlFile('tabs/tab2.html'),
+		);
+		
+		Layout::get()
+			->setTitle('Тест')
+			->setContentPhpFile('test.php', $variables)
+			->render();
 	}
 	
 	public function display_ajax(){

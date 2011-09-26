@@ -132,19 +132,14 @@ class Layout{
 	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ ПРОИЗВОЛЬНОГО ФАЙЛА (БЕЗ ИНТЕРПРЕТАЦИИ) */
 	public function setContentHtmlFile($file){
 		
-		$this->_htmlContent .= file_get_contents($this->_tplPath.$file);
+		$this->_htmlContent .= $this->getContentHtmlFile($file);
 		return $this;
 	}
 	
 	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ PHP-ФАЙЛА */
 	public function setContentPhpFile($file, $variables = array()){
 		
-		foreach($variables as $k => $v)
-			$this->$k = $v;
-			
-		ob_start();
-		include($this->_tplPath.$file);
-		$this->_htmlContent .= ob_get_clean();
+		$this->_htmlContent .= $this->getContentPhpFile($file, $variables);
 		return $this;
 	}
 	
@@ -303,11 +298,32 @@ class Layout{
 			return ob_get_clean();
 	}
 	
+	/** АКСЕССОР ДЛЯ ШАБЛОНОВ */
 	public function __get($name){
 		
 		return isset($this->$name) ? $this->$name : '';
 	}
 	
+	/** ПОЛУЧИТЬ СОДЕРЖИМОЕ HTML ФАЙЛА */
+	public function getContentHtmlFile($file){
+		
+		return file_get_contents($this->_tplPath.$file);
+	}
+	
+	/** ПОЛУЧИТЬ ПРОИНТЕРПРЕТИРОВАННОЕ СОДЕРЖИМОЕ PHP ФАЙЛА */
+	public function getContentPhpFile($file, $variables = array()){
+		
+		foreach($variables as $k => $v)
+			$this->$k = $v;
+			
+		ob_start();
+		include($this->_tplPath.$file);
+		
+		foreach($variables as $k => $v)
+			unset($this->$k);
+		
+		return ob_get_clean();
+	}
 }
 
 ?>

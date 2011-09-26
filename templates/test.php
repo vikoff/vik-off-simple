@@ -1,21 +1,8 @@
 
 
-<form id="form" action="" method="post">
-	<input type="hidden" name="action" value="test" />
-	<?= FORMCODE; ?>
-	
-	<input type="text" name="test" value="" />
-	<input type="submit" value="Отправить" />
-
-</form>
-
-<script>
-	$(function(){
-		$('#form').submit(function(){
-			$.post(href(''), $(this).serializeArray(), function(response){
-				alert(response);
-			});
-			return false;
-		});
-	});
-</script>
+<div style="border: solid 1px red; margin: 1em;">
+	<?= $this->tab_1; ?>
+</div>
+<div style="border: solid 1px yellow; margin: 1em;">
+	<?= $this->tab_2; ?>
+</div>
