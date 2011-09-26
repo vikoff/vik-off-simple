@@ -2,52 +2,45 @@
 
 class Controller {
 	
-	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ ДЕЙСТВИЯ */
-	protected function _checkAction(){
-		
-		if(isset($_POST['action']) && checkFormDuplication()){
-			
-			$action = $_POST['action'];
-			$method = $this->getActionMethodName($action);
-			
-			if(!method_exists($this, $method))
-				$this->display_404($method);
+	/** ВЫПОЛНЕНИЕ ДЕЙСТВИЯ */
+	public function action($methodIdentifier, $redirect){
 				
-			if($this->$method())
-				if(!empty($_POST['redirect']))
-					redirect($_POST['redirect']);
+		$method = $this->getActionMethodName($methodIdentifier);
 			
-			return TRUE;
-		}
-		
-		return FALSE;
-	}
-	
-	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ ОТОБРАЖЕНИЯ */
-	protected function _checkDisplay(){
-		
-		$method = $this->getDisplayMethodName($this->requestMethod);
-		
-		// если метод не найден
 		if(!method_exists($this, $method)){
-			if(!AJAX_MODE)
-				$this->display_404($method);
-			return FALSE;
+			$this->error_404();
+			exit;
 		}
 		
-		$this->$method($this->requestParams);
+		if($this->$method($method, $redirect))
+			if(!empty($redirect))
+				redirect($redirect);
+		
 		return TRUE;
 	}
 	
-	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ AJAX */
-	protected function _checkAjax(){
-		
-		$method = $this->getAjaxMethodName($this->requestMethod);
-		
+	/** ВЫПОЛНЕНИЕ ОТОБРАЖЕНИЯ */
+	public function display($methodIdentifier, $params){
+				
+		$method = $this->getDisplayMethodName($methodIdentifier);
+			
 		if(!method_exists($this, $method))
-			$this->display_404($method);
+			return FALSE;
 		
-		$this->$method($this->requestParams);
+		$this->$method($params);
+		return TRUE;
+	}
+	
+	/** ВЫПОЛНЕНИЕ AJAX */
+	public function ajax($method, $params){
+				
+		$method = $this->getAjaxMethodName($methodIdentifier);
+			
+		if(!method_exists($this, $method))
+			return FALSE;
+		
+		$this->$method($params);
+		return TRUE;
 	}
 	
 	/**
@@ -55,7 +48,7 @@ class Controller {
 	 * @param string $controllerIdentifier - идентификатор контроллера
 	 * @return string|null - имя класса  контроллера или null, если контроллер не найден
 	 */
-	public static function getControllerClassName($controllerIdentifier){
+	public function getControllerClassName($controllerIdentifier){
 			
 		// если идентификатор контроллера не передан, вернем null
 		if(empty($controllerIdentifier))
@@ -92,38 +85,6 @@ class Controller {
 		// преобразует строку вида 'any-Method-name' в 'any_method_name'
 		$method = 'ajax_'.strtolower(str_replace('-', '_', $method));
 		return $method;
-	}
-	
-	public function performAction($methodIdentifier, $redirect){
-				
-		$method = $this->getActionMethodName($methodIdentifier);
-			
-		if(!method_exists($this, $method))
-			throw new Exception('');
-		
-		if($this->$method($method, $redirect))
-			if(!empty($redirect))
-				redirect($redirect);
-	}
-	
-	public function peformDispaly($methodIdentifier, $params){
-				
-		$method = $this->getDisplayMethodName($methodIdentifier);
-				
-		if(!method_exists($this, $method))
-			throw new Exception('');
-		
-		$this->$method($params);
-	}
-	
-	public function performAjax($method, $params){
-				
-		$method = $this->getAjaxMethodName($methodIdentifier);
-				
-		if(!method_exists($this, $method))
-			throw new Exception('');
-		
-		$this->$method($params);
 	}
 	
 	

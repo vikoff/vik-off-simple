@@ -43,7 +43,11 @@ class FrontController extends Controller{
 	public function run(){
 		
 		$this->_checkAction();
-		$this->_checkDisplay();
+		
+		if($this->_checkDisplay())
+			exit;
+		
+		$this->display_404();
 	}
 	
 	/** ЗАПУСК ПРИЛОЖЕНИЯ В AJAX-РЕЖИМЕ */
@@ -51,11 +55,14 @@ class FrontController extends Controller{
 		
 		if($this->_checkAction())
 			exit;
+			
+		if($this->_checkAjax())
+			exit;
 		
 		if($this->_checkDisplay())
 			exit;
-			
-		$this->_checkAjax();
+		
+		$this->display_404();
 	}
 	
 	/** ПРОВЕРКА АВТОРИЗАЦИИ */
@@ -67,6 +74,47 @@ class FrontController extends Controller{
 		// if(empty($_SESSION['logged']))
 			// $this->display_login();
 	}
+	
+	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ ДЕЙСТВИЯ */
+	private function _checkAction(){
+		
+		if(!isset($_POST['action']) || !checkFormDuplication())
+			return FALSE;
+		
+		$action = $_POST['action'];
+		
+		// если action вида 'controller/action'
+		if(strpos($action, '/')){
+			
+			list($controller, $action) = explode('/', $action);
+			$controllerClass = $this->getControllerClassName($controller);
+			
+			if(empty($controllerClass)){
+				$this->display_404('action '.$controllerClass.'/'.$action.' not found');
+				exit;
+			}
+			
+			$instance = new $controllerClass();
+			return $instance->action($action, getVar($_POST['redirect']));
+		}
+		// если action вида 'action'
+		else{
+			return $this->action($action, getVar($_POST['redirect']));
+		}
+	}
+	
+	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ ОТОБРАЖЕНИЯ */
+	private function _checkDisplay(){
+		
+		return $this->display($this->requestMethod, $this->requestParams);
+	}
+	
+	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ AJAX */
+	private function _checkAjax(){
+		
+		return $this->ajax($this->requestMethod, $this->requestParams);
+	}
+	
 	
 	
 	/////////////////////
