@@ -14,6 +14,9 @@ class DbAdapter_sqlite extends DbAdapter{
 	
 	}
 	
+	/** ВЫБРАТЬ БАЗУ ДАННЫХ */
+	public function selectDb($db){}
+	
 	/** ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY */
 	public function getLastId(){
 	
@@ -265,6 +268,15 @@ class DbAdapter_sqlite extends DbAdapter{
 	}
 	
 	/**
+	 * ПОЛУЧИТЬ СПИСОК БД
+	 * @return array - массив-список баз данных
+	 */
+	public function showDatabases(){
+	
+		return array($this->connDatabase);
+	}
+	
+	/**
 	 * ПОКАЗАТЬ СТРОКУ CREATE TABLE
 	 * @param string $table - имя таблицы
 	 * @return string - строка CREATE TABLE
@@ -281,16 +293,17 @@ class DbAdapter_sqlite extends DbAdapter{
 	 * @output выдает текст sql-дампа
 	 * @return void
 	 */
-	public function makeDump(){
+	public function makeDump($database = null, $tables = null){
 
 		$lf = "\n";
-		$cmnt = '#';
-		$tables = array();
+		$cmnt = '--';
 		$createtable = array();
 		
-		$cmnt = '--';
-		
-		$tables = $this->showTables();
+		if(!is_null($database))
+			$this->selectDb($database);
+			
+		if(is_null($tables))
+			$tables = $this->showTables();
 
 		// get 'table create' parts for all tables
 		foreach ($tables as $table){
@@ -301,7 +314,7 @@ class DbAdapter_sqlite extends DbAdapter{
 		header('Cache-Control: private');
 		header('Pragma: cache');
 		header('Content-type: application/download');
-		header('Content-Disposition: attachment; filename='.strtolower(date("Y_m_d")).'_backup_'.$this->connDatabase.'.sql');
+		header('Content-Disposition: attachment; filename='.$this->connDatabase.'_'.strtolower(date("Y-m-d_H-i")).'.sql');
 		
 		echo $cmnt." ".$lf;
 		echo $cmnt." START SQLITE DATABASE DUMP".$lf;
@@ -310,7 +323,7 @@ class DbAdapter_sqlite extends DbAdapter{
 		echo $cmnt." Host: ".$_SERVER['SERVER_NAME'].$lf;
 		echo $cmnt." Database : ".$this->connDatabase.$lf;
 		echo $cmnt." Encoding : ".$this->_encoding.$lf;
-		echo $cmnt." Generation Time: ".date("d M Y H:i:s", (time() - date("Z") + 10800)).$lf;
+		echo $cmnt." Generation Time: ".date("d M Y H:i:s").$lf;
 		echo $cmnt." PHP Version: ".phpversion().$lf;
 		echo $cmnt."";
 
@@ -323,7 +336,7 @@ class DbAdapter_sqlite extends DbAdapter{
 			echo $cmnt.' TABLE '.$table.' STRUCTURE'.$lf;
 			echo $cmnt."".$lf;
 			echo $lf;
-				
+			
 			echo "DROP TABLE IF EXISTS ".$table.';'.$lf;
 			echo $lf;
 				
@@ -349,8 +362,10 @@ class DbAdapter_sqlite extends DbAdapter{
 						
 					foreach($rows as $rowIndex => $row){
 						foreach($row as &$cell){
-							$cell = str_replace("\n", '\\r\\n', $cell);
-							$cell = str_replace("\r", '', $cell);
+							if(is_string($cell)){
+								$cell = str_replace("\n", '\\r\\n', $cell);
+								$cell = str_replace("\r", '', $cell);
+							}
 							$cell = $this->qe($cell);
 						}
 

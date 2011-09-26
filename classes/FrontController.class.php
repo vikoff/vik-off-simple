@@ -84,7 +84,7 @@ class FrontController extends Controller{
 		
 		$page = getVar($params[0], 'index');
 		
-		if(!preg_match('/^[\w]+$/', $page))
+		if(!preg_match('/^[\w\-]+$/', $page))
 			$this->display_404();
 		
 		$page = FS_ROOT.'templates/docs/'.$page.'.php';
