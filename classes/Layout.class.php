@@ -136,7 +136,7 @@ class Layout{
 		return $this;
 	}
 	
-	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ PHP-ФАЙЛА */
+	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ PHP-ФАЙЛА (С ИНТЕРПРЕТАЦИЕЙ) */
 	public function setContentPhpFile($file, $variables = array()){
 		
 		$this->_htmlContent .= $this->getContentPhpFile($file, $variables);
