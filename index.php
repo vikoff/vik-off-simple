@@ -18,6 +18,6 @@ require_once(FS_ROOT.'setup.php');
 
 // выполнение приложения
 if(AJAX_MODE)
-	FrontController::get()->ajax();
+	FrontController::get()->run_ajax();
 else
 	FrontController::get()->run();

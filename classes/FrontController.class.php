@@ -51,7 +51,7 @@ class FrontController extends Controller{
 	}
 	
 	/** ЗАПУСК ПРИЛОЖЕНИЯ В AJAX-РЕЖИМЕ */
-	public function ajax(){
+	public function run_ajax(){
 		
 		if($this->_checkAction())
 			exit;
