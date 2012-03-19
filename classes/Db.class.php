@@ -176,7 +176,11 @@ abstract class DbAdapter{
 	abstract public function showTables();
 	abstract public function showCreateTable($table);
 	
-	/** КОНСТРУКТОР */
+	/**
+	 * конструктор
+	 * назначение параметров подключения
+	 * само подключенеие не выполняется.
+	 */
 	public function __construct($host, $user, $pass, $database){
 		
 		$this->connHost = $host;
@@ -185,18 +189,18 @@ abstract class DbAdapter{
 		$this->connDatabase = $database;
 	}
 	
-	/** ВКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК */
+	/** включить режим отлова ошибок */
 	public function enableErrorHandlingMode(){
 		$this->_errorHandlingMode = TRUE;
 	}
 	
-	/** ОТКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК */
+	/** отключить режим отлова ошибок */
 	public function disableErrorHandlingMode(){
 		$this->_errorHandlingMode = TRUE;
 	}
 	
 	/**
-	 * УСТАНОВИТЬ ОБРАБОТЧИК ОШИБОК
+	 * установить обработчик ошибок
 	 * @param null|callback $handler - функция обработки ошибок
 	 * @return void
 	 */
@@ -205,45 +209,44 @@ abstract class DbAdapter{
 		$this->_errorHandler = $handler;
 	}
 	
-	/** ВЫПОЛНЕНО ЛИ ПОДКЛЮЧЕНИЕ К БД */
+	/** выполнено ли подключение к бд */
 	public function isConnected(){
 		
 		return $this->_connected;
 	}
 	
-	/** ВЕСТИ ЛОГ SQL ЗАПРОСОВ */
+	/** вести лог sql запросов */
 	public function keepFileLog($boolEnable){
 		
 		$this->_keepFileLog = $boolEnable;
 	}
 	
-	/** ПОЛУЧИТЬ ХОСТ БД */
+	/** получить хост бд */
 	public function getConnHost(){
 		return $this->connHost;
 	}
 	
-	/** ПОЛУЧИТЬ ИМЯ ПОЛЬЗОВАТЕЛЯ БД */
+	/** получить имя пользователя бд */
 	public function getConnUser(){
 		return $this->connUser;
 	}
 	
-	/** ПОЛУЧИТЬ ПАРОЛЬ ПОЛЬЗОВАТЕЛЯ БД */
+	/** получить пароль пользователя бд */
 	public function getConnPassword(){
 		return $this->connPass;
 	}
 	
-	/** ПОЛУЧИТЬ ИМЯ ТЕКУЩЕЙ БД */
+	/** получить имя текущей бд */
 	public function getDatabase(){
 		return $this->connDatabase;
 	}
 	
-	/** ПОЛУЧИТЬ ТЕКУЩУЮ КОДИРОВКУ СОЕДИНЕНИЯ */
+	/** получить текущую кодировку соединения */
 	public function getEncoding(){
 		return $this->_encoding;
 	}
 	
 	/**
-	 * INSERT
 	 * вставка данных в таблицу
 	 * @param string $table - имя таблицы
 	 * @param array $fieldsValues - массив пар (поле => значение) для вставки
@@ -265,7 +268,6 @@ abstract class DbAdapter{
 	}
 
 	/**
-	 * INSERT MULTI
 	 * вставка в таблицу нескольких строк за раз
 	 * @param string $table - имя таблицы
 	 * @param array $fields - массив-список полей таблиц. Например: array('field1', 'field2')
@@ -290,7 +292,6 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * UPDATE
 	 * обновление записей в таблице
 	 * @param string $table - имя таблицы
 	 * @param array $fieldsValues - массив пар (поле => значение) для обновления
@@ -316,7 +317,6 @@ abstract class DbAdapter{
 	}
 
 	/**
-	 * UPDATE INSERT
 	 * обновляет информацию в таблице.
 	 * Если не было обновлено ни одной строки, создает новую строку.
 	 * Возвращает 0, если было произведено обновление существующей строки,
@@ -362,8 +362,7 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * DELETE
-	 * обновление записей в таблице
+	 * удаление записей в таблице
 	 * @param string $table - имя таблицы
 	 * @param array $fieldsValues - массив пар (поле => значение) для обновления
 	 * @param string $conditions - SQL строка условия (без слова WHERE). Не должно быть пустой строкой.
@@ -384,7 +383,7 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * ЗАКЛЮЧЕНИЕ СТРОК В КОВЫЧКИ
+	 * заключение строк в ковычки 
 	 * в зависимости от типа данных
 	 * @param variant $cell - исходная строка
 	 * @return string заключенная в нужный тип ковычек строка
@@ -402,7 +401,7 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * ЭСКЕЙПИРОВАНИЕ И ЗАКЛЮЧЕНИЕ СТРОКИ В КОВЫЧКИ
+	 * эскейпирование и заключение строки в ковычки
 	 * замена последовательному вызову функций db::escape и db::quote
 	 * @param variant $cell - исходная строка
 	 * @return string эскейпированая и заключенная в нужный тип ковычек строка
@@ -413,8 +412,9 @@ abstract class DbAdapter{
 	}
 	
 	/** 
-	 * СОХРАНИТЬ ЗАПРОС
+	 * сохранение запроса
 	 * @access protected
+	 * @param string @sql - строка sql запроса
 	 */
 	protected function _saveQuery($sql){
 		
@@ -422,7 +422,7 @@ abstract class DbAdapter{
 	}
 	
 	/** 
-	 * СОХРАНИТЬ ВРЕМЯ ИСПОЛНЕНИЯ ЗАПРОСА
+	 * сохранить время исполнения запроса
 	 * @access protected
 	 */
 	protected function _saveQueryTime($t){
@@ -430,25 +430,25 @@ abstract class DbAdapter{
 		$this->_queriesTime[] = $t;
 	}
 	
-	/** ПОЛУЧИТЬ ЧИСЛО ВЫПОЛНЕННЫХ SQL ЗАПРОСОВ */
+	/** получить число выполненных sql запросов */
 	public function getQueriesNum(){
 		
 		return $this->_queriesNum;
 	}
 	
-	/** ПОЛУЧИТЬ ВЫПОЛНЕННЫЕ SQL ЗАПРОСЫ */
+	/** получить выполненные sql запросы */
 	public function getQueries(){
 		
 		return $this->_sqls;
 	}
 	
-	/** ПОЛУЧИТЬ ОБЩЕЕ ВРЕМЯ ВЫПОЛНЕНИЯ SQL ЗАПРОСОВ */
+	/** получить общее время выполнения sql запросов */
 	public function getQueriesTime(){
 		
 		return array_sum($this->_queriesTime);
 	}
 	
-	/** ПОЛУЧИТЬ ВЫПОЛЕННЫЕ ЗАПРОСЫ В ВИДЕ МАССИВА (ЗАПРОС => ВРЕМЯ) */
+	/** получить выполенные запросы в виде массива (запрос => время) */
 	public function getQueriesWithTime(){
 		
 		$output = array();
@@ -461,7 +461,7 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * ПЕРЕХВАТ ОШИБОК ВЫПОЛНЕНИЯ SQL-ЗАПРОСОВ
+	 * перехват ошибок выполнения sql-запросов
 	 * Дальнейший путь ошибки зависит от установки _errorHandlingMode
 	 * @access protected
 	 * @param string $msg - сообщение, сгенерированное СУБД
@@ -497,27 +497,27 @@ abstract class DbAdapter{
 		}
 	}
 	
-	/** СОХРАНИТЬ ОШИБКУ */
+	/** сохранить ошибку */
 	public function setError($error){
 		$this->_error[] = $error;
 	}
 	
-	/** ПОЛУЧИТЬ ВСЕ ОШИБКИ */
+	/** получить все ошибки */
 	public function getError(){
 		return implode('<br />', $this->_error);
 	}
 	
-	/** ПРОВЕРИТЬ, ЕСТЬ ЛИ ОШИБКИ */
+	/** проверить, есть ли ошибки */
 	public function hasError(){
 		return !empty($this->_error);
 	}
 	
-	/** ОЧИСТИТЬ НАКОПИВШИЕСЯ ОШИБКИ */
+	/** очистить накопившиеся ошибки */
 	public function resetError(){
 		$this->_error = array();
 	}
 	
-	/** ЗАГРУЗИТЬ ДАМП ДАННЫХ */
+	/** загрузить дамп данных */
 	public function loadDump($fileName){
 	
 		if(!$fileName){
@@ -559,7 +559,7 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * ДЕСТРУКОТР
+	 * деструкотр
 	 * запись лога выполненных sql-запросов в файл (если требуется)
 	 */
 	public function __destruct(){

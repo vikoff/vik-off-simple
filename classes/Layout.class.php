@@ -21,7 +21,7 @@ class Layout{
 	private static $_instance = null;
 	
 	
-	/** ТОЧКА ВХОДА В КЛАСС (ПОЛУЧИТЬ ЭКЗЕМПЛЯР Layout) */
+	/** точка входа в класс (получить экземпляр Layout) */
 	public static function get(){
 		
 		if(is_null(self::$_instance))
@@ -30,7 +30,7 @@ class Layout{
 		return self::$_instance;
 	}
 	
-	/** КОНСТРУКТОР */
+	/** конструктор */
 	protected function __construct(){
 		
 		$this->_tplPath = FS_ROOT.'templates/';
@@ -42,7 +42,7 @@ class Layout{
 		return $this;
 	}
 	
-	/** ПОЛУЧИТЬ ДИРЕКТОРИЮ ФАЙЛОВ МАКЕТА */
+	/** получить директорию файлов макета */
 	public function getLayoutDir(){
 		return $this->_layoutDir;
 	}
@@ -115,28 +115,28 @@ class Layout{
 		$this->_breadcrumbs = array();
 	}
 	
-	/** ОЧИСТИТЬ КОНТЕНТ */
+	/** очистить контент */
 	public function clearContent(){
 	
 		$this->_htmlContent = '';
 		return $this;
 	}
 	
-	/** ЗАДАТЬ КОНТЕНТ */
+	/** задать контент */
 	public function setContent($content){
 	
 		$this->_htmlContent .= $content;
 		return $this;
 	}
 	
-	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ ПРОИЗВОЛЬНОГО ФАЙЛА (БЕЗ ИНТЕРПРЕТАЦИИ) */
+	/** получить контент из произвольного файла (без интерпретации) */
 	public function setContentHtmlFile($file){
 		
 		$this->_htmlContent .= $this->getContentHtmlFile($file);
 		return $this;
 	}
 	
-	/** ПОЛУЧИТЬ КОНТЕНТ ИЗ PHP-ФАЙЛА (С ИНТЕРПРЕТАЦИЕЙ) */
+	/** получить контент из php-файла (с интерпретацией) */
 	public function setContentPhpFile($file, $variables = array()){
 		
 		$this->_htmlContent .= $this->getContentPhpFile($file, $variables);
@@ -144,7 +144,7 @@ class Layout{
 	}
 	
 	/** 
-	 * ТИП ОТОБРАЖЕНИЯ КОНТЕНТА ВЫБИРАЕТСЯ АВТОМАТИЧЕСКИ
+	 * тип отображения контента выбирается автоматически
 	 * внутри макета для обычных запросов;
 	 * без макета для AJAX-запросов.
 	 */
@@ -154,14 +154,14 @@ class Layout{
 		return $this;
 	}
 	
-	/** ВСЕГДА ОТОБРАЖАТЬ КОНТЕНТ ВНУТРИ МАКЕТА */
+	/** всегда отображать контент внутри макета */
 	public function enableLayout(){
 		
 		$this->_layoutRender = 'on';
 		return $this;
 	}
 	
-	/** ВСЕГДА ОТОБРАЖАТЬ КОНТЕНТ БЕЗ МАКЕТА */
+	/** всегда отображать контент без макета */
 	public function disableLayout(){
 		
 		$this->_layoutRender = 'off';
@@ -184,13 +184,13 @@ class Layout{
 		return $output;
 	}
 	
-	/** GET BASE HREF URL */
+	/** get base href url */
 	protected function _getHtmlBaseHref(){
 		
 		return WWW_ROOT;
 	}
 	
-	/** GET BREADCRUMBS HTML */
+	/** get breadcrumbs html */
 	protected function _getBreadcrumbs(){
 		
 		$breadcrumbs = array();
@@ -203,19 +203,19 @@ class Layout{
 		return $num ? '<div class="breadcrumbs">'.implode('<span class="mediator"> » </span>', $breadcrumbs).'</div>' : '';
 	}
 	
-	/** GET USER MESSAGE HTML */
+	/** get user message html */
 	protected function _getUserMessages(){
 	
 		return Messenger::get()->getAll();
 	}
 	
-	/** GET HTML CONTENT */
+	/** get html content */
 	protected function _getHtmlContent(){
 		
 		return $this->_htmlContent;
 	}
 	
-	/** GET PHP PAGE STATISTICS HTML */
+	/** get php page statistics html */
 	protected function _getPhpPageStatistics(){
 		
 		$scriptExecutionTime = round(microtime(1) - $GLOBALS['__vikOffTimerStart__'], 4);
@@ -255,7 +255,7 @@ class Layout{
 		exit();
 	}
 	
-	/** RENDER ALL */
+	/** render all */
 	public function render($boolReturn = FALSE){
 		
 		// вывод без макета
@@ -268,7 +268,7 @@ class Layout{
 	}
 	
 	/**
-	 * ВЫВЕСТИ/ВЕРНУТЬ КОНТЕНТ БЕЗ МАКЕТА
+	 * вывести/вернуть контент без макета
 	 * @access protected
 	 * @param bool $boolReturn - флаг, возвращать контент, или выводить
 	 * @param void|string контент
@@ -282,7 +282,7 @@ class Layout{
 	}
 	
 	/**
-	 * ВЫВЕСТИ/ВЕРНУТЬ КОНТЕНТ В МАКЕТЕ
+	 * вывести/вернуть контент в макете
 	 * @access protected
 	 * @param bool $boolReturn - флаг, возвращать контент, или выводить
 	 * @param void|string контент
@@ -298,19 +298,19 @@ class Layout{
 			return ob_get_clean();
 	}
 	
-	/** АКСЕССОР ДЛЯ ШАБЛОНОВ */
+	/** аксессор для шаблонов */
 	public function __get($name){
 		
 		return isset($this->$name) ? $this->$name : '';
 	}
 	
-	/** ПОЛУЧИТЬ СОДЕРЖИМОЕ HTML ФАЙЛА */
+	/** получить содержимое html файла */
 	public function getContentHtmlFile($file){
 		
 		return file_get_contents($this->_tplPath.$file);
 	}
 	
-	/** ПОЛУЧИТЬ ПРОИНТЕРПРЕТИРОВАННОЕ СОДЕРЖИМОЕ PHP ФАЙЛА */
+	/** получить проинтерпретированное содержимое php файла */
 	public function getContentPhpFile($file, $variables = array()){
 		
 		foreach($variables as $k => $v)

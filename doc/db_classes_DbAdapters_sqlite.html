@@ -1,0 +1,2095 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">classes/DbAdapters/sqlite.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CDbAdapter_sqlite">\DbAdapter_sqlite</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\DbAdapter_sqlite" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\DbAdapter_sqlite<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b></small><dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_classes_Db.class.html#%5CDbAdapter">\DbAdapter</a></dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\DbAdapter_sqlite::$_connected" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_connected</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">флаг, что соединение установлено</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_connected">\DbAdapter::$$_connected</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_connected">\DbAdapter::$$_connected</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_dbrs" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_dbrs</span>= 'null'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">ресурс соединения с базой данных</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_dbrs">\DbAdapter::$$_dbrs</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_dbrs">\DbAdapter::$$_dbrs</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_encoding" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_encoding</span>= 'null'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">кодировка соединения</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_encoding">\DbAdapter::$$_encoding</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_encoding">\DbAdapter::$$_encoding</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_error" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_error</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">массив сохранения сообщений об ошибках</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_error">\DbAdapter::$$_error</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_error">\DbAdapter::$$_error</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_errorHandler" class="anchor"></a><div class="property private inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">null|callback
+                 <span class="highlight">$_errorHandler</span>= 'null'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">пользовательский обработчик ошибок
+если null, то ошибки складываются в стандартный контейнер (setError, hasError, getError)</p><small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_errorHandler">\DbAdapter::$$_errorHandler</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>null | callback</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_errorHandler">\DbAdapter::$$_errorHandler</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_errorHandlingMode" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_errorHandlingMode</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">режим накопления сообщений об ошибках</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_errorHandlingMode">\DbAdapter::$$_errorHandlingMode</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_errorHandlingMode">\DbAdapter::$$_errorHandlingMode</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_keepFileLog" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_keepFileLog</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">флаг о необходимости логирования sql в файл</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_keepFileLog">\DbAdapter::$$_keepFileLog</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_keepFileLog">\DbAdapter::$$_keepFileLog</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_queriesNum" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_queriesNum</span>= '0'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">число выполненных запросов</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_queriesNum">\DbAdapter::$$_queriesNum</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_queriesNum">\DbAdapter::$$_queriesNum</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_queriesTime" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_queriesTime</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">время выполнения каждого запроса</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_queriesTime">\DbAdapter::$$_queriesTime</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_queriesTime">\DbAdapter::$$_queriesTime</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$_sqls" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_sqls</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">массив сохраненных SQL запросов</p>
+<small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_sqls">\DbAdapter::$$_sqls</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24_sqls">\DbAdapter::$$_sqls</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$connDatabase" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$connDatabase</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connDatabase">\DbAdapter::$$connDatabase</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connDatabase">\DbAdapter::$$connDatabase</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$connHost" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$connHost</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connHost">\DbAdapter::$$connHost</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connHost">\DbAdapter::$$connHost</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$connPass" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$connPass</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connPass">\DbAdapter::$$connPass</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connPass">\DbAdapter::$$connPass</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::$connUser" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$connUser</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connUser">\DbAdapter::$$connUser</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_classes_Db.class.html#%5CDbAdapter::%24%24connUser">\DbAdapter::$$connUser</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\DbAdapter_sqlite::__construct()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+           $host,  $user,  $pass,  $database
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">конструктор
+назначение параметров подключения
+само подключенеие не выполняется.</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::__construct()">\DbAdapter::__construct()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$host</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$user</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$pass</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$database</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::__destruct()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__destruct</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">деструкотр
+запись лога выполненных sql-запросов в файл (если требуется)</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::__destruct()">\DbAdapter::__destruct()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::_saveQuery()" class="anchor"></a><div class="method protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_saveQuery</span><span class="nb-faded-text">(
+          string $sql
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">сохранение запроса</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::_saveQuery()">\DbAdapter::_saveQuery()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sql</th>
+<td>string</td>
+<td><em><p>@sql - строка sql запроса</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::_saveQueryTime()" class="anchor"></a><div class="method protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_saveQueryTime</span><span class="nb-faded-text">(
+           $t
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">сохранить время исполнения запроса</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::_saveQueryTime()">\DbAdapter::_saveQueryTime()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$t</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::connect()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">connect</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::delete()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">delete</span><span class="nb-faded-text">(
+          string $table, string $conditions
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">удаление записей в таблице</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::delete()">\DbAdapter::delete()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>имя таблицы</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$conditions</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL строка условия (без слова WHERE). Не должно быть пустой строкой.</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>количество затронутых строк</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::describe()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">describe</span><span class="nb-faded-text">(
+          string $table
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">DESCRIBE
+получить массив, описывающий структуру таблицы</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>имя таблицы</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>- структура таблицы</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::disableErrorHandlingMode()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">disableErrorHandlingMode</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">отключить режим отлова ошибок</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::disableErrorHandlingMode()">\DbAdapter::disableErrorHandlingMode()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::enableErrorHandlingMode()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">enableErrorHandlingMode</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">включить режим отлова ошибок</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::enableErrorHandlingMode()">\DbAdapter::enableErrorHandlingMode()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::error()" class="anchor"></a><div class="method protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">error</span><span class="nb-faded-text">(
+          string $msg, string $sql
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">перехват ошибок выполнения sql-запросов
+Дальнейший путь ошибки зависит от установки _errorHandlingMode</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::error()">\DbAdapter::error()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$msg</th>
+<td>string</td>
+<td><em><ul>
+<li>сообщение, сгенерированное СУБД</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$sql</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос, в котором возникла ошибка</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::escape()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">escape</span><span class="nb-faded-text">(
+          mixed $str
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">ЭКРАНИРОВАНИЕ ДАННЫХ
+выполняется с учетом типа данных для предотвращения SQL-инъекций</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>mixed</td>
+<td><em><p>строка для экранирования</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getAffectedNum()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAffectedNum</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getAll()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAll</span><span class="nb-faded-text">(
+          string $query, mixed $default_value
+              =
+              array()
+          )
+        </span>
+        :
+          array | \$default_value</code><div class="description"><p class="short_description">GET ALL
+выполнить запрос и вернуть многомерный ассоциативный массив данных</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em><ul>
+<li>значение, возвращаемое если запрос ничего не вернул</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getAllIndexed()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAllIndexed</span><span class="nb-faded-text">(
+          string $query, string $index, mixed $default_value
+              =
+              0
+          )
+        </span>
+        :
+          array | \$default_value</code><div class="description"><p class="short_description">GET ALL INDEXED
+выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$index</th>
+<td>string</td>
+<td><em><ul>
+<li>имя поля, по которому будет индексироваться массив результатов. Важно проследить, чтобы значение у индекса было уникальным у каждой строки, иначе дублирующиеся строки будут затерты.</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em><ul>
+<li>значение, возвращаемое если запрос ничего не вернул</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getCell()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getCell</span><span class="nb-faded-text">(
+          string $query, integer $row, integer $column, mixed $default_value
+              =
+              0
+          )
+        </span>
+        :
+          mixed | \$default_value</code><div class="description"><p class="short_description">GET CELL
+выполнить запрос и вернуть единственное значение (указанные строка и столбец)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$row</th>
+<td>integer</td>
+<td><em><ul>
+<li>номер строки, значение которой будет возвращено</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$column</th>
+<td>integer</td>
+<td><em><ul>
+<li>номер столбца, значение которого будет возвращено</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em><ul>
+<li>значение, возвращаемое если запрос ничего не вернул</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getCol()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getCol</span><span class="nb-faded-text">(
+          string $query, mixed $default_value
+              =
+              array()
+          )
+        </span>
+        :
+          array | \$default_value</code><div class="description"><p class="short_description">GET COL
+выполнить запрос и вернуть единственный столбец (первый)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em><ul>
+<li>значение, возвращаемое если запрос ничего не вернул</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getColIndexed()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getColIndexed</span><span class="nb-faded-text">(
+          string $query, mixed $default_value
+              =
+              0
+          )
+        </span>
+        :
+          array | \$default_value</code><div class="description"><p class="short_description">GET COL INDEXED
+возвращает одномерный ассоциативный массив.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Для каждой пары ключ массива - значение первого столбца, извлекаемого из БД
+значение массива - значение второго столбца, извлекаемого из БД</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getConnHost()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getConnHost</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить хост бд</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getConnHost()">\DbAdapter::getConnHost()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getConnPassword()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getConnPassword</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить пароль пользователя бд</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getConnPassword()">\DbAdapter::getConnPassword()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getConnUser()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getConnUser</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить имя пользователя бд</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getConnUser()">\DbAdapter::getConnUser()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getDatabase()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDatabase</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить имя текущей бд</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getDatabase()">\DbAdapter::getDatabase()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getEncoding()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getEncoding</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить текущую кодировку соединения</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getEncoding()">\DbAdapter::getEncoding()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getError()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getError</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить все ошибки</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getError()">\DbAdapter::getError()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getLastId()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLastId</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getOne()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getOne</span><span class="nb-faded-text">(
+          string $query, mixed $default_value
+              =
+              0
+          )
+        </span>
+        :
+          mixed | \$default_value</code><div class="description"><p class="short_description">GET ONE
+выполнить запрос и вернуть единственное значение (первая строка, первый столбец)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em><ul>
+<li>значение, возвращаемое если запрос ничего не вернул</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getQueries()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getQueries</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить выполненные sql запросы</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getQueries()">\DbAdapter::getQueries()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getQueriesNum()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getQueriesNum</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить число выполненных sql запросов</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getQueriesNum()">\DbAdapter::getQueriesNum()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getQueriesTime()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getQueriesTime</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить общее время выполнения sql запросов</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getQueriesTime()">\DbAdapter::getQueriesTime()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getQueriesWithTime()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getQueriesWithTime</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">получить выполенные запросы в виде массива (запрос => время)</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::getQueriesWithTime()">\DbAdapter::getQueriesWithTime()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getRow()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getRow</span><span class="nb-faded-text">(
+          string $query, mixed $default_value
+              =
+              0
+          )
+        </span>
+        :
+          array | \$default_value</code><div class="description"><p class="short_description">GET ROW
+выполнить запрос и вернуть единственную строку (первую)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em><ul>
+<li>значение, возвращаемое если запрос ничего не вернул</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getStaticOne()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getStaticOne</span><span class="nb-faded-text">(
+          string $query, string $table, array $fieldsvalues, mixed $default_value
+              =
+              array()
+          )
+        </span>
+        :
+          mixed | \$default_value</code><div class="description"><p class="short_description">GET STATIC ONE
+выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+а если строка не найдена, то вставить ее в таблицу</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>таблица для вставки</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$fieldsvalues</th>
+<td>array</td>
+<td><em><ul>
+<li>ассоциативный массив данных для вставки</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td>mixed</td>
+<td><em><ul>
+<li>значение, возвращаемое если запрос ничего не вернул</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed | \$default_value</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::getStaticRow()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getStaticRow</span><span class="nb-faded-text">(
+          string $query, string $table, array $fieldsvalues,  $default_value
+              =
+              array()
+          )
+        </span>
+        :
+          array | \$fieldsvalues</code><div class="description"><p class="short_description">GET STATIC ROW
+выполнить запрос и вернуть единственную строку (первую)
+а если строка не найдена, то вставить ее в таблицу</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>таблица для вставки</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$fieldsvalues</th>
+<td>array</td>
+<td><em><ul>
+<li>ассоциативный массив данных для вставки</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$default_value</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array | \$fieldsvalues</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::hasError()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">hasError</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">проверить, есть ли ошибки</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::hasError()">\DbAdapter::hasError()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::insert()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">insert</span><span class="nb-faded-text">(
+          string $table, array $fieldsValues
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">вставка данных в таблицу</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::insert()">\DbAdapter::insert()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>имя таблицы</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$fieldsValues</th>
+<td>array</td>
+<td><em><ul>
+<li>массив пар (поле => значение) для вставки</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>последний вставленный id</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::insertMulti()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">insertMulti</span><span class="nb-faded-text">(
+          string $table, array $fields, array $valuesArrArr
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">вставка в таблицу нескольких строк за раз</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::insertMulti()">\DbAdapter::insertMulti()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>имя таблицы</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$fields</th>
+<td>array</td>
+<td><em><ul>
+<li>массив-список полей таблиц. Например: array('field1', 'field2')</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$valuesArrArr</th>
+<td>array</td>
+<td><em><ul>
+<li>список списков, каждый из которых содержит в себе данные для вставки одной строки. Например: array( array(val1, val2), array(val3, val4) )</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>колечество вставленных строк</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::isConnected()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isConnected</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">выполнено ли подключение к бд</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::isConnected()">\DbAdapter::isConnected()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::keepFileLog()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">keepFileLog</span><span class="nb-faded-text">(
+           $boolEnable
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">вести лог sql запросов</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::keepFileLog()">\DbAdapter::keepFileLog()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$boolEnable</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::loadDump()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">loadDump</span><span class="nb-faded-text">(
+           $fileName
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">загрузить дамп данных</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::loadDump()">\DbAdapter::loadDump()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$fileName</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::makeDump()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">makeDump</span><span class="nb-faded-text">(
+          string | null $database
+              =
+              null, array | null $tables
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">СОЗДАТЬ ДАМП БАЗЫ ДАННЫХ</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$database</th>
+<td>string | null</td>
+<td><em><ul>
+<li>база данных (или дефолтная, если null)</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$tables</th>
+<td>array | null</td>
+<td><em><ul>
+<li>список таблиц (или все, если null)</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Output</dt>
+<dd>выдает текст sql-дампа
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::qe()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">qe</span><span class="nb-faded-text">(
+          \variant $cell
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">эскейпирование и заключение строки в ковычки
+замена последовательному вызову функций db::escape и db::quote</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::qe()">\DbAdapter::qe()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cell</th>
+<td>\variant</td>
+<td><em><ul>
+<li>исходная строка</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>эскейпированая и заключенная в нужный тип ковычек строка</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::query()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">query</span><span class="nb-faded-text">(
+          string $query
+          )
+        </span>
+        :
+          resource</code><div class="description"><p class="short_description">ВЫПОЛНИТЬ ЗАПРОС</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL-запрос</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>resource</td>
+<td>- ресурс ответа базы данных</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::quote()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">quote</span><span class="nb-faded-text">(
+          \variant $cell
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">заключение строк в ковычки
+в зависимости от типа данных</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::quote()">\DbAdapter::quote()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cell</th>
+<td>\variant</td>
+<td><em><ul>
+<li>исходная строка</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>заключенная в нужный тип ковычек строка</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::quoteFieldName()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">quoteFieldName</span><span class="nb-faded-text">(
+           $field
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">ЗАКЛЮЧЕНИЕ ИМЕНИ ПОЛЯ В КАВЫЧКИ
+для полей, имена которых совпадают с ключевыми словами</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>заключенная в нужный тип ковычек строка</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::resetError()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">resetError</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">очистить накопившиеся ошибки</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::resetError()">\DbAdapter::resetError()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::selectDb()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">selectDb</span><span class="nb-faded-text">(
+           $db
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">ВЫБРАТЬ БАЗУ ДАННЫХ</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$db</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::setEncoding()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setEncoding</span><span class="nb-faded-text">(
+           $encoding
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$encoding</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::setError()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setError</span><span class="nb-faded-text">(
+           $error
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">сохранить ошибку</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::setError()">\DbAdapter::setError()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$error</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::setErrorHandler()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setErrorHandler</span><span class="nb-faded-text">(
+          null | callback $handler
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">установить обработчик ошибок</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::setErrorHandler()">\DbAdapter::setErrorHandler()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handler</th>
+<td>null | callback</td>
+<td><em><ul>
+<li>функция обработки ошибок</li>
+</ul>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::showCreateTable()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">showCreateTable</span><span class="nb-faded-text">(
+          string $table
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">ПОКАЗАТЬ СТРОКУ CREATE TABLE</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>имя таблицы</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>- строка CREATE TABLE</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::showDatabases()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">showDatabases</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">ПОЛУЧИТЬ СПИСОК БД</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>- массив-список баз данных</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::showTables()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">showTables</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
+в текущей базе данных</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>- массив-список таблиц</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::update()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">update</span><span class="nb-faded-text">(
+          string $table, array $fieldsValues, string $conditions
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">обновление записей в таблице</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::update()">\DbAdapter::update()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>имя таблицы</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$fieldsValues</th>
+<td>array</td>
+<td><em><ul>
+<li>массив пар (поле => значение) для обновления</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$conditions</th>
+<td>string</td>
+<td><em><ul>
+<li>SQL строка условия (без слова WHERE). Не должно быть пустой строкой.</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>количество затронутых строк</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DbAdapter_sqlite::updateInsert()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">updateInsert</span><span class="nb-faded-text">(
+          string $table, array $fieldsValues, array $conditionFieldsValues
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">обновляет информацию в таблице.</p>
+<small>Inherited from:
+                    <a href="db_classes_Db.class.html#%5CDbAdapter::updateInsert()">\DbAdapter::updateInsert()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Если не было обновлено ни одной строки, создает новую строку.
+Возвращает 0, если было произведено обновление существующей строки,
+Возвращает id, если была произведена вставка новой строки
+ВАЖНО: при создании новой строки, функция заполнит ее данными из $fieldsValues и $conditionArr</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>string</td>
+<td><em><ul>
+<li>имя таблицы</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$fieldsValues</th>
+<td>array</td>
+<td><em><ul>
+<li>поля для обновление</li>
+</ul>
+</em></td>
+</tr>
+<tr>
+<th>$conditionFieldsValues</th>
+<td>array</td>
+<td><em><ul>
+<li>поля, задающие условие обновления</li>
+</ul>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>количество затронутых строк</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.18.1</a>.
+    </small></body></html>

@@ -1,0 +1,150 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><script xmlns="" type="text/javascript" src="js/sidebar.js"></script><div xmlns="" id="sidebar">
+<div id="sidebar-header">
+<img src="images/icon48x48.png" id="sidebar-logo" alt="Logo"><h1>DocBlox</h1>
+<div style="clear: both"></div>
+</div>
+<div id="sidebar-nav">
+<h3 id="sidebar-dashboard">
+<img class="icon" src="css/docblox/images/icons/dashboard.png" alt="Dashboard"><a href="content.html" class="link" target="content">Dashboard</a>
+</h3>
+<div style="display: none"></div>
+<h3 id="sidebar-files">
+<img src="css/docblox/images/icons/files.png" alt="Files"><a href="#files">Files</a>
+</h3>
+<div class="sidebar-section">
+<div class="search-bar">
+<a href="#" onclick="$(this).parent().next().find('.collapsable-hitarea').click(); return false;"><img src="images/collapse_all.png" title="Collapse all" alt="Collapse all"></a><a href="#" onclick="$(this).parent().next().find('.expandable-hitarea').click(); return false;"><img src="images/expand_all.png" title="Expand all" alt="Expand all"></a><div><input type="text" onkeyup="tree_search(this);"></div>
+</div>
+<ul class="sidebar-nav-tree">
+<li class="closed">
+<span class="file"><a href="db_classes_Controller.class.html" target="content">classes/Controller.class.php</a></span><ul id="files_a426d78adaaf19620396408a0e44f1d2" class="filetree"><li><span class="class"><a href="db_classes_Controller.class.html#%5CController" target="content">Controller<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_classes_Db.class.html" target="content">classes/Db.class.php</a></span><ul id="files_041b7660457c26c86f6d86d1e89a473c" class="filetree">
+<li><span class="class"><a href="db_classes_Db.class.html#%5Cdb" target="content">db<br></a></span></li>
+<li><span class="class"><a href="db_classes_Db.class.html#%5CDbAdapter" target="content">DbAdapter<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_classes_DbAdapters_mysql.html" target="content">classes/DbAdapters/mysql.php</a></span><ul id="files_c87f406ab0bd42378b9b4313f531f252" class="filetree"><li><span class="class"><a href="db_classes_DbAdapters_mysql.html#%5CDbAdapter_mysql" target="content">DbAdapter_mysql<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_classes_DbAdapters_postgres.html" target="content">classes/DbAdapters/postgres.php</a></span><ul id="files_c92a88250aa494baae4d51a11e1cfbcf" class="filetree"><li><span class="class"><a href="db_classes_DbAdapters_postgres.html#%5CDbAdapter_postgres" target="content">DbAdapter_postgres<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_classes_DbAdapters_sqlite.html" target="content">classes/DbAdapters/sqlite.php</a></span><ul id="files_0604a22094e60e65dbaf07fe9860da7b" class="filetree"><li><span class="class"><a href="db_classes_DbAdapters_sqlite.html#%5CDbAdapter_sqlite" target="content">DbAdapter_sqlite<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_classes_FrontController.class.html" target="content">classes/FrontController.class.php</a></span><ul id="files_395d913c05184d613f6444dc3ff25d8f" class="filetree"><li><span class="class"><a href="db_classes_FrontController.class.html#%5CFrontController" target="content">FrontController<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_classes_Layout.class.html" target="content">classes/Layout.class.php</a></span><ul id="files_e871e242d9cc858b322c098528659021" class="filetree"><li><span class="class"><a href="db_classes_Layout.class.html#%5CLayout" target="content">Layout<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_config.html" target="content">config.php</a></span><ul id="files_8a4a7354297ac36383cf49dc7e4c8261" class="filetree">
+<li><span class="constant"><a href="db_config.html#::CHECK_FORM_DUPLICATION" target="content">CHECK_FORM_DUPLICATION<br></a></span></li>
+<li><span class="constant"><a href="db_config.html#::CFG_SITE_NAME" target="content">CFG_SITE_NAME<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_func.html" target="content">func.php</a></span><ul id="files_46fb25f249863d05ad878fe9699fd201" class="filetree">
+<li><span class="function"><a href="db_func.html#::getVar()" target="content">getVar<br></a></span></li>
+<li><span class="function"><a href="db_func.html#::href()" target="content">href<br></a></span></li>
+<li><span class="function"><a href="db_func.html#::reload()" target="content">reload<br></a></span></li>
+<li><span class="function"><a href="db_func.html#::redirect()" target="content">redirect<br></a></span></li>
+<li><span class="function"><a href="db_func.html#::getFormCodeInput()" target="content">getFormCodeInput<br></a></span></li>
+<li><span class="function"><a href="db_func.html#::checkFormDuplication()" target="content">checkFormDuplication<br></a></span></li>
+<li><span class="function"><a href="db_func.html#::lockFormCode()" target="content">lockFormCode<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_index.html" target="content">index.php</a></span><ul id="files_a5252f76f188da47cfb81068b3d3a2ba" class="filetree">
+<li><span class="constant"><a href="db_index.html#::WWW_ROOT" target="content">WWW_ROOT<br></a></span></li>
+<li><span class="constant"><a href="db_index.html#::WWW_URI" target="content">WWW_URI<br></a></span></li>
+<li><span class="constant"><a href="db_index.html#::FS_ROOT" target="content">FS_ROOT<br></a></span></li>
+<li><span class="constant"><a href="db_index.html#::AJAX_MODE" target="content">AJAX_MODE<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_setup.html" target="content">setup.php</a></span><ul id="files_d03dbfdbe75b085a48348946944c095c" class="filetree"><li><span class="constant"><a href="db_setup.html#::FORMCODE" target="content">FORMCODE<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_ajax.html" target="content">templates/ajax.php</a></span><ul id="files_6118c5910bff294167f17ac1d7b5b0a5" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_docs.html" target="content">templates/docs.php</a></span><ul id="files_da0698b7615d5796f07b2859401c2c80" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_docs_index.html" target="content">templates/docs/index.php</a></span><ul id="files_76c1290136f124e14ac3c7bb2db9f7b7" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_docs_intro.html" target="content">templates/docs/intro.php</a></span><ul id="files_ac58ce346e6670cdbb41416b01dcf7ff" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_docs_modules-requirements.html" target="content">templates/docs/modules-requirements.php</a></span><ul id="files_3bc0c4b7dc7dfb15d07e4a01c92d63bb" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_docs_struct.html" target="content">templates/docs/struct.php</a></span><ul id="files_61a83890c3dfb77784c38be20f86088c" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_index.html" target="content">templates/index.php</a></span><ul id="files_539ca912632a8595d9cea03b2c603056" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_layout.html" target="content">templates/layout.php</a></span><ul id="files_f33a8b25f855c2a3911cbbdcaf7e14f4" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_tabs_tab1.html" target="content">templates/tabs/tab1.php</a></span><ul id="files_8f6b396143647535c2d3d4067c7494d0" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_templates_test.html" target="content">templates/test.php</a></span><ul id="files_ae93c0cbb21dfc95c531a6d8d62ff38a" class="filetree"></ul>
+</li>
+</ul>
+</div>
+<h3 id="sidebar-packages">
+<img src="css/docblox/images/icons/packages.png" alt="Packages"><a href="#packages">Packages</a>
+</h3>
+<div class="sidebar-section sidebar-tree">
+<div class="search-bar">
+<a href="#" onclick="$(this).parent().next().find('.collapsable-hitarea').click(); return false;"><img src="images/collapse_all.png" title="Collapse all" alt="Collapse all"></a><a href="#" onclick="$(this).parent().next().find('.expandable-hitarea').click(); return false;"><img src="images/expand_all.png" title="Expand all" alt="Expand all"></a><div><input type="text" onkeyup="tree_search(this);"></div>
+</div>
+<ul class="sidebar-nav-tree"><li class="closed">
+<span class="folder">Default</span><ul>
+<li><span class="function"><a href="db_func.html#::getVar()" target="content">getVar</a></span></li>
+<li><span class="function"><a href="db_func.html#::redirect()" target="content">redirect</a></span></li>
+<li><span class="function"><a href="db_func.html#::reload()" target="content">reload</a></span></li>
+<li><span class="class"><a href="db_classes_Layout.class.html#%5CLayout" target="content">Layout</a></span></li>
+</ul>
+</li></ul>
+</div>
+<h3 id="sidebar-charts">
+<img src="css/docblox/images/icons/chart.png" alt="Charts"><a href="#charts">Charts</a>
+</h3>
+<div class="sidebar-section"><ul style="list-style-image: url('css/docblox/images/icons/chart15x12.png');"><li><a href="graph.html" target="content">Class Inheritance Diagram</a></li></ul></div>
+<h3 id="sidebar-reports">
+<img src="css/docblox/images/icons/reports.png" alt="Reports"><a href="#reports">Reports</a>
+</h3>
+<div class="sidebar-section"><ul style="list-style-image: url('css/docblox/images/icons/reports9x12.png');">
+<li><a href="report_markers.html" target="content">Markers (TODO/FIXME)</a></li>
+<li><a href="report_parse_markers.html" target="content">Parsing errors</a></li>
+<li><a href="report_deprecated.html" target="content">Deprecated elements</a></li>
+</ul></div>
+</div>
+<div id="sidebar-footer">
+        Documentation is generated by <a href="http://docblox-project.org" target="_top"><img src="images/icon48x48.png" height="12" align="top" alt="Logo"> DocBlox 0.18.1</a>, images courtesy of <a href="http://glyphish.com/" target="_top">Glyphish</a>
+</div>
+</div></body></html>

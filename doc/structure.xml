@@ -1,0 +1,3601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="0.18.1" title="">
+  <file path="index.php" hash="a5252f76f188da47cfb81068b3d3a2ba">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file index.php</error>
+    </parse_markers>
+    <include line="17" type="Require Once">
+      <name>setup.php</name>
+    </include>
+    <constant namespace="default" line="6">
+      <name>WWW_ROOT</name>
+      <value><![CDATA['http://'.$_SERVER['SERVER_NAME'].(strlen($_url) > 1 ? $_url : '').'/']]></value>
+    </constant>
+    <constant namespace="default" line="7">
+      <name>WWW_URI</name>
+      <value><![CDATA['http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']]]></value>
+    </constant>
+    <constant namespace="default" line="8">
+      <name>FS_ROOT</name>
+      <value><![CDATA[realpath('.').DIRECTORY_SEPARATOR]]></value>
+    </constant>
+    <constant namespace="default" line="11">
+      <name>AJAX_MODE</name>
+      <value><![CDATA[isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest']]></value>
+    </constant>
+  </file>
+  <file path="templates/index.php" hash="539ca912632a8595d9cea03b2c603056">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/index.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/tabs/tab1.php" hash="8f6b396143647535c2d3d4067c7494d0">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/tabs/tab1.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/docs.php" hash="da0698b7615d5796f07b2859401c2c80">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/docs.php</error>
+    </parse_markers>
+    <include line="9" type="Include">
+      <name>$this</name>
+    </include>
+  </file>
+  <file path="templates/ajax.php" hash="6118c5910bff294167f17ac1d7b5b0a5">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/ajax.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/layout.php" hash="f33a8b25f855c2a3911cbbdcaf7e14f4">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/layout.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/test.php" hash="ae93c0cbb21dfc95c531a6d8d62ff38a">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/test.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/docs/index.php" hash="76c1290136f124e14ac3c7bb2db9f7b7">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/docs/index.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/docs/modules-requirements.php" hash="3bc0c4b7dc7dfb15d07e4a01c92d63bb">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/docs/modules-requirements.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/docs/struct.php" hash="61a83890c3dfb77784c38be20f86088c">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/docs/struct.php</error>
+    </parse_markers>
+  </file>
+  <file path="templates/docs/intro.php" hash="ac58ce346e6670cdbb41416b01dcf7ff">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file templates/docs/intro.php</error>
+    </parse_markers>
+  </file>
+  <file path="config.php" hash="8a4a7354297ac36383cf49dc7e4c8261">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file config.php</error>
+    </parse_markers>
+    <constant namespace="default" line="15">
+      <name>CHECK_FORM_DUPLICATION</name>
+      <value><![CDATA[0]]></value>
+    </constant>
+    <constant namespace="default" line="18">
+      <name>CFG_SITE_NAME</name>
+      <value><![CDATA['vik-off simple']]></value>
+    </constant>
+  </file>
+  <file path="func.php" hash="46fb25f249863d05ad878fe9699fd201">
+    <parse_markers>
+      <error line="6" code="50015">Argument $varname is missing from the Docblock of getVar()</error>
+      <error line="6" code="50015">Argument $defaultVal is missing from the Docblock of getVar()</error>
+      <error line="6" code="50015">Argument $type is missing from the Docblock of getVar()</error>
+      <error line="18" code="50009">No DocBlock was found for function href()</error>
+      <error line="31" code="50015">Argument $href is missing from the Docblock of redirect()</error>
+      <error line="39" code="50009">No DocBlock was found for function getFormCodeInput()</error>
+      <error line="49" code="50009">No DocBlock was found for function checkFormDuplication()</error>
+      <error line="73" code="50009">No DocBlock was found for function lockFormCode()</error>
+      <error line="1" code="50007">No page-level DocBlock was found in file func.php</error>
+    </parse_markers>
+    <function namespace="default" line="7" package="Default">
+      <name>getVar</name>
+      <type>function</type>
+      <docblock line="6">
+        <description><![CDATA[ФУНКЦИЯ GETVAR]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <argument line="7">
+        <name>$varname</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="7">
+        <name>$defaultVal</name>
+        <default><![CDATA['']]></default>
+        <type/>
+      </argument>
+      <argument line="7">
+        <name>$type</name>
+        <default><![CDATA['']]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="default" line="18">
+      <name>href</name>
+      <type>function</type>
+      <argument line="18">
+        <name>$href</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="default" line="24" package="Default">
+      <name>reload</name>
+      <type>function</type>
+      <docblock line="23">
+        <description><![CDATA[RELOAD]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </function>
+    <function namespace="default" line="32" package="Default">
+      <name>redirect</name>
+      <type>function</type>
+      <docblock line="31">
+        <description><![CDATA[REDIRECT]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <argument line="32">
+        <name>$href</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="default" line="39">
+      <name>getFormCodeInput</name>
+      <type>function</type>
+    </function>
+    <function namespace="default" line="49">
+      <name>checkFormDuplication</name>
+      <type>function</type>
+    </function>
+    <function namespace="default" line="73">
+      <name>lockFormCode</name>
+      <type>function</type>
+      <argument line="73">
+        <name>$code</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+  </file>
+  <file path="setup.php" hash="d03dbfdbe75b085a48348946944c095c">
+    <parse_markers>
+      <error line="1" code="50007">No page-level DocBlock was found in file setup.php</error>
+    </parse_markers>
+    <include line="6" type="Require Once">
+      <name>func.php</name>
+    </include>
+    <include line="7" type="Require Once">
+      <name>classes/Controller.class.php</name>
+    </include>
+    <include line="8" type="Require Once">
+      <name>classes/FrontController.class.php</name>
+    </include>
+    <include line="9" type="Require Once">
+      <name>classes/Layout.class.php</name>
+    </include>
+    <include line="10" type="Require Once">
+      <name>classes/Db.class.php</name>
+    </include>
+    <include line="12" type="Require Once">
+      <name>classes/DbAdapters/mysql.php</name>
+    </include>
+    <include line="13" type="Require Once">
+      <name>classes/DbAdapters/postgres.php</name>
+    </include>
+    <include line="14" type="Require Once">
+      <name>classes/DbAdapters/sqlite.php</name>
+    </include>
+    <include line="16" type="Require Once">
+      <name>config.php</name>
+    </include>
+    <constant namespace="default" line="19">
+      <name>FORMCODE</name>
+      <value><![CDATA[getFormCodeInput()]]></value>
+    </constant>
+  </file>
+  <file path="classes/Db.class.php" hash="041b7660457c26c86f6d86d1e89a473c">
+    <parse_markers>
+      <error line="3" code="50000">No DocBlock was found for db</error>
+      <error line="145" code="50018">No DocBlock was found for property $connHost</error>
+      <error line="146" code="50018">No DocBlock was found for property $connUser</error>
+      <error line="147" code="50018">No DocBlock was found for property $connPass</error>
+      <error line="148" code="50018">No DocBlock was found for property $connDatabase</error>
+      <error line="154" code="50010">No DocBlock was found for method connect()</error>
+      <error line="155" code="50010">No DocBlock was found for method setEncoding()</error>
+      <error line="156" code="50010">No DocBlock was found for method getLastId()</error>
+      <error line="157" code="50010">No DocBlock was found for method getAffectedNum()</error>
+      <error line="158" code="50010">No DocBlock was found for method query()</error>
+      <error line="159" code="50010">No DocBlock was found for method getOne()</error>
+      <error line="160" code="50010">No DocBlock was found for method getCell()</error>
+      <error line="161" code="50010">No DocBlock was found for method getCol()</error>
+      <error line="162" code="50010">No DocBlock was found for method getColIndexed()</error>
+      <error line="163" code="50010">No DocBlock was found for method getRow()</error>
+      <error line="164" code="50010">No DocBlock was found for method getAll()</error>
+      <error line="165" code="50010">No DocBlock was found for method getAllIndexed()</error>
+      <error line="166" code="50010">No DocBlock was found for method escape()</error>
+      <error line="175" code="50010">No DocBlock was found for method describe()</error>
+      <error line="176" code="50010">No DocBlock was found for method showTables()</error>
+      <error line="177" code="50010">No DocBlock was found for method showCreateTable()</error>
+      <error line="179" code="50015">Argument $host is missing from the Docblock of __construct()</error>
+      <error line="179" code="50015">Argument $user is missing from the Docblock of __construct()</error>
+      <error line="179" code="50015">Argument $pass is missing from the Docblock of __construct()</error>
+      <error line="179" code="50015">Argument $database is missing from the Docblock of __construct()</error>
+      <error line="218" code="50015">Argument $boolEnable is missing from the Docblock of keepFileLog()</error>
+      <error line="364" code="50014">Name of argument $conditions does not match with the DocBlock's name $fieldsValues in delete()</error>
+      <notice line="364" code="50013">Parameter $fieldsValues could not be found in delete()</notice>
+      <error line="424" code="50015">Argument $t is missing from the Docblock of _saveQueryTime()</error>
+      <error line="500" code="50015">Argument $error is missing from the Docblock of setError()</error>
+      <error line="520" code="50015">Argument $fileName is missing from the Docblock of loadDump()</error>
+      <error line="111" code="50000">No DocBlock was found for DbAdapter</error>
+      <error line="1" code="50007">No page-level DocBlock was found in file classes/Db.class.php</error>
+    </parse_markers>
+    <class final="false" abstract="false" namespace="default" line="3">
+      <name>db</name>
+      <full_name>\db</full_name>
+      <extends/>
+      <property final="false" static="true" visibility="private" line="9" package="Default">
+        <name>$_instances</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="5">
+          <description><![CDATA[экземпляры класса db (один экземпляр - одно подключение)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="5" name="var" description="" type="\array()">
+            <type by_reference="false">\array()</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="true" visibility="private" line="15" package="Default">
+        <name>$_defaultInstance</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="11">
+          <description><![CDATA[экземпляр дефолтного соединения с БД]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="11" name="var" description="" type="null|\db">
+            <type by_reference="false">null</type>
+            <type by_reference="false">\db</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="default" line="33" package="Default">
+        <name>create</name>
+        <type>function</type>
+        <docblock line="18">
+          <description><![CDATA[СОЗДАНИЕ ПОДКЛЮЧЕНИЯ К БД
+создает новый экземпляр соединения с бд, при этом не подключаясь к ней.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="18" name="param" description="string 'adapter' optional, указывает адаптер подключения к БД Если не указан, используется mysql string 'host' required string 'user' required string 'pass' required string 'database' required string 'encoding' optional, устанавливает кодировку соединения" type="array" variable="$connParams">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="18" name="param" description="- идентификатор соединения с БД. Если null, создается дефолтное соединение." type="null|string" variable="$connIdentifier">
+            <type by_reference="false">null</type>
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="18" name="return" description="instance" type="\db">
+            <type by_reference="false">\db</type>
+          </tag>
+        </docblock>
+        <argument line="33">
+          <name>$connParams</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="33">
+          <name>$connIdentifier</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="default" line="92" package="Default">
+        <name>get</name>
+        <type>function</type>
+        <docblock line="85">
+          <description><![CDATA[ПОЛУЧИТЬ ЭКЗЕМПЛЯР КЛАССА db]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="85" name="param" description="- идентификатор соединения с БД. Если не указан, возвращается дефолтное соединение." type="null|string" variable="$connIdentifier">
+            <type by_reference="false">null</type>
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="85" name="return" description="of db" type="\instance">
+            <type by_reference="false">\instance</type>
+          </tag>
+        </docblock>
+        <argument line="92">
+          <name>$connIdentifier</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <class final="false" abstract="true" namespace="default" line="111">
+      <name>DbAdapter</name>
+      <full_name>\DbAdapter</full_name>
+      <extends/>
+      <property final="false" static="false" visibility="protected" line="114" package="Default">
+        <name>$_connected</name>
+        <default><![CDATA[FALSE]]></default>
+        <docblock line="113">
+          <description><![CDATA[флаг, что соединение установлено]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="117" package="Default">
+        <name>$_keepFileLog</name>
+        <default><![CDATA[FALSE]]></default>
+        <docblock line="116">
+          <description><![CDATA[флаг о необходимости логирования sql в файл]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="120" package="Default">
+        <name>$_sqls</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="119">
+          <description><![CDATA[массив сохраненных SQL запросов]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="123" package="Default">
+        <name>$_queriesTime</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="122">
+          <description><![CDATA[время выполнения каждого запроса]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="126" package="Default">
+        <name>$_queriesNum</name>
+        <default><![CDATA[0]]></default>
+        <docblock line="125">
+          <description><![CDATA[число выполненных запросов]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="129" package="Default">
+        <name>$_error</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="128">
+          <description><![CDATA[массив сохранения сообщений об ошибках]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="132" package="Default">
+        <name>$_errorHandlingMode</name>
+        <default><![CDATA[FALSE]]></default>
+        <docblock line="131">
+          <description><![CDATA[режим накопления сообщений об ошибках]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="139" package="Default">
+        <name>$_errorHandler</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="134">
+          <description><![CDATA[пользовательский обработчик ошибок
+если null, то ошибки складываются в стандартный контейнер (setError, hasError, getError)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="134" name="var" description="" type="null|callback">
+            <type by_reference="false">null</type>
+            <type by_reference="false">callback</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="142" package="Default">
+        <name>$_dbrs</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="141">
+          <description><![CDATA[ресурс соединения с базой данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="145">
+        <name>$connHost</name>
+        <default><![CDATA['']]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="146">
+        <name>$connUser</name>
+        <default><![CDATA['']]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="147">
+        <name>$connPass</name>
+        <default><![CDATA['']]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="148">
+        <name>$connDatabase</name>
+        <default><![CDATA['']]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="151" package="Default">
+        <name>$_encoding</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="150">
+          <description><![CDATA[кодировка соединения]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="154">
+        <name>connect</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="155">
+        <name>setEncoding</name>
+        <type>function</type>
+        <argument line="155">
+          <name>$encoding</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="156">
+        <name>getLastId</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="157">
+        <name>getAffectedNum</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="158">
+        <name>query</name>
+        <type>function</type>
+        <argument line="158">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="159">
+        <name>getOne</name>
+        <type>function</type>
+        <argument line="159">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="159">
+          <name>$default_value</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="160">
+        <name>getCell</name>
+        <type>function</type>
+        <argument line="160">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="160">
+          <name>$row</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="160">
+          <name>$column</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="160">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="161">
+        <name>getCol</name>
+        <type>function</type>
+        <argument line="161">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="161">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="162">
+        <name>getColIndexed</name>
+        <type>function</type>
+        <argument line="162">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="162">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="163">
+        <name>getRow</name>
+        <type>function</type>
+        <argument line="163">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="163">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="164">
+        <name>getAll</name>
+        <type>function</type>
+        <argument line="164">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="164">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="165">
+        <name>getAllIndexed</name>
+        <type>function</type>
+        <argument line="165">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="165">
+          <name>$index</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="165">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="166">
+        <name>escape</name>
+        <type>function</type>
+        <argument line="166">
+          <name>$str</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="174" package="Default">
+        <name>quoteFieldName</name>
+        <type>function</type>
+        <docblock line="168">
+          <description><![CDATA[ЗАКЛЮЧЕНИЕ ИМЕН ПОЛЕЙ В НУЖНЫЙ ТИП КОВЫЧЕК
+метод индивидуален для каждого db-адапрета]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="168" name="param" description="- строка имени поля" type="\variant" variable="$field">
+            <type by_reference="false">\variant</type>
+          </tag>
+          <tag line="168" name="return" description="заключенная в нужный тип ковычек строка" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="174">
+          <name>$field</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="175">
+        <name>describe</name>
+        <type>function</type>
+        <argument line="175">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="176">
+        <name>showTables</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="default" line="177">
+        <name>showCreateTable</name>
+        <type>function</type>
+        <argument line="177">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="184" package="Default">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="179">
+          <description><![CDATA[конструктор
+назначение параметров подключения
+само подключенеие не выполняется.]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="184">
+          <name>$host</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="184">
+          <name>$user</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="184">
+          <name>$pass</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="184">
+          <name>$database</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="193" package="Default">
+        <name>enableErrorHandlingMode</name>
+        <type>function</type>
+        <docblock line="192">
+          <description><![CDATA[включить режим отлова ошибок]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="198" package="Default">
+        <name>disableErrorHandlingMode</name>
+        <type>function</type>
+        <docblock line="197">
+          <description><![CDATA[отключить режим отлова ошибок]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="207" package="Default">
+        <name>setErrorHandler</name>
+        <type>function</type>
+        <docblock line="202">
+          <description><![CDATA[установить обработчик ошибок]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="202" name="param" description="- функция обработки ошибок" type="null|callback" variable="$handler">
+            <type by_reference="false">null</type>
+            <type by_reference="false">callback</type>
+          </tag>
+          <tag line="202" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="207">
+          <name>$handler</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="213" package="Default">
+        <name>isConnected</name>
+        <type>function</type>
+        <docblock line="212">
+          <description><![CDATA[выполнено ли подключение к бд]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="219" package="Default">
+        <name>keepFileLog</name>
+        <type>function</type>
+        <docblock line="218">
+          <description><![CDATA[вести лог sql запросов]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="219">
+          <name>$boolEnable</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="225" package="Default">
+        <name>getConnHost</name>
+        <type>function</type>
+        <docblock line="224">
+          <description><![CDATA[получить хост бд]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="230" package="Default">
+        <name>getConnUser</name>
+        <type>function</type>
+        <docblock line="229">
+          <description><![CDATA[получить имя пользователя бд]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="235" package="Default">
+        <name>getConnPassword</name>
+        <type>function</type>
+        <docblock line="234">
+          <description><![CDATA[получить пароль пользователя бд]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="240" package="Default">
+        <name>getDatabase</name>
+        <type>function</type>
+        <docblock line="239">
+          <description><![CDATA[получить имя текущей бд]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="245" package="Default">
+        <name>getEncoding</name>
+        <type>function</type>
+        <docblock line="244">
+          <description><![CDATA[получить текущую кодировку соединения]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="255" package="Default">
+        <name>insert</name>
+        <type>function</type>
+        <docblock line="249">
+          <description><![CDATA[вставка данных в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="249" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="249" name="param" description="- массив пар (поле =&gt; значение) для вставки" type="array" variable="$fieldsValues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="249" name="return" description="последний вставленный id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="255">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="255">
+          <name>$fieldsValues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="278" package="Default">
+        <name>insertMulti</name>
+        <type>function</type>
+        <docblock line="270">
+          <description><![CDATA[вставка в таблицу нескольких строк за раз]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="270" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="270" name="param" description="- массив-список полей таблиц. Например: array('field1', 'field2')" type="array" variable="$fields">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="270" name="param" description="- список списков, каждый из которых содержит в себе данные для вставки одной строки. Например: array( array(val1, val2), array(val3, val4) )" type="array" variable="$valuesArrArr">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="270" name="return" description="колечество вставленных строк" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="278">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="278">
+          <name>$fields</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="278">
+          <name>$valuesArrArr</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="301" package="Default">
+        <name>update</name>
+        <type>function</type>
+        <docblock line="294">
+          <description><![CDATA[обновление записей в таблице]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="294" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="294" name="param" description="- массив пар (поле =&gt; значение) для обновления" type="array" variable="$fieldsValues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="294" name="param" description="- SQL строка условия (без слова WHERE). Не должно быть пустой строкой." type="string" variable="$conditions">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="294" name="return" description="количество затронутых строк" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="301">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="301">
+          <name>$fieldsValues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="301">
+          <name>$conditions</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="330" package="Default">
+        <name>updateInsert</name>
+        <type>function</type>
+        <docblock line="319">
+          <description><![CDATA[обновляет информацию в таблице.]]></description>
+          <long-description><![CDATA[<p>Если не было обновлено ни одной строки, создает новую строку.
+Возвращает 0, если было произведено обновление существующей строки,
+Возвращает id, если была произведена вставка новой строки
+ВАЖНО: при создании новой строки, функция заполнит ее данными из $fieldsValues и $conditionArr</p>]]></long-description>
+          <tag line="319" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="319" name="param" description="- поля для обновление" type="array" variable="$fieldsValues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="319" name="param" description="- поля, задающие условие обновления" type="array" variable="$conditionFieldsValues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="319" name="return" description="количество затронутых строк" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="330">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="330">
+          <name>$fieldsValues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="330">
+          <name>$conditionFieldsValues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="371" package="Default">
+        <name>delete</name>
+        <type>function</type>
+        <docblock line="364">
+          <description><![CDATA[удаление записей в таблице]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="364" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="364" name="param" description="- массив пар (поле =&gt; значение) для обновления" type="array" variable="$fieldsValues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="364" name="param" description="- SQL строка условия (без слова WHERE). Не должно быть пустой строкой." type="string" variable="$conditions">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="364" name="return" description="количество затронутых строк" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="371">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="371">
+          <name>$conditions</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="391" package="Default">
+        <name>quote</name>
+        <type>function</type>
+        <docblock line="385">
+          <description><![CDATA[заключение строк в ковычки
+в зависимости от типа данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="385" name="param" description="- исходная строка" type="\variant" variable="$cell">
+            <type by_reference="false">\variant</type>
+          </tag>
+          <tag line="385" name="return" description="заключенная в нужный тип ковычек строка" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="391">
+          <name>$cell</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="409" package="Default">
+        <name>qe</name>
+        <type>function</type>
+        <docblock line="403">
+          <description><![CDATA[эскейпирование и заключение строки в ковычки
+замена последовательному вызову функций db::escape и db::quote]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="403" name="param" description="- исходная строка" type="\variant" variable="$cell">
+            <type by_reference="false">\variant</type>
+          </tag>
+          <tag line="403" name="return" description="эскейпированая и заключенная в нужный тип ковычек строка" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="409">
+          <name>$cell</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="419" package="Default">
+        <name>_saveQuery</name>
+        <type>function</type>
+        <docblock line="414">
+          <description><![CDATA[сохранение запроса]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="414" name="access" description="protected"/>
+          <tag line="414" name="param" description="@sql - строка sql запроса" type="string" variable="$sql">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="419">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="428" package="Default">
+        <name>_saveQueryTime</name>
+        <type>function</type>
+        <docblock line="424">
+          <description><![CDATA[сохранить время исполнения запроса]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="424" name="access" description="protected"/>
+        </docblock>
+        <argument line="428">
+          <name>$t</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="434" package="Default">
+        <name>getQueriesNum</name>
+        <type>function</type>
+        <docblock line="433">
+          <description><![CDATA[получить число выполненных sql запросов]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="440" package="Default">
+        <name>getQueries</name>
+        <type>function</type>
+        <docblock line="439">
+          <description><![CDATA[получить выполненные sql запросы]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="446" package="Default">
+        <name>getQueriesTime</name>
+        <type>function</type>
+        <docblock line="445">
+          <description><![CDATA[получить общее время выполнения sql запросов]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="452" package="Default">
+        <name>getQueriesWithTime</name>
+        <type>function</type>
+        <docblock line="451">
+          <description><![CDATA[получить выполенные запросы в виде массива (запрос => время)]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="471" package="Default">
+        <name>error</name>
+        <type>function</type>
+        <docblock line="463">
+          <description><![CDATA[перехват ошибок выполнения sql-запросов
+Дальнейший путь ошибки зависит от установки _errorHandlingMode]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="463" name="access" description="protected"/>
+          <tag line="463" name="param" description="- сообщение, сгенерированное СУБД" type="string" variable="$msg">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="463" name="param" description="- SQL-запрос, в котором возникла ошибка" type="string" variable="$sql">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="463" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="471">
+          <name>$msg</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="471">
+          <name>$sql</name>
+          <default><![CDATA['']]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="501" package="Default">
+        <name>setError</name>
+        <type>function</type>
+        <docblock line="500">
+          <description><![CDATA[сохранить ошибку]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="501">
+          <name>$error</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="506" package="Default">
+        <name>getError</name>
+        <type>function</type>
+        <docblock line="505">
+          <description><![CDATA[получить все ошибки]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="511" package="Default">
+        <name>hasError</name>
+        <type>function</type>
+        <docblock line="510">
+          <description><![CDATA[проверить, есть ли ошибки]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="516" package="Default">
+        <name>resetError</name>
+        <type>function</type>
+        <docblock line="515">
+          <description><![CDATA[очистить накопившиеся ошибки]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="521" package="Default">
+        <name>loadDump</name>
+        <type>function</type>
+        <docblock line="520">
+          <description><![CDATA[загрузить дамп данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="521">
+          <name>$fileName</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="565" package="Default">
+        <name>__destruct</name>
+        <type>function</type>
+        <docblock line="561">
+          <description><![CDATA[деструкотр
+запись лога выполненных sql-запросов в файл (если требуется)]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="classes/FrontController.class.php" hash="395d913c05184d613f6444dc3ff25d8f">
+    <parse_markers>
+      <error line="5" code="50018">No DocBlock was found for property $_instance</error>
+      <error line="7" code="50018">No DocBlock was found for property $requestMethod</error>
+      <error line="8" code="50018">No DocBlock was found for property $requestParams</error>
+      <error line="125" code="50010">No DocBlock was found for method display_index()</error>
+      <error line="132" code="50010">No DocBlock was found for method display_docs()</error>
+      <error line="154" code="50010">No DocBlock was found for method display_test_db()</error>
+      <error line="169" code="50010">No DocBlock was found for method display_tabs()</error>
+      <error line="184" code="50010">No DocBlock was found for method display_ajax()</error>
+      <error line="191" code="50010">No DocBlock was found for method display_404()</error>
+      <error line="208" code="50010">No DocBlock was found for method action_login()</error>
+      <error line="218" code="50010">No DocBlock was found for method action_logout()</error>
+      <error line="224" code="50010">No DocBlock was found for method action_test()</error>
+      <error line="233" code="50010">No DocBlock was found for method ajax_test()</error>
+      <error line="3" code="50000">No DocBlock was found for FrontController</error>
+      <error line="1" code="50007">No page-level DocBlock was found in file classes/FrontController.class.php</error>
+    </parse_markers>
+    <class final="false" abstract="false" namespace="default" line="3">
+      <name>FrontController</name>
+      <full_name>\FrontController</full_name>
+      <extends>\Controller</extends>
+      <property final="false" static="true" visibility="private" line="5">
+        <name>$_instance</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <property final="false" static="false" visibility="public" line="7">
+        <name>$requestMethod</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <property final="false" static="false" visibility="public" line="8">
+        <name>$requestParams</name>
+        <default><![CDATA[array()]]></default>
+      </property>
+      <property final="false" static="false" visibility="public" line="11" package="Default">
+        <name>$data</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="10">
+          <description><![CDATA[контейнер обмена данными между методами]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="default" line="15" package="Default">
+        <name>get</name>
+        <type>function</type>
+        <docblock line="14">
+          <description><![CDATA[получение экземпляра FrontController]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="default" line="30" package="Default">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="23">
+          <description><![CDATA[Приватный конструктор.]]></description>
+          <long-description><![CDATA[<p>Доступ к объекту осуществляется через статический метод self::get()
+Выполняет примитивную авторизацию пользователя.
+Парсит полученную query string.</p>]]></long-description>
+          <tag line="23" name="access" description="private"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="44" package="Default">
+        <name>run</name>
+        <type>function</type>
+        <docblock line="43">
+          <description><![CDATA[запуск приложения]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="55" package="Default">
+        <name>run_ajax</name>
+        <type>function</type>
+        <docblock line="54">
+          <description><![CDATA[запуск приложения в ajax-режиме]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="default" line="70" package="Default">
+        <name>_checkAuth</name>
+        <type>function</type>
+        <docblock line="69">
+          <description><![CDATA[проверка авторизации]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="default" line="80" package="Default">
+        <name>_checkAction</name>
+        <type>function</type>
+        <docblock line="79">
+          <description><![CDATA[проверка необходимости выполнения действия]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="default" line="108" package="Default">
+        <name>_checkDisplay</name>
+        <type>function</type>
+        <docblock line="107">
+          <description><![CDATA[проверка необходимости выполнения отображения]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="default" line="114" package="Default">
+        <name>_checkAjax</name>
+        <type>function</type>
+        <docblock line="113">
+          <description><![CDATA[проверка необходимости выполнения ajax]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="125">
+        <name>display_index</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="132">
+        <name>display_docs</name>
+        <type>function</type>
+        <argument line="132">
+          <name>$params</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="154">
+        <name>display_test_db</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="169">
+        <name>display_tabs</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="184">
+        <name>display_ajax</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="191">
+        <name>display_404</name>
+        <type>function</type>
+        <argument line="191">
+          <name>$method</name>
+          <default><![CDATA['']]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="208">
+        <name>action_login</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="218">
+        <name>action_logout</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="224">
+        <name>action_test</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="233">
+        <name>ajax_test</name>
+        <type>function</type>
+      </method>
+    </class>
+  </file>
+  <file path="classes/DbAdapters/sqlite.php" hash="0604a22094e60e65dbaf07fe9860da7b">
+    <parse_markers>
+      <error line="12" code="50015">Argument $encoding is missing from the Docblock of setEncoding()</error>
+      <error line="17" code="50015">Argument $db is missing from the Docblock of selectDb()</error>
+      <error line="165" code="50015">Argument $default_value is missing from the Docblock of getStaticRow()</error>
+      <notice line="223" code="50013">Parameter  could not be found in escape()</notice>
+      <error line="239" code="50014">Name of argument $field does not match with the DocBlock's name $fieldname in quoteFieldName()</error>
+      <notice line="239" code="50013">Parameter $fieldname could not be found in quoteFieldName()</notice>
+      <notice line="239" code="50013">Parameter  could not be found in quoteFieldName()</notice>
+      <error line="3" code="50000">No DocBlock was found for DbAdapter_sqlite</error>
+      <error line="1" code="50007">No page-level DocBlock was found in file classes/DbAdapters/sqlite.php</error>
+    </parse_markers>
+    <class final="false" abstract="false" namespace="default" line="3">
+      <name>DbAdapter_sqlite</name>
+      <full_name>\DbAdapter_sqlite</full_name>
+      <extends>\DbAdapter</extends>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="6" package="Default">
+        <name>connect</name>
+        <type>function</type>
+        <docblock line="5">
+          <description><![CDATA[ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="13" package="Default">
+        <name>setEncoding</name>
+        <type>function</type>
+        <docblock line="12">
+          <description><![CDATA[УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="13">
+          <name>$encoding</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="18" package="Default">
+        <name>selectDb</name>
+        <type>function</type>
+        <docblock line="17">
+          <description><![CDATA[ВЫБРАТЬ БАЗУ ДАННЫХ]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="18">
+          <name>$db</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="21" package="Default">
+        <name>getLastId</name>
+        <type>function</type>
+        <docblock line="20">
+          <description><![CDATA[ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="27" package="Default">
+        <name>getAffectedNum</name>
+        <type>function</type>
+        <docblock line="26">
+          <description><![CDATA[ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="37" package="Default">
+        <name>query</name>
+        <type>function</type>
+        <docblock line="32">
+          <description><![CDATA[ВЫПОЛНИТЬ ЗАПРОС]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="32" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="32" name="return" description="- ресурс ответа базы данных" type="resource">
+            <type by_reference="false">resource</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="57" package="Default">
+        <name>getOne</name>
+        <type>function</type>
+        <docblock line="50">
+          <description><![CDATA[GET ONE
+выполнить запрос и вернуть единственное значение (первая строка, первый столбец)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="50" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="50" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="50" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="57">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="57">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="76" package="Default">
+        <name>getCell</name>
+        <type>function</type>
+        <docblock line="67">
+          <description><![CDATA[GET CELL
+выполнить запрос и вернуть единственное значение (указанные строка и столбец)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="67" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="67" name="param" description="- номер строки, значение которой будет возвращено" type="integer" variable="$row">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="67" name="param" description="- номер столбца, значение которого будет возвращено" type="integer" variable="$column">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="67" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="67" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="76">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="76">
+          <name>$row</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="76">
+          <name>$column</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="76">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="98" package="Default">
+        <name>getStaticOne</name>
+        <type>function</type>
+        <docblock line="88">
+          <description><![CDATA[GET STATIC ONE
+выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+а если строка не найдена, то вставить ее в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="88" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="88" name="param" description="- таблица для вставки" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="88" name="param" description="- ассоциативный массив данных для вставки" type="array" variable="$fieldsvalues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="88" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="88" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="98">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="98">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="98">
+          <name>$fieldsvalues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="98">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="118" package="Default">
+        <name>getCol</name>
+        <type>function</type>
+        <docblock line="111">
+          <description><![CDATA[GET COL
+выполнить запрос и вернуть единственный столбец (первый)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="111" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="111" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="111" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="118">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="118">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="137" package="Default">
+        <name>getColIndexed</name>
+        <type>function</type>
+        <docblock line="128">
+          <description><![CDATA[GET COL INDEXED
+возвращает одномерный ассоциативный массив.]]></description>
+          <long-description><![CDATA[<p>Для каждой пары ключ массива - значение первого столбца, извлекаемого из БД
+значение массива - значение второго столбца, извлекаемого из БД</p>]]></long-description>
+          <tag line="128" name="param" description="" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="128" name="param" description="" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="128" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="137">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="137">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="155" package="Default">
+        <name>getRow</name>
+        <type>function</type>
+        <docblock line="148">
+          <description><![CDATA[GET ROW
+выполнить запрос и вернуть единственную строку (первую)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="148" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="148" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="148" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="155">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="155">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="174" package="Default">
+        <name>getStaticRow</name>
+        <type>function</type>
+        <docblock line="165">
+          <description><![CDATA[GET STATIC ROW
+выполнить запрос и вернуть единственную строку (первую)
+а если строка не найдена, то вставить ее в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="165" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="165" name="param" description="- таблица для вставки" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="165" name="param" description="- ассоциативный массив данных для вставки" type="array" variable="$fieldsvalues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="165" name="return" description="" type="array|\$fieldsvalues">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$fieldsvalues</type>
+          </tag>
+        </docblock>
+        <argument line="174">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="174">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="174">
+          <name>$fieldsvalues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="174">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="193" package="Default">
+        <name>getAll</name>
+        <type>function</type>
+        <docblock line="186">
+          <description><![CDATA[GET ALL
+выполнить запрос и вернуть многомерный ассоциативный массив данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="186" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="186" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="186" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="193">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="193">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="213" package="Default">
+        <name>getAllIndexed</name>
+        <type>function</type>
+        <docblock line="203">
+          <description><![CDATA[GET ALL INDEXED
+выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="203" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="203" name="param" description="- имя поля, по которому будет индексироваться массив результатов. Важно проследить, чтобы значение у индекса было уникальным у каждой строки, иначе дублирующиеся строки будут затерты." type="string" variable="$index">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="203" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="203" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="213">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="213">
+          <name>$index</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="213">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="229" package="Default">
+        <name>escape</name>
+        <type>function</type>
+        <docblock line="223">
+          <description><![CDATA[ЭКРАНИРОВАНИЕ ДАННЫХ
+выполняется с учетом типа данных для предотвращения SQL-инъекций]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="223" name="param" description="строка для экранирования" type="mixed" variable="$str">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="223" name="param" description="- безопасная строка" type="mixed" variable="">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="229">
+          <name>$str</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="245" package="Default">
+        <name>quoteFieldName</name>
+        <type>function</type>
+        <docblock line="239">
+          <description><![CDATA[ЗАКЛЮЧЕНИЕ ИМЕНИ ПОЛЯ В КАВЫЧКИ
+для полей, имена которых совпадают с ключевыми словами]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="239" name="param" description="- имя поля" type="string" variable="$fieldname">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="239" name="param" description="- имя поля, заключенное в кавычки" type="string" variable="">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="245">
+          <name>$field</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="255" package="Default">
+        <name>describe</name>
+        <type>function</type>
+        <docblock line="249">
+          <description><![CDATA[DESCRIBE
+получить массив, описывающий структуру таблицы]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="249" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="249" name="return" description="- структура таблицы" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="255">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="265" package="Default">
+        <name>showTables</name>
+        <type>function</type>
+        <docblock line="260">
+          <description><![CDATA[ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
+в текущей базе данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="260" name="return" description="- массив-список таблиц" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="274" package="Default">
+        <name>showDatabases</name>
+        <type>function</type>
+        <docblock line="270">
+          <description><![CDATA[ПОЛУЧИТЬ СПИСОК БД]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="270" name="return" description="- массив-список баз данных" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="284" package="Default">
+        <name>showCreateTable</name>
+        <type>function</type>
+        <docblock line="279">
+          <description><![CDATA[ПОКАЗАТЬ СТРОКУ CREATE TABLE]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="279" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="279" name="return" description="- строка CREATE TABLE" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="284">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="296" package="Default">
+        <name>makeDump</name>
+        <type>function</type>
+        <docblock line="289">
+          <description><![CDATA[СОЗДАТЬ ДАМП БАЗЫ ДАННЫХ]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="289" name="param" description="- база данных (или дефолтная, если null)" type="string|null" variable="$database">
+            <type by_reference="false">string</type>
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="289" name="param" description="- список таблиц (или все, если null)" type="array|null" variable="$tables">
+            <type by_reference="false">array</type>
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="289" name="output" description="выдает текст sql-дампа"/>
+          <tag line="289" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="296">
+          <name>$database</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="296">
+          <name>$tables</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="classes/DbAdapters/postgres.php" hash="c92a88250aa494baae4d51a11e1cfbcf">
+    <parse_markers>
+      <error line="17" code="50015">Argument $encoding is missing from the Docblock of setEncoding()</error>
+      <error line="26" code="50015">Argument $tablename is missing from the Docblock of getLastId()</error>
+      <error line="26" code="50015">Argument $fieldname is missing from the Docblock of getLastId()</error>
+      <error line="41" code="50015">Argument $autoIncrementField is missing from the Docblock of insert()</error>
+      <error line="65" code="50014">Name of argument $sql does not match with the DocBlock's name $query in query()</error>
+      <notice line="65" code="50013">Parameter $query could not be found in query()</notice>
+      <error line="78" code="50014">Name of argument $sql does not match with the DocBlock's name $query in query_prepared()</error>
+      <notice line="78" code="50013">Parameter $query could not be found in query_prepared()</notice>
+      <error line="99" code="50015">Argument $rs is missing from the Docblock of freeResult()</error>
+      <error line="189" code="50014">Name of argument $default_value does not match with the DocBlock's name $index in getColIndexed()</error>
+      <notice line="189" code="50013">Parameter $index could not be found in getColIndexed()</notice>
+      <error line="294" code="50010">No DocBlock was found for method fetchOne()</error>
+      <error line="306" code="50010">No DocBlock was found for method fetchRow()</error>
+      <error line="318" code="50010">No DocBlock was found for method fetchPairs()</error>
+      <error line="330" code="50010">No DocBlock was found for method fetchCol()</error>
+      <error line="342" code="50010">No DocBlock was found for method fetchAssoc()</error>
+      <error line="362" code="50010">No DocBlock was found for method fetchAll()</error>
+      <notice line="374" code="50013">Parameter  could not be found in escape()</notice>
+      <error line="3" code="50000">No DocBlock was found for DbAdapter_postgres</error>
+      <error line="1" code="50007">No page-level DocBlock was found in file classes/DbAdapters/postgres.php</error>
+    </parse_markers>
+    <class final="false" abstract="false" namespace="default" line="3">
+      <name>DbAdapter_postgres</name>
+      <full_name>\DbAdapter_postgres</full_name>
+      <extends>\DbAdapter</extends>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="6" package="Default">
+        <name>connect</name>
+        <type>function</type>
+        <docblock line="5">
+          <description><![CDATA[ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="18" package="Default">
+        <name>setEncoding</name>
+        <type>function</type>
+        <docblock line="17">
+          <description><![CDATA[УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="18">
+          <name>$encoding</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="27" package="Default">
+        <name>getLastId</name>
+        <type>function</type>
+        <docblock line="26">
+          <description><![CDATA[ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="27">
+          <name>$tablename</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="27">
+          <name>$fieldname</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="36" package="Default">
+        <name>getAffectedNum</name>
+        <type>function</type>
+        <docblock line="35">
+          <description><![CDATA[ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="48" package="Default">
+        <name>insert</name>
+        <type>function</type>
+        <docblock line="41">
+          <description><![CDATA[INSERT
+вставка данных в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="41" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="41" name="param" description="- массив пар (поле =&gt; значение) для вставки" type="array" variable="$fieldsValues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="41" name="return" description="последний вставленный id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="48">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="48">
+          <name>$fieldsValues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="48">
+          <name>$autoIncrementField</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="70" package="Default">
+        <name>query</name>
+        <type>function</type>
+        <docblock line="65">
+          <description><![CDATA[ВЫПОЛНИТЬ ЗАПРОС]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="65" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="65" name="return" description="- ресурс ответа базы данных" type="resource">
+            <type by_reference="false">resource</type>
+          </tag>
+        </docblock>
+        <argument line="70">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="84" package="Default">
+        <name>query_prepared</name>
+        <type>function</type>
+        <docblock line="78">
+          <description><![CDATA[ВЫПОЛНИТЬ ПАРАМЕТРИЗОВАННЫЙ ЗАПРОС]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="78" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="78" name="param" description="- массив подстановщиков" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="78" name="return" description="- ресурс ответа базы данных" type="resource">
+            <type by_reference="false">resource</type>
+          </tag>
+        </docblock>
+        <argument line="84">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="84">
+          <name>$params</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="100" package="Default">
+        <name>freeResult</name>
+        <type>function</type>
+        <docblock line="99">
+          <description><![CDATA[FREE RESULT]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="100">
+          <name>$rs</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="113" package="Default">
+        <name>getOne</name>
+        <type>function</type>
+        <docblock line="106">
+          <description><![CDATA[GET ONE
+выполнить запрос и вернуть единственное значение (первая строка, первый столбец)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="106" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="106" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="106" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="113">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="113">
+          <name>$default_value</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="134" package="Default">
+        <name>getCell</name>
+        <type>function</type>
+        <docblock line="125">
+          <description><![CDATA[GET CELL
+выполнить запрос и вернуть единственное значение (указанные строка и столбец)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="125" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="125" name="param" description="- номер строки, значение которой будет возвращено" type="integer" variable="$row">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="125" name="param" description="- номер столбца, значение которого будет возвращено" type="integer" variable="$column">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="125" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="125" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="134">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="134">
+          <name>$row</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="134">
+          <name>$column</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="134">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="156" package="Default">
+        <name>getStaticOne</name>
+        <type>function</type>
+        <docblock line="146">
+          <description><![CDATA[GET STATIC ONE
+выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+а если строка не найдена, то вставить ее в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="146" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="146" name="param" description="- таблица для вставки" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="146" name="param" description="- ассоциативный массив данных для вставки" type="array" variable="$fieldsvalues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="146" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="146" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="156">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="156">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="156">
+          <name>$fieldsvalues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="156">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="177" package="Default">
+        <name>getCol</name>
+        <type>function</type>
+        <docblock line="170">
+          <description><![CDATA[GET COL
+выполнить запрос и вернуть единственный столбец (первый)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="170" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="170" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="170" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="177">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="177">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="200" package="Default">
+        <name>getColIndexed</name>
+        <type>function</type>
+        <docblock line="189">
+          <description><![CDATA[GET COL INDEXED
+возвращает одномерный ассоциативный массив.]]></description>
+          <long-description><![CDATA[<p>Для каждой пары ключ массива - значение первого столбца, извлекаемого из БД
+значение массива - значение второго столбца, извлекаемого из БД</p>]]></long-description>
+          <tag line="189" name="param" description="" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="189" name="param" description="" type="string" variable="$index">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="189" name="param" description="" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="189" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="200">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="200">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="219" package="Default">
+        <name>getRow</name>
+        <type>function</type>
+        <docblock line="212">
+          <description><![CDATA[GET ROW
+выполнить запрос и вернуть единственную строку (первую)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="212" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="212" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="212" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="219">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="219">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="240" package="Default">
+        <name>getStaticRow</name>
+        <type>function</type>
+        <docblock line="231">
+          <description><![CDATA[GET STATIC ROW
+выполнить запрос и вернуть единственную строку (первую)
+а если строка не найдена, то вставить ее в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="231" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="231" name="param" description="- таблица для вставки" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="231" name="param" description="- ассоциативный массив данных для вставки" type="array" variable="$fieldsvalues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="231" name="return" description="" type="array|\$fieldsvalues">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$fieldsvalues</type>
+          </tag>
+        </docblock>
+        <argument line="240">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="240">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="240">
+          <name>$fieldsvalues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="260" package="Default">
+        <name>getAll</name>
+        <type>function</type>
+        <docblock line="253">
+          <description><![CDATA[GET ALL
+выполнить запрос и вернуть многомерный ассоциативный массив данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="253" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="253" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="253" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="260">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="260">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="282" package="Default">
+        <name>getAllIndexed</name>
+        <type>function</type>
+        <docblock line="272">
+          <description><![CDATA[GET ALL INDEXED
+выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="272" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="272" name="param" description="- имя поля, по которому будет индексироваться массив результатов. Важно проследить, чтобы значение у индекса было уникальным у каждой строки, иначе дублирующиеся строки будут затерты." type="string" variable="$index">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="272" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="272" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="282">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="282">
+          <name>$index</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="282">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="294">
+        <name>fetchOne</name>
+        <type>function</type>
+        <argument line="294">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="294">
+          <name>$bind</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="294">
+          <name>$default</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="306">
+        <name>fetchRow</name>
+        <type>function</type>
+        <argument line="306">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="306">
+          <name>$bind</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="306">
+          <name>$default</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="318">
+        <name>fetchPairs</name>
+        <type>function</type>
+        <argument line="318">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="318">
+          <name>$bind</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="318">
+          <name>$default</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="330">
+        <name>fetchCol</name>
+        <type>function</type>
+        <argument line="330">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="330">
+          <name>$bind</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="330">
+          <name>$default</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="342">
+        <name>fetchAssoc</name>
+        <type>function</type>
+        <argument line="342">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="342">
+          <name>$bind</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="342">
+          <name>$default</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="362">
+        <name>fetchAll</name>
+        <type>function</type>
+        <argument line="362">
+          <name>$sql</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="362">
+          <name>$bind</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="362">
+          <name>$default</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="380" package="Default">
+        <name>escape</name>
+        <type>function</type>
+        <docblock line="374">
+          <description><![CDATA[ЭКРАНИРОВАНИЕ ДАННЫХ
+выполняется с учетом типа данных для предотвращения SQL-инъекций]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="374" name="param" description="строка для экранирования" type="mixed" variable="$str">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="374" name="param" description="- безопасная строка" type="mixed" variable="">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="380">
+          <name>$str</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="395" package="Default">
+        <name>showTables</name>
+        <type>function</type>
+        <docblock line="390">
+          <description><![CDATA[ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
+в текущей базе данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="390" name="return" description="- массив-список таблиц" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="404" package="Default">
+        <name>showDatabases</name>
+        <type>function</type>
+        <docblock line="400">
+          <description><![CDATA[ПОЛУЧИТЬ СПИСОК БД]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="400" name="return" description="- массив-список баз данных" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="415" package="Default">
+        <name>describe</name>
+        <type>function</type>
+        <docblock line="409">
+          <description><![CDATA[DESCRIBE
+получить массив, описывающий структуру таблицы]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="409" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="409" name="return" description="- структура таблицы" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="415">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="425" package="Default">
+        <name>showCreateTable</name>
+        <type>function</type>
+        <docblock line="420">
+          <description><![CDATA[ПОКАЗАТЬ СТРОКУ CREATE TABLE]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="420" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="420" name="return" description="- строка CREATE TABLE" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="425">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="437" package="Default">
+        <name>makeDump</name>
+        <type>function</type>
+        <docblock line="430">
+          <description><![CDATA[СОЗДАТЬ ДАМП БАЗЫ ДАННЫХ]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="430" name="param" description="- база данных (или дефолтная, если null)" type="string|null" variable="$database">
+            <type by_reference="false">string</type>
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="430" name="param" description="- список таблиц (или все, если null)" type="array|null" variable="$tables">
+            <type by_reference="false">array</type>
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="430" name="output" description="выдает текст sql-дампа"/>
+          <tag line="430" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="437">
+          <name>$database</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="437">
+          <name>$tables</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="classes/DbAdapters/mysql.php" hash="c87f406ab0bd42378b9b4313f531f252">
+    <parse_markers>
+      <error line="17" code="50015">Argument $encoding is missing from the Docblock of setEncoding()</error>
+      <error line="26" code="50015">Argument $db is missing from the Docblock of selectDb()</error>
+      <notice line="252" code="50013">Parameter  could not be found in escape()</notice>
+      <notice line="268" code="50013">Parameter  could not be found in quoteFieldName()</notice>
+      <error line="3" code="50000">No DocBlock was found for DbAdapter_mysql</error>
+      <error line="1" code="50007">No page-level DocBlock was found in file classes/DbAdapters/mysql.php</error>
+    </parse_markers>
+    <class final="false" abstract="false" namespace="default" line="3">
+      <name>DbAdapter_mysql</name>
+      <full_name>\DbAdapter_mysql</full_name>
+      <extends>\DbAdapter</extends>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="6" package="Default">
+        <name>connect</name>
+        <type>function</type>
+        <docblock line="5">
+          <description><![CDATA[подключение к базе данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="18" package="Default">
+        <name>setEncoding</name>
+        <type>function</type>
+        <docblock line="17">
+          <description><![CDATA[установить кодировку соединения]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="18">
+          <name>$encoding</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="27" package="Default">
+        <name>selectDb</name>
+        <type>function</type>
+        <docblock line="26">
+          <description><![CDATA[выбрать базу данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="27">
+          <name>$db</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="34" package="Default">
+        <name>getLastId</name>
+        <type>function</type>
+        <docblock line="33">
+          <description><![CDATA[получить последний вставленный primary key]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="40" package="Default">
+        <name>getAffectedNum</name>
+        <type>function</type>
+        <docblock line="39">
+          <description><![CDATA[получить количество строк, затронутых последней операцией]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="52" package="Default">
+        <name>replace</name>
+        <type>function</type>
+        <docblock line="45">
+          <description><![CDATA[вставка данных в таблицу (аналогично INSERT). Но если в таблице уже присутствует PRIMARY KEY
+или UNIQUE с тем же значением, что и переданное, то старая запись будет удалена.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="45" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="45" name="param" description="- массив пар (поле =&gt; значение) для вставки" type="array" variable="$fieldsValues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="45" name="return" description="последний вставленный id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="52">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="52">
+          <name>$fieldsValues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="71" package="Default">
+        <name>query</name>
+        <type>function</type>
+        <docblock line="66">
+          <description><![CDATA[выполнить запрос]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="66" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="66" name="return" description="- ресурс ответа базы данных" type="resource">
+            <type by_reference="false">resource</type>
+          </tag>
+        </docblock>
+        <argument line="71">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="91" package="Default">
+        <name>getOne</name>
+        <type>function</type>
+        <docblock line="84">
+          <description><![CDATA[get one
+выполнить запрос и вернуть единственное значение (первая строка, первый столбец)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="84" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="84" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="84" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="91">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="91">
+          <name>$default_value</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="110" package="Default">
+        <name>getCell</name>
+        <type>function</type>
+        <docblock line="102">
+          <description><![CDATA[выполнить запрос и вернуть единственное значение (указанные строка и столбец)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="102" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="102" name="param" description="- номер строки, значение которой будет возвращено" type="integer" variable="$row">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="102" name="param" description="- номер столбца, значение которого будет возвращено" type="integer" variable="$column">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="102" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="102" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="110">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="110">
+          <name>$row</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="110">
+          <name>$column</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="110">
+          <name>$default_value</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="130" package="Default">
+        <name>getStaticOne</name>
+        <type>function</type>
+        <docblock line="121">
+          <description><![CDATA[выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
+а если строка не найдена, то вставить ее в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="121" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="121" name="param" description="- таблица для вставки" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="121" name="param" description="- ассоциативный массив данных для вставки" type="array" variable="$fieldsvalues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="121" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="121" name="return" description="" type="mixed|\$default_value">
+            <type by_reference="false">mixed</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="130">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="130">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="130">
+          <name>$fieldsvalues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="130">
+          <name>$default_value</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="148" package="Default">
+        <name>getCol</name>
+        <type>function</type>
+        <docblock line="142">
+          <description><![CDATA[выполнить запрос и вернуть единственный столбец (первый)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="142" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="142" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="142" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="148">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="148">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="167" package="Default">
+        <name>getColIndexed</name>
+        <type>function</type>
+        <docblock line="159">
+          <description><![CDATA[возвращает одномерный ассоциативный массив.]]></description>
+          <long-description><![CDATA[<p>Для каждой пары ключ массива - значение первого столбца, извлекаемого из БД
+значение массива - значение второго столбца, извлекаемого из БД</p>]]></long-description>
+          <tag line="159" name="param" description="" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="159" name="param" description="" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="159" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="167">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="184" package="Default">
+        <name>getRow</name>
+        <type>function</type>
+        <docblock line="178">
+          <description><![CDATA[выполнить запрос и вернуть единственную строку (первую)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="178" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="178" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="178" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="184">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="184">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="203" package="Default">
+        <name>getStaticRow</name>
+        <type>function</type>
+        <docblock line="195">
+          <description><![CDATA[выполнить запрос и вернуть единственную строку (первую)
+а если строка не найдена, то вставить ее в таблицу]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="195" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="195" name="param" description="- таблица для вставки" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="195" name="param" description="- ассоциативный массив данных для вставки" type="array" variable="$fieldsvalues">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="195" name="return" description="" type="array|\$fieldsvalues">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$fieldsvalues</type>
+          </tag>
+        </docblock>
+        <argument line="203">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="203">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="203">
+          <name>$fieldsvalues</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="222" package="Default">
+        <name>getAll</name>
+        <type>function</type>
+        <docblock line="216">
+          <description><![CDATA[выполнить запрос и вернуть многомерный ассоциативный массив данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="216" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="216" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="216" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="222">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="222">
+          <name>$default_value</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="242" package="Default">
+        <name>getAllIndexed</name>
+        <type>function</type>
+        <docblock line="233">
+          <description><![CDATA[выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="233" name="param" description="- SQL-запрос" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="233" name="param" description="- имя поля, по которому будет индексироваться массив результатов. Важно проследить, чтобы значение у индекса было уникальным у каждой строки, иначе дублирующиеся строки будут затерты." type="string" variable="$index">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="233" name="param" description="- значение, возвращаемое если запрос ничего не вернул" type="mixed" variable="$default_value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="233" name="return" description="" type="array|\$default_value">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\$default_value</type>
+          </tag>
+        </docblock>
+        <argument line="242">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="242">
+          <name>$index</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="242">
+          <name>$default_value</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="258" package="Default">
+        <name>escape</name>
+        <type>function</type>
+        <docblock line="252">
+          <description><![CDATA[экранирование данных
+выполняется с учетом типа данных для предотвращения SQL-инъекций]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="252" name="param" description="строка для экранирования" type="mixed" variable="$str">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="252" name="param" description="- безопасная строка" type="mixed" variable="">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="258">
+          <name>$str</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="274" package="Default">
+        <name>quoteFieldName</name>
+        <type>function</type>
+        <docblock line="268">
+          <description><![CDATA[заключение имени поля в кавычки
+для полей, имена которых совпадают с ключевыми словами]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="268" name="param" description="- имя поля" type="string" variable="$fieldname">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="268" name="param" description="- имя поля, заключенное в кавычки" type="string" variable="">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="274">
+          <name>$fieldname</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="283" package="Default">
+        <name>describe</name>
+        <type>function</type>
+        <docblock line="278">
+          <description><![CDATA[получить массив, описывающий структуру таблицы]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="278" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="278" name="return" description="- структура таблицы" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="283">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="293" package="Default">
+        <name>showTables</name>
+        <type>function</type>
+        <docblock line="288">
+          <description><![CDATA[получить список таблиц
+в текущей базе данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="288" name="return" description="- массив-список таблиц" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="302" package="Default">
+        <name>showDatabases</name>
+        <type>function</type>
+        <docblock line="298">
+          <description><![CDATA[получить список бд]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="298" name="return" description="- массив-список баз данных" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="312" package="Default">
+        <name>showCreateTable</name>
+        <type>function</type>
+        <docblock line="307">
+          <description><![CDATA[показать строку CREATE TABLE]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="307" name="param" description="- имя таблицы" type="string" variable="$table">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="307" name="return" description="- строка CREATE TABLE" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="312">
+          <name>$table</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="324" package="Default">
+        <name>makeDump</name>
+        <type>function</type>
+        <docblock line="317">
+          <description><![CDATA[создать дамп базы данных]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="317" name="param" description="- база данных (или дефолтная, если null)" type="string|null" variable="$database">
+            <type by_reference="false">string</type>
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="317" name="param" description="- список таблиц (или все, если null)" type="array|null" variable="$tables">
+            <type by_reference="false">array</type>
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="317" name="output" description="выдает текст sql-дампа"/>
+          <tag line="317" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="324">
+          <name>$database</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="324">
+          <name>$tables</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="classes/Layout.class.php" hash="e871e242d9cc858b322c098528659021">
+    <parse_markers>
+      <error line="11" code="50018">No DocBlock was found for property $_tplPath</error>
+      <error line="13" code="50018">No DocBlock was found for property $_htmlTitle</error>
+      <error line="14" code="50018">No DocBlock was found for property $_htmlLinkTags</error>
+      <error line="15" code="50018">No DocBlock was found for property $_breadcrumbs</error>
+      <error line="16" code="50018">No DocBlock was found for property $_isAutoBreadcrumbsAdded</error>
+      <error line="17" code="50018">No DocBlock was found for property $_htmlContent</error>
+      <error line="19" code="50018">No DocBlock was found for property $_layoutRender</error>
+      <error line="21" code="50018">No DocBlock was found for property $_instance</error>
+      <error line="39" code="50010">No DocBlock was found for method setTitle()</error>
+      <error line="50" code="50010">No DocBlock was found for method prependTitle()</error>
+      <error line="58" code="50010">No DocBlock was found for method appendTitle()</error>
+      <error line="66" code="50010">No DocBlock was found for method setLinkTags()</error>
+      <error line="75" code="50010">No DocBlock was found for method setBreadcrumbs()</error>
+      <error line="109" code="50010">No DocBlock was found for method setBreadcrumbsAuto()</error>
+      <error line="125" code="50015">Argument $content is missing from the Docblock of setContent()</error>
+      <error line="132" code="50015">Argument $file is missing from the Docblock of setContentHtmlFile()</error>
+      <error line="139" code="50015">Argument $file is missing from the Docblock of setContentPhpFile()</error>
+      <error line="139" code="50015">Argument $variables is missing from the Docblock of setContentPhpFile()</error>
+      <error line="171" code="50010">No DocBlock was found for method _getHtmlTitle()</error>
+      <error line="178" code="50010">No DocBlock was found for method _getHtmlLinkTags()</error>
+      <error line="252" code="50010">No DocBlock was found for method loginPage()</error>
+      <error line="258" code="50015">Argument $boolReturn is missing from the Docblock of render()</error>
+      <notice line="270" code="50013">Parameter  could not be found in _renderNoLayout()</notice>
+      <notice line="284" code="50013">Parameter  could not be found in _renderWithLayout()</notice>
+      <error line="301" code="50015">Argument $name is missing from the Docblock of __get()</error>
+      <error line="307" code="50015">Argument $file is missing from the Docblock of getContentHtmlFile()</error>
+      <error line="313" code="50015">Argument $file is missing from the Docblock of getContentPhpFile()</error>
+      <error line="313" code="50015">Argument $variables is missing from the Docblock of getContentPhpFile()</error>
+      <critical line="2" code="50005">No short description for class Layout</critical>
+      <error line="1" code="50007">No page-level DocBlock was found in file classes/Layout.class.php</error>
+    </parse_markers>
+    <class final="false" abstract="false" namespace="default" line="9" package="Default">
+      <name>Layout</name>
+      <full_name>\Layout</full_name>
+      <extends/>
+      <docblock line="2">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="using" description=":&#10;const: CFG_SITE_NAME, FS_ROOT, WWW_ROOT, AJAX_MODE"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="11">
+        <name>$_tplPath</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="13">
+        <name>$_htmlTitle</name>
+        <default><![CDATA['']]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="14">
+        <name>$_htmlLinkTags</name>
+        <default><![CDATA[array()]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="15">
+        <name>$_breadcrumbs</name>
+        <default><![CDATA[array()]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="16">
+        <name>$_isAutoBreadcrumbsAdded</name>
+        <default><![CDATA[FALSE]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="17">
+        <name>$_htmlContent</name>
+        <default><![CDATA['']]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="19">
+        <name>$_layoutRender</name>
+        <default><![CDATA['auto']]></default>
+      </property>
+      <property final="false" static="true" visibility="private" line="21">
+        <name>$_instance</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="default" line="25" package="Default">
+        <name>get</name>
+        <type>function</type>
+        <docblock line="24">
+          <description><![CDATA[точка входа в класс (получить экземпляр Layout)]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="34" package="Default">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="33">
+          <description><![CDATA[конструктор]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="39">
+        <name>setTitle</name>
+        <type>function</type>
+        <argument line="39">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="46" package="Default">
+        <name>getLayoutDir</name>
+        <type>function</type>
+        <docblock line="45">
+          <description><![CDATA[получить директорию файлов макета]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="50">
+        <name>prependTitle</name>
+        <type>function</type>
+        <argument line="50">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="50">
+          <name>$separator</name>
+          <default><![CDATA[' » ']]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="58">
+        <name>appendTitle</name>
+        <type>function</type>
+        <argument line="58">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="58">
+          <name>$separator</name>
+          <default><![CDATA[' » ']]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="66">
+        <name>setLinkTags</name>
+        <type>function</type>
+        <argument line="66">
+          <name>$tags</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="75">
+        <name>setBreadcrumbs</name>
+        <type>function</type>
+        <argument line="75">
+          <name>$mode</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="75">
+          <name>$data</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="109">
+        <name>setBreadcrumbsAuto</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="119" package="Default">
+        <name>clearContent</name>
+        <type>function</type>
+        <docblock line="118">
+          <description><![CDATA[очистить контент]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="126" package="Default">
+        <name>setContent</name>
+        <type>function</type>
+        <docblock line="125">
+          <description><![CDATA[задать контент]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="126">
+          <name>$content</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="133" package="Default">
+        <name>setContentHtmlFile</name>
+        <type>function</type>
+        <docblock line="132">
+          <description><![CDATA[получить контент из произвольного файла (без интерпретации)]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="133">
+          <name>$file</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="140" package="Default">
+        <name>setContentPhpFile</name>
+        <type>function</type>
+        <docblock line="139">
+          <description><![CDATA[получить контент из php-файла (с интерпретацией)]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="140">
+          <name>$file</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="140">
+          <name>$variables</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="151" package="Default">
+        <name>autoLayout</name>
+        <type>function</type>
+        <docblock line="146">
+          <description><![CDATA[тип отображения контента выбирается автоматически
+внутри макета для обычных запросов;
+без макета для AJAX-запросов.]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="158" package="Default">
+        <name>enableLayout</name>
+        <type>function</type>
+        <docblock line="157">
+          <description><![CDATA[всегда отображать контент внутри макета]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="165" package="Default">
+        <name>disableLayout</name>
+        <type>function</type>
+        <docblock line="164">
+          <description><![CDATA[всегда отображать контент без макета]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="171">
+        <name>_getHtmlTitle</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="178">
+        <name>_getHtmlLinkTags</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="188" package="Default">
+        <name>_getHtmlBaseHref</name>
+        <type>function</type>
+        <docblock line="187">
+          <description><![CDATA[get base href url]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="194" package="Default">
+        <name>_getBreadcrumbs</name>
+        <type>function</type>
+        <docblock line="193">
+          <description><![CDATA[get breadcrumbs html]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="207" package="Default">
+        <name>_getUserMessages</name>
+        <type>function</type>
+        <docblock line="206">
+          <description><![CDATA[get user message html]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="213" package="Default">
+        <name>_getHtmlContent</name>
+        <type>function</type>
+        <docblock line="212">
+          <description><![CDATA[get html content]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="219" package="Default">
+        <name>_getPhpPageStatistics</name>
+        <type>function</type>
+        <docblock line="218">
+          <description><![CDATA[get php page statistics html]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="252">
+        <name>loginPage</name>
+        <type>function</type>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="259" package="Default">
+        <name>render</name>
+        <type>function</type>
+        <docblock line="258">
+          <description><![CDATA[render all]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="259">
+          <name>$boolReturn</name>
+          <default><![CDATA[FALSE]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="276" package="Default">
+        <name>_renderNoLayout</name>
+        <type>function</type>
+        <docblock line="270">
+          <description><![CDATA[вывести/вернуть контент без макета]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="270" name="access" description="protected"/>
+          <tag line="270" name="param" description="- флаг, возвращать контент, или выводить" type="bool" variable="$boolReturn">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="270" name="param" description="контент" type="void|string" variable="">
+            <type by_reference="false">void</type>
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="276">
+          <name>$boolReturn</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="290" package="Default">
+        <name>_renderWithLayout</name>
+        <type>function</type>
+        <docblock line="284">
+          <description><![CDATA[вывести/вернуть контент в макете]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="284" name="access" description="protected"/>
+          <tag line="284" name="param" description="- флаг, возвращать контент, или выводить" type="bool" variable="$boolReturn">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="284" name="param" description="контент" type="void|string" variable="">
+            <type by_reference="false">void</type>
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="290">
+          <name>$boolReturn</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="302" package="Default">
+        <name>__get</name>
+        <type>function</type>
+        <docblock line="301">
+          <description><![CDATA[аксессор для шаблонов]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="302">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="308" package="Default">
+        <name>getContentHtmlFile</name>
+        <type>function</type>
+        <docblock line="307">
+          <description><![CDATA[получить содержимое html файла]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="308">
+          <name>$file</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="314" package="Default">
+        <name>getContentPhpFile</name>
+        <type>function</type>
+        <docblock line="313">
+          <description><![CDATA[получить проинтерпретированное содержимое php файла]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="314">
+          <name>$file</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="314">
+          <name>$variables</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="classes/Controller.class.php" hash="a426d78adaaf19620396408a0e44f1d2">
+    <parse_markers>
+      <error line="5" code="50015">Argument $methodIdentifier is missing from the Docblock of action()</error>
+      <error line="5" code="50015">Argument $redirect is missing from the Docblock of action()</error>
+      <error line="22" code="50015">Argument $methodIdentifier is missing from the Docblock of display()</error>
+      <error line="22" code="50015">Argument $params is missing from the Docblock of display()</error>
+      <error line="34" code="50015">Argument $methodIdentifier is missing from the Docblock of ajax()</error>
+      <error line="34" code="50015">Argument $params is missing from the Docblock of ajax()</error>
+      <error line="66" code="50015">Argument $method is missing from the Docblock of getActionMethodName()</error>
+      <error line="74" code="50015">Argument $method is missing from the Docblock of getDisplayMethodName()</error>
+      <error line="82" code="50015">Argument $method is missing from the Docblock of getAjaxMethodName()</error>
+      <error line="95" code="50010">No DocBlock was found for method display_404()</error>
+      <error line="3" code="50000">No DocBlock was found for Controller</error>
+      <error line="1" code="50007">No page-level DocBlock was found in file classes/Controller.class.php</error>
+    </parse_markers>
+    <class final="false" abstract="false" namespace="default" line="3">
+      <name>Controller</name>
+      <full_name>\Controller</full_name>
+      <extends/>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="6" package="Default">
+        <name>action</name>
+        <type>function</type>
+        <docblock line="5">
+          <description><![CDATA[выполнение действия]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="6">
+          <name>$methodIdentifier</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="6">
+          <name>$redirect</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="23" package="Default">
+        <name>display</name>
+        <type>function</type>
+        <docblock line="22">
+          <description><![CDATA[выполнение отображения]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="23">
+          <name>$methodIdentifier</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="23">
+          <name>$params</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="35" package="Default">
+        <name>ajax</name>
+        <type>function</type>
+        <docblock line="34">
+          <description><![CDATA[выполнение ajax]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="35">
+          <name>$methodIdentifier</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="35">
+          <name>$params</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="51" package="Default">
+        <name>getControllerClassName</name>
+        <type>function</type>
+        <docblock line="46">
+          <description><![CDATA[получить имя класса контроллера по идентификатору]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="46" name="param" description="- идентификатор контроллера" type="string" variable="$controllerIdentifier">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="46" name="return" description="- имя класса контроллера или null, если контроллер не найден" type="string|null">
+            <type by_reference="false">string</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="51">
+          <name>$controllerIdentifier</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="67" package="Default">
+        <name>getActionMethodName</name>
+        <type>function</type>
+        <docblock line="66">
+          <description><![CDATA[получить имя метода действия по идентификатору]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="67">
+          <name>$method</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="75" package="Default">
+        <name>getDisplayMethodName</name>
+        <type>function</type>
+        <docblock line="74">
+          <description><![CDATA[получить имя метода отображения по идентификатору]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="75">
+          <name>$method</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="83" package="Default">
+        <name>getAjaxMethodName</name>
+        <type>function</type>
+        <docblock line="82">
+          <description><![CDATA[получить имя ajax метода по идентификатору]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="83">
+          <name>$method</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="95">
+        <name>display_404</name>
+        <type>function</type>
+        <argument line="95">
+          <name>$method</name>
+          <default><![CDATA['']]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <package name="Default"/>
+  <namespace name="default"/>
+  <marker>todo</marker>
+  <marker>fixme</marker>
+</project>

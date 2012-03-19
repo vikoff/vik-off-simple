@@ -2,7 +2,7 @@
 
 class DbAdapter_mysql extends DbAdapter{ 
 	
-	/** ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ */
+	/** подключение к базе данных */
 	public function connect(){
 	
 		$this->_dbrs = mysql_connect($this->connHost, $this->connUser, $this->connPass, $new_link = TRUE) or $this->error('Невозможно подключиться к серверу MySQL');
@@ -14,7 +14,7 @@ class DbAdapter_mysql extends DbAdapter{
 		$this->_connected = TRUE;
 	}
 	
-	/** УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ */
+	/** установить кодировку соединения */
 	public function setEncoding($encoding){
 		
 		$this->_encoding = $encoding;
@@ -23,27 +23,26 @@ class DbAdapter_mysql extends DbAdapter{
 			$this->query('SET NAMES '.$this->_encoding);
 	}
 	
-	/** ВЫБРАТЬ БАЗУ ДАННЫХ */
+	/** выбрать базу данных */
 	public function selectDb($db){
 		
 		$this->connDatabase = $db;
 		mysql_select_db($this->connDatabase, $this->_dbrs)or $this->error('Невозможно выбрать базу данных');
 	}
 	
-	/** ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY */
+	/** получить последний вставленный primary key */
 	public function getLastId(){
 	
 		return mysql_insert_id($this->_dbrs);
 	}
 	
-	/** ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ */
+	/** получить количество строк, затронутых последней операцией */
 	public function getAffectedNum(){
 		
 		return mysql_affected_rows($this->_dbrs);
 	}
 	
 	/**
-	 * REPLACE
 	 * вставка данных в таблицу (аналогично INSERT). Но если в таблице уже присутствует PRIMARY KEY
 	 * или UNIQUE с тем же значением, что и переданное, то старая запись будет удалена.
 	 * @param string $table - имя таблицы
@@ -65,7 +64,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 
 	/**
-	 * ВЫПОЛНИТЬ ЗАПРОС
+	 * выполнить запрос
 	 * @param string $query - SQL-запрос
 	 * @return resource - ресурс ответа базы данных
 	 */
@@ -83,7 +82,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET ONE
+	 * get one
 	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -101,7 +100,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET CELL
 	 * выполнить запрос и вернуть единственное значение (указанные строка и столбец)
 	 * @param string $query - SQL-запрос
 	 * @param integer $row - номер строки, значение которой будет возвращено
@@ -121,7 +119,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET STATIC ONE
 	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
 	 * а если строка не найдена, то вставить ее в таблицу
 	 * @param string $query - SQL-запрос
@@ -143,7 +140,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET COL
 	 * выполнить запрос и вернуть единственный столбец (первый)
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -161,7 +157,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET COL INDEXED
 	 * возвращает одномерный ассоциативный массив.
 	 * Для каждой пары ключ массива - значение первого столбца, извлекаемого из БД
 	 * значение массива - значение второго столбца, извлекаемого из БД
@@ -181,7 +176,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET ROW
 	 * выполнить запрос и вернуть единственную строку (первую)
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -199,7 +193,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET STATIC ROW
 	 * выполнить запрос и вернуть единственную строку (первую)
 	 * а если строка не найдена, то вставить ее в таблицу
 	 * @param string $query - SQL-запрос
@@ -221,7 +214,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET ALL
 	 * выполнить запрос и вернуть многомерный ассоциативный массив данных
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -239,7 +231,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * GET ALL INDEXED
 	 * выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных
 	 * @param string $query - SQL-запрос
 	 * @param string $index - имя поля, по которому будет индексироваться массив результатов.
@@ -259,7 +250,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * ЭКРАНИРОВАНИЕ ДАННЫХ
+	 * экранирование данных
 	 * выполняется с учетом типа данных для предотвращения SQL-инъекций
 	 * @param mixed строка для экранирования
 	 * @param mixed - безопасная строка
@@ -275,7 +266,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * ЗАКЛЮЧЕНИЕ ИМЕНИ ПОЛЯ В КАВЫЧКИ
+	 * заключение имени поля в кавычки
 	 * для полей, имена которых совпадают с ключевыми словами
 	 * @param string $fieldname - имя поля
 	 * @param string - имя поля, заключенное в кавычки
@@ -285,7 +276,6 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * DESCRIBE
 	 * получить массив, описывающий структуру таблицы
 	 * @param string $table - имя таблицы
 	 * @return array - структура таблицы
@@ -296,7 +286,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
+	 * получить список таблиц
 	 * в текущей базе данных
 	 * @return array - массив-список таблиц
 	 */
@@ -306,7 +296,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * ПОЛУЧИТЬ СПИСОК БД
+	 * получить список бд
 	 * @return array - массив-список баз данных
 	 */
 	public function showDatabases(){
@@ -315,7 +305,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * ПОКАЗАТЬ СТРОКУ CREATE TABLE
+	 * показать строку CREATE TABLE
 	 * @param string $table - имя таблицы
 	 * @return string - строка CREATE TABLE
 	 */
@@ -325,7 +315,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * СОЗДАТЬ ДАМП БАЗЫ ДАННЫХ
+	 * создать дамп базы данных
 	 * @param string|null $database - база данных (или дефолтная, если null)
 	 * @param array|null $tables - список таблиц (или все, если null)
 	 * @output выдает текст sql-дампа

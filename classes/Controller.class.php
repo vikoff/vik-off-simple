@@ -2,7 +2,7 @@
 
 class Controller {
 	
-	/** ВЫПОЛНЕНИЕ ДЕЙСТВИЯ */
+	/** выполнение действия */
 	public function action($methodIdentifier, $redirect){
 				
 		$method = $this->getActionMethodName($methodIdentifier);
@@ -19,7 +19,7 @@ class Controller {
 		return TRUE;
 	}
 	
-	/** ВЫПОЛНЕНИЕ ОТОБРАЖЕНИЯ */
+	/** выполнение отображения */
 	public function display($methodIdentifier, $params){
 				
 		$method = $this->getDisplayMethodName($methodIdentifier);
@@ -31,8 +31,8 @@ class Controller {
 		return TRUE;
 	}
 	
-	/** ВЫПОЛНЕНИЕ AJAX */
-	public function ajax($method, $params){
+	/** выполнение ajax */
+	public function ajax($methodIdentifier, $params){
 				
 		$method = $this->getAjaxMethodName($methodIdentifier);
 			
@@ -44,7 +44,7 @@ class Controller {
 	}
 	
 	/**
-	 * ПОЛУЧИТЬ ИМЯ КЛАССА КОНТРОЛЛЕРА ПО ИДЕНТИФИКАТОРУ
+	 * получить имя класса контроллера по идентификатору
 	 * @param string $controllerIdentifier - идентификатор контроллера
 	 * @return string|null - имя класса  контроллера или null, если контроллер не найден
 	 */
@@ -63,7 +63,7 @@ class Controller {
 		return class_exists($controller) ? $controller : null;
 	}
 	
-	/** ПОЛУЧИТЬ ИМЯ МЕТОДА ДЕЙСТВИЯ ПО ИДЕНТИФИКАТОРУ */
+	/** получить имя метода действия по идентификатору */
 	public function getActionMethodName($method){
 	
 		// преобразует строку вида 'any-Method-name' в 'any_method_name'
@@ -71,7 +71,7 @@ class Controller {
 		return $method;
 	}
 	
-	/** ПОЛУЧИТЬ ИМЯ МЕТОДА ОТОБРАЖЕНИЯ ПО ИДЕНТИФИКАТОРУ */
+	/** получить имя метода отображения по идентификатору */
 	public  function getDisplayMethodName($method){
 	
 		// преобразует строку вида 'any-Method-name' в 'any_method_name'
@@ -79,7 +79,7 @@ class Controller {
 		return $method;
 	}
 	
-	/** ПОЛУЧИТЬ ИМЯ AJAX МЕТОДА ПО ИДЕНТИФИКАТОРУ */
+	/** получить имя ajax метода по идентификатору */
 	public function getAjaxMethodName($method){
 	
 		// преобразует строку вида 'any-Method-name' в 'any_method_name'

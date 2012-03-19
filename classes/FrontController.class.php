@@ -11,7 +11,7 @@ class FrontController extends Controller{
 	public $data = array();
 	
 	
-	/** ПОЛУЧЕНИЕ ЭКЗЕМПЛЯРА FrontController */
+	/** получение экземпляра FrontController */
 	public static function get(){
 		
 		if(is_null(self::$_instance))
@@ -21,10 +21,11 @@ class FrontController extends Controller{
 	}
 	
 	/**
-	 * КОНСТРУКТОР
-	 * Приватный. Доступ к объекту осуществляется через статический метод self::get()
+	 * Приватный конструктор.
+	 * Доступ к объекту осуществляется через статический метод self::get()
 	 * Выполняет примитивную авторизацию пользователя.
 	 * Парсит полученную query string.
+	 * @access private
 	 */
 	private function __construct(){
 		
@@ -39,7 +40,7 @@ class FrontController extends Controller{
 		$this->requestParams = $request;
 	}
 	
-	/** ЗАПУСК ПРИЛОЖЕНИЯ */
+	/** запуск приложения */
 	public function run(){
 		
 		$this->_checkAction();
@@ -50,7 +51,7 @@ class FrontController extends Controller{
 		$this->display_404();
 	}
 	
-	/** ЗАПУСК ПРИЛОЖЕНИЯ В AJAX-РЕЖИМЕ */
+	/** запуск приложения в ajax-режиме */
 	public function run_ajax(){
 		
 		if($this->_checkAction())
@@ -65,7 +66,7 @@ class FrontController extends Controller{
 		$this->display_404();
 	}
 	
-	/** ПРОВЕРКА АВТОРИЗАЦИИ */
+	/** проверка авторизации */
 	private function _checkAuth(){
 		
 		if(getVar($_POST['action']) == 'login')
@@ -75,7 +76,7 @@ class FrontController extends Controller{
 			// $this->display_login();
 	}
 	
-	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ ДЕЙСТВИЯ */
+	/** проверка необходимости выполнения действия */
 	private function _checkAction(){
 		
 		if(!isset($_POST['action']) || !checkFormDuplication())
@@ -103,13 +104,13 @@ class FrontController extends Controller{
 		}
 	}
 	
-	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ ОТОБРАЖЕНИЯ */
+	/** проверка необходимости выполнения отображения */
 	private function _checkDisplay(){
 		
 		return $this->display($this->requestMethod, $this->requestParams);
 	}
 	
-	/** ПРОВЕРКА НЕОБХОДИМОСТИ ВЫПОЛНЕНИЯ AJAX */
+	/** проверка необходимости выполнения ajax */
 	private function _checkAjax(){
 		
 		return $this->ajax($this->requestMethod, $this->requestParams);
