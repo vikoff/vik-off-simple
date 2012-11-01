@@ -5,7 +5,7 @@ session_start();
 $_url = dirname($_SERVER['SCRIPT_NAME']);
 define('WWW_ROOT', 'http://'.$_SERVER['SERVER_NAME'].(strlen($_url) > 1 ? $_url : '').'/');
 define('WWW_URI', 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-define('FS_ROOT', realpath('.').DIRECTORY_SEPARATOR);
+define('FS_ROOT', dirname(__FILE__).'/');
 
 // определение ajax-запроса
 define('AJAX_MODE', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');

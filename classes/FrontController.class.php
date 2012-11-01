@@ -128,6 +128,7 @@ class FrontController extends Controller{
 			->setContentPhpFile('index.php')
 			->render();
 	}
+	// <generation-skip>
 	
 	public function display_docs($params = array()){
 		
@@ -187,6 +188,7 @@ class FrontController extends Controller{
 				->setContentPhpFile('ajax.php')
 				->render();
 	}
+	// </generation-skip>
 	
 	public function display_404($method = ''){
 		
@@ -204,6 +206,8 @@ class FrontController extends Controller{
 	////////////////////
 	////// ACTION //////
 	////////////////////
+	
+	// <generation-skip>
 	
 	public function action_login(){
 		
@@ -225,20 +229,22 @@ class FrontController extends Controller{
 		
 		echo '<pre>'; print_r($_POST);
 	}
+	// </generation-skip>
 
 	////////////////////
 	//////  AJAX  //////
 	////////////////////
 	
+	// <generation-skip>
+	
 	public function ajax_test(){
 		
 		print_r($_GET);
 	}
+	// </generation-skip>
 
 	////////////////////
 	//////  MODEL  /////
 	////////////////////
 	
 }
-
-?>

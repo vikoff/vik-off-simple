@@ -1,6 +1,5 @@
 <?
-
-if(!defined('WWW_ROOT'))
+if(!defined('FS_ROOT'))
 	die('access denided (setup file)');
 
 require_once('func.php');

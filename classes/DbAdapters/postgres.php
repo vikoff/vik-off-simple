@@ -5,8 +5,12 @@ class DbAdapter_postgres extends DbAdapter{
 	/** ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ */
 	public function connect(){
 		
+		$start = microtime(1);
+		
 		$connString = 'host='.$this->connHost.' port='.$this->connPort.' user='.$this->connUser.' password='.$this->connPass.' dbname='.$this->connDatabase;
 		$this->_dbrs = pg_connect($connString) or $this->error('Невозможно подключиться к серверу PgSQL');
+		
+		$this->_saveConnectTime(microtime(1) - $start);
 		
 		// if(!empty($this->_encoding))
 			// mysql_query('SET NAMES '.$this->_params['encoding'], $this->_dbrs)or $this->error('Невозможно установить кодировку соединения с БД: '.mysql_error());
@@ -379,12 +383,9 @@ class DbAdapter_postgres extends DbAdapter{
 	 */
 	public function escape($str){
 		
-		if(!in_array(strtolower(gettype($str)), array('integer', 'double', 'boolean', 'null'))){
-			if(get_magic_quotes_gpc() || get_magic_quotes_runtime())
-				$str = stripslashes($str);
-			$str = pg_escape_string($this->_dbrs, $str);
-		}
-		return $str;
+		return is_string($str)
+			? pg_escape_string($this->_dbrs, $str)
+			: $str;
 	}
 	
 	/**
@@ -506,8 +507,8 @@ class DbAdapter_postgres extends DbAdapter{
 					foreach($rows as $rowIndex => $row){
 						foreach($row as &$cell){
 							if(is_string($cell)){
-								$cell = str_replace("\n", '\\r\\n', $cell);
-								$cell = str_replace("\r", '', $cell);
+								$cell = str_replace("\n", '\\n', $cell);
+								$cell = str_replace("\r", '\\r', $cell);
 							}
 							$cell = $this->qe($cell);
 						}

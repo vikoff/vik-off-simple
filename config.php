@@ -1,6 +1,6 @@
 <?
 
-if(!defined('WWW_ROOT'))
+if(!defined('FS_ROOT'))
 	die('access denided (config file)');
 
 
@@ -10,6 +10,9 @@ ini_set('display_errors', 1);
 
 // установить текущий часовой пояс
 date_default_timezone_set('Europe/Kiev');
+
+// задать кодировку по умолчанию для mb_* функций
+mb_internal_encoding("utf8");
 
 // отсеивать дублируемые формы
 define('CHECK_FORM_DUPLICATION', 0);

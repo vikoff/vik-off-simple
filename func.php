@@ -1,7 +1,7 @@
 <?
 
-if(!defined('WWW_ROOT'))
-	die('access denided (setup file)');
+if(!defined('FS_ROOT'))
+	die('access denided (func file)');
 
 /** ФУНКЦИЯ GETVAR */
 function getVar(&$varname, $defaultVal = '', $type = ''){

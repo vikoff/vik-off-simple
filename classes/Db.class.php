@@ -1,18 +1,16 @@
-<?
+<?php
 
-class db{ 
+/**
+ * класс для работы с базой данных
+ * @author Yuriy Novikov
+ */
+class db { 
 	
 	/**
 	 * экземпляры класса db (один экземпляр - одно подключение)
 	 * @var array()
 	 */
 	private static $_instances = array();
-	
-	/**
-	 * экземпляр дефолтного соединения с БД
-	 * @var null|db
-	 */
-	private static $_defaultInstance = null;
 	
 	
 	/**
@@ -28,9 +26,9 @@ class db{
 	 *		string 'encoding' optional, устанавливает кодировку соединения
 	 * @param null|string $connIdentifier - идентификатор соединения с БД.
 	 * 		Если null, создается дефолтное соединение.
-	 * @return db instance
+	 * @return DbAdapter
 	 */
-	public static function create($connParams, $connIdentifier = null){
+	public static function create($connParams, $connIdentifier = 'default'){
 		
 		// проверка, переданы ли параметры в виде массива
 		if(!is_array($connParams))
@@ -56,28 +54,11 @@ class db{
 		if(!empty($connParams['keepFileLog']))
 			$db->keepFileLog($connParams['keepFileLog']);
 		
-		// если идентификатор соединения не передан
-		// создаем дефолтное подключение
-		if(is_null($connIdentifier)){
-			
-			if(is_null(self::$_defaultInstance))
-				self::$_defaultInstance = & $db;
-			else
-				trigger_error('Соединение с БД с дефолтным идентификатором уже создано', E_USER_ERROR);
-		}
-		// если идентификатор соединения указан
 		// создаем подключение с указанным идентификатором
-		else{
-			
-			if(strlen($connIdentifier)){
-				if(empty(self::$_instances[$connIdentifier]))
-					self::$_instances[$connIdentifier] = & $db;
-				else
-					trigger_error('Соединение с БД с идентификатором "'.$connIdentifier.'" уже создано', E_USER_ERROR);
-			}else{
-				trigger_error('Идентификатор соединения с БД должен быть числом, строкой или значением null', E_USER_ERROR);
-			}
-		}
+		if(empty(self::$_instances[$connIdentifier]))
+			self::$_instances[$connIdentifier] = & $db;
+		else
+			trigger_error('Соединение с БД с идентификатором "'.$connIdentifier.'" уже создано', E_USER_ERROR);
 		
 		return $db;
 	}
@@ -87,34 +68,40 @@ class db{
 	 * 
 	 * @param null|string $connIdentifier - идентификатор соединения с БД.
 	 * 		Если не указан, возвращается дефолтное соединение.
-	 * @return instance of db
+	 * @return DbAdapter
 	 */
-	public static function get($connIdentifier = null){
+	public static function get($connIdentifier = 'default'){
 		
-		$db = is_null($connIdentifier)
-			? self::$_defaultInstance
-			: (isset(self::$_instances[$connIdentifier])
-				? self::$_instances[$connIdentifier]
-				: null);
+		$db = isset(self::$_instances[$connIdentifier])
+			? self::$_instances[$connIdentifier]
+			: null;
 		
 		if(is_null($db))
-			trigger_error('Соединение с БД с '.(is_null($connIdentifier) ? 'дефолтным идентификатором' : 'идентификатором "'.$connIdentifier.'"').' не создано', E_USER_ERROR);
+			trigger_error('Соединение с БД с '.($connIdentifier == 'default' ? 'дефолтным идентификатором' : 'идентификатором "'.$connIdentifier.'"').' не создано', E_USER_ERROR);
 		
 		if(!$db->isConnected())
 			$db->connect();
 		
 		return $db;
 	}
+
+	public static function getAllConnections(){
+
+		return self::$_instances;
+	}
 	
 }
 
-abstract class DbAdapter{
+abstract class DbAdapter {
 	
 	/** флаг, что соединение установлено */
 	protected $_connected = FALSE;
 	
 	/** флаг о необходимости логирования sql в файл */
 	protected $_keepFileLog = FALSE;
+	
+	/** время подключения к БД */
+	protected $_connectTime = null;
 	
 	/** массив сохраненных SQL запросов */
 	protected $_sqls = array();
@@ -157,7 +144,6 @@ abstract class DbAdapter{
 	abstract public function getAffectedNum();
 	abstract public function query($query);
 	abstract public function getOne($query, $default_value = null);
-	abstract public function getCell($query, $row, $column, $default_value = 0);
 	abstract public function getCol($query, $default_value = array());
 	abstract public function getColIndexed($query, $default_value = 0);
 	abstract public function getRow($query, $default_value = array());
@@ -171,16 +157,12 @@ abstract class DbAdapter{
 	 * @param variant $field - строка имени поля
 	 * @return string заключенная в нужный тип ковычек строка
 	 */
-	public function quoteFieldName($field){}
+	abstract function quoteFieldName($field);
 	abstract public function describe($table);
 	abstract public function showTables();
 	abstract public function showCreateTable($table);
 	
-	/**
-	 * конструктор
-	 * назначение параметров подключения
-	 * само подключенеие не выполняется.
-	 */
+	/** КОНСТРУКТОР */
 	public function __construct($host, $user, $pass, $database){
 		
 		$this->connHost = $host;
@@ -189,18 +171,19 @@ abstract class DbAdapter{
 		$this->connDatabase = $database;
 	}
 	
-	/** включить режим отлова ошибок */
+	/** ВКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК */
 	public function enableErrorHandlingMode(){
+		debug_print_backtrace();
 		$this->_errorHandlingMode = TRUE;
 	}
 	
-	/** отключить режим отлова ошибок */
+	/** ОТКЛЮЧИТЬ РЕЖИМ ОТЛОВА ОШИБОК */
 	public function disableErrorHandlingMode(){
 		$this->_errorHandlingMode = TRUE;
 	}
 	
 	/**
-	 * установить обработчик ошибок
+	 * УСТАНОВИТЬ ОБРАБОТЧИК ОШИБОК
 	 * @param null|callback $handler - функция обработки ошибок
 	 * @return void
 	 */
@@ -209,44 +192,45 @@ abstract class DbAdapter{
 		$this->_errorHandler = $handler;
 	}
 	
-	/** выполнено ли подключение к бд */
+	/** ВЫПОЛНЕНО ЛИ ПОДКЛЮЧЕНИЕ К БД */
 	public function isConnected(){
 		
 		return $this->_connected;
 	}
 	
-	/** вести лог sql запросов */
+	/** ВЕСТИ ЛОГ SQL ЗАПРОСОВ */
 	public function keepFileLog($boolEnable){
 		
 		$this->_keepFileLog = $boolEnable;
 	}
 	
-	/** получить хост бд */
+	/** ПОЛУЧИТЬ ХОСТ БД */
 	public function getConnHost(){
 		return $this->connHost;
 	}
 	
-	/** получить имя пользователя бд */
+	/** ПОЛУЧИТЬ ИМЯ ПОЛЬЗОВАТЕЛЯ БД */
 	public function getConnUser(){
 		return $this->connUser;
 	}
 	
-	/** получить пароль пользователя бд */
+	/** ПОЛУЧИТЬ ПАРОЛЬ ПОЛЬЗОВАТЕЛЯ БД */
 	public function getConnPassword(){
 		return $this->connPass;
 	}
 	
-	/** получить имя текущей бд */
+	/** ПОЛУЧИТЬ ИМЯ ТЕКУЩЕЙ БД */
 	public function getDatabase(){
 		return $this->connDatabase;
 	}
 	
-	/** получить текущую кодировку соединения */
+	/** ПОЛУЧИТЬ ТЕКУЩУЮ КОДИРОВКУ СОЕДИНЕНИЯ */
 	public function getEncoding(){
 		return $this->_encoding;
 	}
 	
 	/**
+	 * INSERT
 	 * вставка данных в таблицу
 	 * @param string $table - имя таблицы
 	 * @param array $fieldsValues - массив пар (поле => значение) для вставки
@@ -268,6 +252,7 @@ abstract class DbAdapter{
 	}
 
 	/**
+	 * INSERT MULTI
 	 * вставка в таблицу нескольких строк за раз
 	 * @param string $table - имя таблицы
 	 * @param array $fields - массив-список полей таблиц. Например: array('field1', 'field2')
@@ -292,6 +277,7 @@ abstract class DbAdapter{
 	}
 	
 	/**
+	 * UPDATE
 	 * обновление записей в таблице
 	 * @param string $table - имя таблицы
 	 * @param array $fieldsValues - массив пар (поле => значение) для обновления
@@ -317,6 +303,7 @@ abstract class DbAdapter{
 	}
 
 	/**
+	 * UPDATE INSERT
 	 * обновляет информацию в таблице.
 	 * Если не было обновлено ни одной строки, создает новую строку.
 	 * Возвращает 0, если было произведено обновление существующей строки,
@@ -362,7 +349,8 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * удаление записей в таблице
+	 * DELETE
+	 * удаление записей из таблицы
 	 * @param string $table - имя таблицы
 	 * @param array $fieldsValues - массив пар (поле => значение) для обновления
 	 * @param string $conditions - SQL строка условия (без слова WHERE). Не должно быть пустой строкой.
@@ -383,7 +371,36 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * заключение строк в ковычки 
+	 * TRUNCATE
+	 * очистка таблицы
+	 * @param string $table - имя таблицы
+	 * @return void
+	 */
+	public function truncate($table){
+		
+		$this->query('TRUNCATE TABLE '.$table);
+	}
+	
+	/** НАЧАТЬ ТРАНЗАКЦИЮ */
+	public function beginTransaction(){
+		
+		$this->query('BEGIN');
+	}
+	
+	/** ПРИМЕНИТЬ ТРАНЗАКЦИЮ */
+	public function commit(){
+		
+		$this->query('COMMIT');
+	}
+	
+	/** ОТКАТИТЬ ТРАНЗАКЦИЮ */
+	public function rollBack(){
+		
+		$this->query('ROLLBACK');
+	}
+	
+	/**
+	 * ЗАКЛЮЧЕНИЕ СТРОК В КОВЫЧКИ
 	 * в зависимости от типа данных
 	 * @param variant $cell - исходная строка
 	 * @return string заключенная в нужный тип ковычек строка
@@ -395,13 +412,15 @@ abstract class DbAdapter{
 				return $cell ? 'TRUE' : 'FALSE';
 			case 'null':
 				return 'NULL';
+			case 'object':
+				return $cell;
 			default:
 				return "'".$cell."'";
 		}
 	}
 	
 	/**
-	 * эскейпирование и заключение строки в ковычки
+	 * ЭСКЕЙПИРОВАНИЕ И ЗАКЛЮЧЕНИЕ СТРОКИ В КОВЫЧКИ
 	 * замена последовательному вызову функций db::escape и db::quote
 	 * @param variant $cell - исходная строка
 	 * @return string эскейпированая и заключенная в нужный тип ковычек строка
@@ -411,10 +430,21 @@ abstract class DbAdapter{
 		return $this->quote($this->escape($cell));
 	}
 	
+	/**
+	 * получить строку, которая будет обработана адаптером без преобразований
+	 * (без эскейпирования и заковычивания)
+	 * полезно для SQL функций, например NOW()
+	 * @param string $statement - SQL выражение
+	 * @return DbStatement object
+	 */
+	public function raw($statement){
+		
+		return new DbStatement($statement);
+	}
+	
 	/** 
-	 * сохранение запроса
+	 * СОХРАНИТЬ ЗАПРОС
 	 * @access protected
-	 * @param string @sql - строка sql запроса
 	 */
 	protected function _saveQuery($sql){
 		
@@ -422,7 +452,16 @@ abstract class DbAdapter{
 	}
 	
 	/** 
-	 * сохранить время исполнения запроса
+	 * СОХРАНИТЬ ВРЕМЯ ПОДКЛЮЧЕНИЯ К БД
+	 * @access protected
+	 */
+	protected function _saveConnectTime($t){
+	
+		$this->_connectTime = $t;
+	}
+	
+	/** 
+	 * СОХРАНИТЬ ВРЕМЯ ИСПОЛНЕНИЯ ЗАПРОСА
 	 * @access protected
 	 */
 	protected function _saveQueryTime($t){
@@ -430,25 +469,31 @@ abstract class DbAdapter{
 		$this->_queriesTime[] = $t;
 	}
 	
-	/** получить число выполненных sql запросов */
+	/** ПОЛУЧИТЬ ВРЕМЯ ПОДКЛЮЧЕНИЯ К БД */
+	public function getConnectTime(){
+		
+		return $this->_connectTime;
+	}
+	
+	/** ПОЛУЧИТЬ ЧИСЛО ВЫПОЛНЕННЫХ SQL ЗАПРОСОВ */
 	public function getQueriesNum(){
 		
 		return $this->_queriesNum;
 	}
 	
-	/** получить выполненные sql запросы */
+	/** ПОЛУЧИТЬ ВЫПОЛНЕННЫЕ SQL ЗАПРОСЫ */
 	public function getQueries(){
 		
 		return $this->_sqls;
 	}
 	
-	/** получить общее время выполнения sql запросов */
+	/** ПОЛУЧИТЬ ОБЩЕЕ ВРЕМЯ ВЫПОЛНЕНИЯ SQL ЗАПРОСОВ */
 	public function getQueriesTime(){
 		
 		return array_sum($this->_queriesTime);
 	}
 	
-	/** получить выполенные запросы в виде массива (запрос => время) */
+	/** ПОЛУЧИТЬ ВЫПОЛЕННЫЕ ЗАПРОСЫ В ВИДЕ МАССИВА (ЗАПРОС => ВРЕМЯ) */
 	public function getQueriesWithTime(){
 		
 		$output = array();
@@ -460,8 +505,17 @@ abstract class DbAdapter{
 		return $output;
 	}
 	
+	/** ПОЛУЧИТЬ ИНФОРМАЦИЮ О ПОСЛЕДНЕМ ЗАПРОСЕ (sql, time) */
+	public function getLastQueryInfo(){
+		
+		return array(
+			'sql' => end($this->_sqls),
+			'time' => end($this->_queriesTime)
+		);
+	}
+	
 	/**
-	 * перехват ошибок выполнения sql-запросов
+	 * ПЕРЕХВАТ ОШИБОК ВЫПОЛНЕНИЯ SQL-ЗАПРОСОВ
 	 * Дальнейший путь ошибки зависит от установки _errorHandlingMode
 	 * @access protected
 	 * @param string $msg - сообщение, сгенерированное СУБД
@@ -469,7 +523,7 @@ abstract class DbAdapter{
 	 * @return void
 	 */
 	protected function error($msg, $sql = ''){
-	
+		
 		$fullmsg = ""
 			."\n\nError on ".date('Y-m-d H:i:s')."\n"
 			."[  SQL] ".str_repeat('-', 80)."\n\n"
@@ -489,7 +543,7 @@ abstract class DbAdapter{
 		}
 		// выброс ошибок
 		else{
-		
+			
 			if(PHP_SAPI != 'cli')
 				$fullmsg = '<pre>'.$fullmsg.'</pre>';
 			
@@ -497,27 +551,27 @@ abstract class DbAdapter{
 		}
 	}
 	
-	/** сохранить ошибку */
+	/** СОХРАНИТЬ ОШИБКУ */
 	public function setError($error){
 		$this->_error[] = $error;
 	}
 	
-	/** получить все ошибки */
+	/** ПОЛУЧИТЬ ВСЕ ОШИБКИ */
 	public function getError(){
 		return implode('<br />', $this->_error);
 	}
 	
-	/** проверить, есть ли ошибки */
+	/** ПРОВЕРИТЬ, ЕСТЬ ЛИ ОШИБКИ */
 	public function hasError(){
 		return !empty($this->_error);
 	}
 	
-	/** очистить накопившиеся ошибки */
+	/** ОЧИСТИТЬ НАКОПИВШИЕСЯ ОШИБКИ */
 	public function resetError(){
 		$this->_error = array();
 	}
 	
-	/** загрузить дамп данных */
+	/** ЗАГРУЗИТЬ ДАМП ДАННЫХ */
 	public function loadDump($fileName){
 	
 		if(!$fileName){
@@ -539,17 +593,12 @@ abstract class DbAdapter{
 		while(!feof($rs)){
 		
 			$row = fgets($rs);
+			$row = preg_replace('/;\r\n/', ";\n", $row);
 			$singleQuery .= $row;
 			
 			if(substr($row, -2) == ";\n"){
-				try{
-					$this->query($singleQuery);
-					$completeCommands++;
-				}
-				catch(Exception $e){
-					echo 'error: '.$e->getMessage().'<br />';
-					$failedCommands++;
-				}
+				$singleQuery = str_replace(array('\r', '\n'), array("\r", "\n"), $singleQuery);
+				$this->query($singleQuery);
 				$singleQuery = '';
 				$numCommands++;
 			}
@@ -559,13 +608,27 @@ abstract class DbAdapter{
 	}
 	
 	/**
-	 * деструкотр
+	 * СОЗДАТЬ ДАМП БАЗЫ ДАННЫХ
+	 * @param string|null $database - база данных (или дефолтная, если null)
+	 * @param array|null $tables - список таблиц (или все, если null)
+	 * @output выдает текст sql-дампа
+	 * @return void
+	 */
+	public function makeDump($database = null, $tables = null){}
+	
+	/**
+	 * ДЕСТРУКОТР
 	 * запись лога выполненных sql-запросов в файл (если требуется)
 	 */
 	public function __destruct(){
 		
 		if($this->_keepFileLog){
-			$f = fopen(FS_ROOT.'logs/mysql.log', 'a');
+			
+			$logpath = FS_ROOT.'logs/';
+			if (!is_dir($logpath))
+				mkdir($logpath, 0777, true);
+				
+			$f = fopen($logpath.'sql.log', 'a');
 			fwrite($f, '-------- '.date('Y-m-d H:i:s')." --------\n");
 			fwrite($f, implode("\n", $this->_sqls));
 			fwrite($f, "\n\n");
@@ -573,6 +636,30 @@ abstract class DbAdapter{
 		}
 	}
 
+}
+
+/**
+ * Класс, экземпляры которого используются как части SQL выражения
+ * над которыми не надо производить эскейпирование или закавычивание
+ */
+class DbStatement {
+	
+	private $_statement = '';
+	
+	public static function create($statement){
+		
+		return new DbStatement($statement);
+	}
+	
+	public function __construct($statement){
+		
+		$this->_statement = $statement;
+	}
+	
+	public function __toString(){
+		
+		return $this->_statement;
+	}
 }
 
 ?>

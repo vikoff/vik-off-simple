@@ -5,8 +5,12 @@ class DbAdapter_sqlite extends DbAdapter{
 	/** ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ */
 	public function connect(){
 		
+		$start = microtime(1);
+		
 		$this->_dbrs = sqlite_open($this->connDatabase)or $this->error('Невозможно подключиться к базе данных');
 		$this->_connected = TRUE;
+		
+		$this->_saveConnectTime(microtime(1) - $start);
 	}
 
 	/** УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ */
@@ -194,10 +198,8 @@ class DbAdapter_sqlite extends DbAdapter{
 
 		$rs = $this->query($query);
 		$data = sqlite_fetch_all($rs, SQLITE_ASSOC);
-		if(count($data))
-			return $data;
-		else
-			return $default_value;
+		
+		return !empty($data) ? $data : $default_value;
 	}
 	
 	/**
@@ -212,12 +214,23 @@ class DbAdapter_sqlite extends DbAdapter{
 	 */
 	public function getAllIndexed($query, $index, $default_value = 0){
 		
-		// $rs = $this->query($query);
-		// if(mysql_num_rows($rs))
-			// for($data = array(); $row = mysql_fetch_assoc($rs); $data[$row[$index]] = $row);
-		// else
-			// $data = $default_value;
-		// return $data;
+		$rs = $this->query($query);
+		$data = array();
+		foreach(sqlite_fetch_all($rs, SQLITE_ASSOC) as $row)
+			$data[$row[$index]] = $row;
+		
+		return !empty($data) ? $data : $default_value;
+	}
+	
+	/**
+	 * TRUNCATE
+	 * очистка таблицы
+	 * @param string $table - имя таблицы
+	 * @return void
+	 */
+	public function truncate($table){
+		
+		$this->query('DELETE FROM '.$table);
 	}
 	
 	/**
@@ -228,12 +241,9 @@ class DbAdapter_sqlite extends DbAdapter{
 	 */
 	public function escape($str){
 		
-		if(!in_array(strtolower(gettype($str)), array('integer', 'double', 'boolean', 'null'))){
-			if(get_magic_quotes_gpc() || get_magic_quotes_runtime())
-				$str = stripslashes($str);
-			$str = sqlite_escape_string($str);
-		}
-		return $str;
+		return is_string($str)
+			? sqlite_escape_string($str)
+			: $str;
 	}
 	
 	/**
@@ -243,7 +253,26 @@ class DbAdapter_sqlite extends DbAdapter{
 	 * @param string - имя поля, заключенное в кавычки
 	 */
 	public function quoteFieldName($field){
-		return "'".$field."'";
+		return '"'.$field.'"';
+	}
+	
+	/**
+	 * ЗАКЛЮЧЕНИЕ СТРОК В КОВЫЧКИ
+	 * в зависимости от типа данных
+	 * @override DbAdapter method
+	 * @param variant $cell - исходная строка
+	 * @return string заключенная в нужный тип ковычек строка
+	 */
+	public function quote($cell){
+		
+		switch(strtolower(gettype($cell))){
+			case 'boolean':
+				return $cell ? '1' : '0';
+			case 'null':
+				return 'NULL';
+			default:
+				return "'".$cell."'";
+		}
 	}
 	
 	/**
@@ -325,8 +354,10 @@ class DbAdapter_sqlite extends DbAdapter{
 		echo $cmnt." Encoding : ".$this->_encoding.$lf;
 		echo $cmnt." Generation Time: ".date("d M Y H:i:s").$lf;
 		echo $cmnt." PHP Version: ".phpversion().$lf;
-		echo $cmnt."";
-
+		echo $lf;
+		echo $cmnt.' START TRANSACTION'.$lf;
+		echo 'BEGIN;'.$lf;
+		
 		foreach($tables as $table){
 
 			echo $lf;
@@ -363,8 +394,8 @@ class DbAdapter_sqlite extends DbAdapter{
 					foreach($rows as $rowIndex => $row){
 						foreach($row as &$cell){
 							if(is_string($cell)){
-								$cell = str_replace("\n", '\\r\\n', $cell);
-								$cell = str_replace("\r", '', $cell);
+								$cell = str_replace("\n", '\\n', $cell);
+								$cell = str_replace("\r", '\\r', $cell);
 							}
 							$cell = $this->qe($cell);
 						}
@@ -375,6 +406,10 @@ class DbAdapter_sqlite extends DbAdapter{
 				}
 			}
 		}
+		echo $lf;
+		echo $cmnt.' COMMIT TRANSACTION'.$lf;
+		echo 'COMMIT;'.$lf;
+		echo $lf;
 		echo $cmnt." ".$lf;
 		echo $cmnt." END DATABASE DUMP".$lf;
 		echo $cmnt." ".$lf;

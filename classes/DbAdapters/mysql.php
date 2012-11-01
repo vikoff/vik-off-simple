@@ -2,11 +2,15 @@
 
 class DbAdapter_mysql extends DbAdapter{ 
 	
-	/** подключение к базе данных */
+	/** ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ */
 	public function connect(){
-	
+		
+		$start = microtime(1);
+		
 		$this->_dbrs = mysql_connect($this->connHost, $this->connUser, $this->connPass, $new_link = TRUE) or $this->error('Невозможно подключиться к серверу MySQL');
 		$this->selectDb($this->connDatabase);
+		
+		$this->_saveConnectTime(microtime(1) - $start);
 		
 		if(!empty($this->_encoding))
 			$this->query('SET NAMES '.$this->_encoding);
@@ -14,7 +18,7 @@ class DbAdapter_mysql extends DbAdapter{
 		$this->_connected = TRUE;
 	}
 	
-	/** установить кодировку соединения */
+	/** УСТАНОВИТЬ КОДИРОВКУ СОЕДИНЕНИЯ */
 	public function setEncoding($encoding){
 		
 		$this->_encoding = $encoding;
@@ -23,26 +27,27 @@ class DbAdapter_mysql extends DbAdapter{
 			$this->query('SET NAMES '.$this->_encoding);
 	}
 	
-	/** выбрать базу данных */
+	/** ВЫБРАТЬ БАЗУ ДАННЫХ */
 	public function selectDb($db){
 		
 		$this->connDatabase = $db;
 		mysql_select_db($this->connDatabase, $this->_dbrs)or $this->error('Невозможно выбрать базу данных');
 	}
 	
-	/** получить последний вставленный primary key */
+	/** ПОЛУЧИТЬ ПОСЛЕДНИЙ ВСТАВЛЕННЫЙ PRIMARY KEY */
 	public function getLastId(){
 	
 		return mysql_insert_id($this->_dbrs);
 	}
 	
-	/** получить количество строк, затронутых последней операцией */
+	/** ПОЛУЧИТЬ КОЛИЧЕСТВО СТРОК, ЗАТРОНУТЫХ ПОСЛЕДНЕЙ ОПЕРАЦИЕЙ */
 	public function getAffectedNum(){
 		
 		return mysql_affected_rows($this->_dbrs);
 	}
 	
 	/**
+	 * REPLACE
 	 * вставка данных в таблицу (аналогично INSERT). Но если в таблице уже присутствует PRIMARY KEY
 	 * или UNIQUE с тем же значением, что и переданное, то старая запись будет удалена.
 	 * @param string $table - имя таблицы
@@ -64,7 +69,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 
 	/**
-	 * выполнить запрос
+	 * ВЫПОЛНИТЬ ЗАПРОС
 	 * @param string $query - SQL-запрос
 	 * @return resource - ресурс ответа базы данных
 	 */
@@ -82,7 +87,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * get one
+	 * GET ONE
 	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -100,6 +105,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET CELL
 	 * выполнить запрос и вернуть единственное значение (указанные строка и столбец)
 	 * @param string $query - SQL-запрос
 	 * @param integer $row - номер строки, значение которой будет возвращено
@@ -119,6 +125,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET STATIC ONE
 	 * выполнить запрос и вернуть единственное значение (первая строка, первый столбец)
 	 * а если строка не найдена, то вставить ее в таблицу
 	 * @param string $query - SQL-запрос
@@ -140,6 +147,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET COL
 	 * выполнить запрос и вернуть единственный столбец (первый)
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -157,6 +165,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET COL INDEXED
 	 * возвращает одномерный ассоциативный массив.
 	 * Для каждой пары ключ массива - значение первого столбца, извлекаемого из БД
 	 * значение массива - значение второго столбца, извлекаемого из БД
@@ -176,6 +185,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET ROW
 	 * выполнить запрос и вернуть единственную строку (первую)
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -193,6 +203,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET STATIC ROW
 	 * выполнить запрос и вернуть единственную строку (первую)
 	 * а если строка не найдена, то вставить ее в таблицу
 	 * @param string $query - SQL-запрос
@@ -214,6 +225,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET ALL
 	 * выполнить запрос и вернуть многомерный ассоциативный массив данных
 	 * @param string $query - SQL-запрос
 	 * @param mixed $default_value - значение, возвращаемое если запрос ничего не вернул
@@ -231,6 +243,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * GET ALL INDEXED
 	 * выполнить запрос и вернуть многомерный индексированных ассоциативный массив данных
 	 * @param string $query - SQL-запрос
 	 * @param string $index - имя поля, по которому будет индексироваться массив результатов.
@@ -250,23 +263,20 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * экранирование данных
-	 * выполняется с учетом типа данных для предотвращения SQL-инъекций
+	 * ЭКРАНИРОВАНИЕ ДАННЫХ
+	 * выполняется для строк для предотвращения SQL-инъекций
 	 * @param mixed строка для экранирования
 	 * @param mixed - безопасная строка
 	 */
 	public function escape($str){
 		
-		if(!in_array(strtolower(gettype($str)), array('integer', 'double', 'boolean', 'null'))){
-			if(get_magic_quotes_gpc() || get_magic_quotes_runtime())
-				$str = stripslashes($str);
-			$str = mysql_real_escape_string($str, $this->_dbrs);
-		}
-		return $str;
+		return is_string($str)
+			? mysql_real_escape_string($str, $this->_dbrs)
+			: $str;
 	}
 	
 	/**
-	 * заключение имени поля в кавычки
+	 * ЗАКЛЮЧЕНИЕ ИМЕНИ ПОЛЯ В КАВЫЧКИ
 	 * для полей, имена которых совпадают с ключевыми словами
 	 * @param string $fieldname - имя поля
 	 * @param string - имя поля, заключенное в кавычки
@@ -276,17 +286,25 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
+	 * DESCRIBE
 	 * получить массив, описывающий структуру таблицы
 	 * @param string $table - имя таблицы
 	 * @return array - структура таблицы
 	 */
 	public function describe($table){
 		
-		return $this->getAll('DESCRIBE '.$table);
+		$data = $this->getAll('DESCRIBE '.$table);
+		foreach ($data as & $row) {
+			$row['name'] = $row['Field'];
+			$row['type'] = $row['Type'];
+			unset($row['Field'], $row['Type']);
+		}
+
+		return $data;
 	}
 	
 	/**
-	 * получить список таблиц
+	 * ПОЛУЧИТЬ СПИСОК ТАБЛИЦ
 	 * в текущей базе данных
 	 * @return array - массив-список таблиц
 	 */
@@ -296,7 +314,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * получить список бд
+	 * ПОЛУЧИТЬ СПИСОК БД
 	 * @return array - массив-список баз данных
 	 */
 	public function showDatabases(){
@@ -305,7 +323,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * показать строку CREATE TABLE
+	 * ПОКАЗАТЬ СТРОКУ CREATE TABLE
 	 * @param string $table - имя таблицы
 	 * @return string - строка CREATE TABLE
 	 */
@@ -315,7 +333,7 @@ class DbAdapter_mysql extends DbAdapter{
 	}
 	
 	/**
-	 * создать дамп базы данных
+	 * СОЗДАТЬ ДАМП БАЗЫ ДАННЫХ
 	 * @param string|null $database - база данных (или дефолтная, если null)
 	 * @param array|null $tables - список таблиц (или все, если null)
 	 * @output выдает текст sql-дампа
@@ -393,8 +411,8 @@ class DbAdapter_mysql extends DbAdapter{
 					foreach($rows as $rowIndex => $row){
 						foreach($row as &$cell){
 							if(is_string($cell)){
-								$cell = str_replace("\n", '\\r\\n', $cell);
-								$cell = str_replace("\r", '', $cell);
+								$cell = str_replace("\n", '\\n', $cell);
+								$cell = str_replace("\r", '\\r', $cell);
 							}
 							$cell = $this->qe($cell);
 						}
