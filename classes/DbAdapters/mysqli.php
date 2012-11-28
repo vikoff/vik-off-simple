@@ -67,7 +67,7 @@ class DbAdapter_mysqli implements DbAdapter{
 		$this->_dbrs = new mysqli($this->connHost, $this->connUser, $this->connPass, $this->connDatabase);
 		
 		if(mysqli_connect_error())
-			$this->error('Невозможно подключиться к серверу MySQL: '.mysqli_connect_error());
+			$this->_error('Невозможно подключиться к серверу MySQL: '.mysqli_connect_error());
 			
 		if(!empty($this->_encoding))
 			$this->_dbrs->set_charset($this->_encoding) or error('Не удалось установить кодировку БД');
@@ -156,7 +156,7 @@ class DbAdapter_mysqli implements DbAdapter{
 			$update_arr[] = $field.'=\''.$value.'\'';
 		
 		if(!is_array($conditionFieldsValues) || !count($conditionFieldsValues)){
-			$this->error('функция updateInsert получила неверное условие conditionFieldsValues');
+			$this->_error('функция updateInsert получила неверное условие conditionFieldsValues');
 			return false;
 		}
 		$conditionArr = array();
@@ -170,7 +170,7 @@ class DbAdapter_mysqli implements DbAdapter{
 		// если не было изменено ни одной строки, смотрим внимательно
 		if($affected == 0){
 			// если такая запись присутствует в таблице, то все хорошо
-			if($this->getOne('SELECT COUNT(*) FROM '.$table.' WHERE '.implode(' AND ',$conditionArr), 0))
+			if($this->fetchOne('SELECT COUNT(*) FROM '.$table.' WHERE '.implode(' AND ',$conditionArr), 0))
 				return 0;
 			// если же нет, то создаем ее
 			else
@@ -203,14 +203,14 @@ class DbAdapter_mysqli implements DbAdapter{
 		$this->_queriesNum++;
 		
 		$start = microtime(1);
-		$rs = mysql_query($sql, $this->_dbrs) or $this->error(mysql_error($this->_dbrs), $sql);
+		$rs = mysql_query($sql, $this->_dbrs) or $this->_error(mysql_error($this->_dbrs), $sql);
 		$this->_saveQueryTime(microtime(1) - $start);
 		
 		return $rs;
 	}
 	
 	//функция GET ONE выполняет запрос и возвращает единственное значение (первая строка, первый столбец)
-	public function getOne($query, $default_value = null){
+	public function fetchOne($query, $default_value = null){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -247,7 +247,7 @@ class DbAdapter_mysqli implements DbAdapter{
 	}
 	
 	// GET COL возвращает единственный столбец (первый в наборе)
-	public function getCol($query, $default_value = array()){
+	public function fetchCol($query, $default_value = array()){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -267,7 +267,7 @@ class DbAdapter_mysqli implements DbAdapter{
 	 * @param mixed $default_value
 	 * @return array|$default_value
 	 */
-	public function getColIndexed($query, $default_value = 0){
+	public function fetchPairs($query, $default_value = 0){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -279,7 +279,7 @@ class DbAdapter_mysqli implements DbAdapter{
 	}
 	
 	// GET ROW возвращает единственную строку (первую в наборе)
-	public function getRow($query, $default_value = array()){
+	public function fetchRow($query, $default_value = array()){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -304,7 +304,7 @@ class DbAdapter_mysqli implements DbAdapter{
 	}
 	
 	// GET ALL формирует многомерный ассоциативный массив
-	public function getAll($query, $default_value = array()){
+	public function fetchAll($query, $default_value = array()){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -316,7 +316,7 @@ class DbAdapter_mysqli implements DbAdapter{
 	}
 	
 	// GET ALL INDEXED формирует многомерный индексированный ассоциативный массив 
-	public function getAllIndexed($query, $index, $default_value = 0){
+	public function fetchAssoc($query, $index, $default_value = 0){
 		
 		$rs = $this->query($query);
 		if(is_resource($rs) && mysql_num_rows($rs))
@@ -342,7 +342,7 @@ class DbAdapter_mysqli implements DbAdapter{
 	// DESCRIBE
 	public function describe($table){
 		
-		return $this->getAll('DESCRIBE '.$table);
+		return $this->fetchAll('DESCRIBE '.$table);
 	}
 
 	// СОХРАНИТЬ ЗАПРОС
@@ -388,17 +388,17 @@ class DbAdapter_mysqli implements DbAdapter{
 	}
 	
 	// ПЕРЕХВАТ ОШИБОК ПРИ ВЫПОЛНЕНИИ SQL ЗАПРОСОВ
-	private function error($msg, $sql = ''){
+	private function _error($msg, $sql = ''){
 
 		if($this->_errorHandlingMode)
-			$this->setError('"'.$sql.'"<br />'.$msg);
+			$this->_setError('"'.$sql.'"<br />'.$msg);
 		else
 			trigger_error('<hr />'.$sql.'<hr /><br />'.$msg.'<br />', E_USER_ERROR);
 	}
 	
 	public function showTables(){
 	
-		return $this->getCol('SHOW TABLES');
+		return $this->fetchCol('SHOW TABLES');
 	}
 	
 	public function makeDump(){
@@ -411,7 +411,7 @@ class DbAdapter_mysqli implements DbAdapter{
 		$PHP_EVAL_MODE = FALSE;
 		$cmnt = $PHP_EVAL_MODE ? '//' : '#';
 		
-		$tables = $this->getCol('SHOW TABLES');
+		$tables = $this->fetchCol('SHOW TABLES');
 
 		// get 'table create' parts for all tables
 		foreach ($tables as $table){
@@ -465,7 +465,7 @@ class DbAdapter_mysqli implements DbAdapter{
 				
 			echo $lf;
 			
-			$numRows = $this->getOne('SELECT COUNT(*) FROM '.$table);
+			$numRows = $this->fetchOne('SELECT COUNT(*) FROM '.$table);
 			
 			if($numRows){
 				
@@ -475,12 +475,12 @@ class DbAdapter_mysqli implements DbAdapter{
 				
 				// извлечение названий полей
 				$fields = array();
-				foreach($this->getAll('DESCRIBE '.$table, array()) as $f)
+				foreach($this->fetchAll('DESCRIBE '.$table, array()) as $f)
 					$fields[] = $f['Field'];
 					
 				for($i = 0; $i < $numIterations; $i++){
 				
-					$rows = db::get()->getAll('SELECT * FROM '.$table.' LIMIT '.($i * $rowsPerIteration).', '.$rowsPerIteration, array());
+					$rows = db::get()->fetchAll('SELECT * FROM '.$table.' LIMIT '.($i * $rowsPerIteration).', '.$rowsPerIteration, array());
 					foreach($rows as $rowIndex => $row){
 						foreach($row as $field => $cell){
 							$cell = addslashes($cell);
@@ -518,11 +518,11 @@ class DbAdapter_mysqli implements DbAdapter{
 	public function loadDump($fileName){
 	
 		if(!$fileName){
-			$this->setError('Файл дампа не загружен');
+			$this->_setError('Файл дампа не загружен');
 			return FALSE;
 		}
 		if(!file_exists($fileName)){
-			$this->setError('Файл дампа не найден');
+			$this->_setError('Файл дампа не найден');
 			return FALSE;
 		}
 		
@@ -554,7 +554,7 @@ class DbAdapter_mysqli implements DbAdapter{
 		return TRUE;
 	}
 	
-	public function setError($error){
+	public function _setError($error){
 		$this->_error[] = $error;
 	}
 	

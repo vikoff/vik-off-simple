@@ -8,9 +8,10 @@ require_once('classes/FrontController.class.php');
 require_once('classes/Layout.class.php');
 require_once('classes/Db.class.php');
 
-require_once('classes/DbAdapters/mysql.php');
-require_once('classes/DbAdapters/postgres.php');
-require_once('classes/DbAdapters/sqlite.php');
+require_once('classes/DbAdapters/PdoAbstract.php');
+require_once('classes/DbAdapters/PdoSqlite.php');
+require_once('classes/DbAdapters/PdoMysql.php');
+require_once('classes/DbAdapters/Mysql.php');
 
 require_once('config.php');
 
