@@ -82,7 +82,15 @@ class FrontController extends Controller{
 		if(!isset($_POST['action']) || !checkFormDuplication())
 			return FALSE;
 		
-		$action = $_POST['action'];
+		if (is_array($_POST['action'])) {
+			reset($_POST['action']);
+			$action = key($_POST['action']);
+		} else {
+			$action = $_POST['action'];
+		}
+
+		if (!is_string($action))
+			return FALSE;
 		
 		// если action вида 'controller/action'
 		if(strpos($action, '/')){

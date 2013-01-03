@@ -125,19 +125,6 @@ abstract class DbAdapter {
 	/** число выполненных запросов */
 	protected $_queriesNum = 0;
 	
-	/** массив сохранения сообщений об ошибках */
-	protected $_error = array();
-	
-	/** режим накопления сообщений об ошибках */
-	protected $_errorHandlingMode = 1;
-	
-	/**
-	 * пользовательский обработчик ошибок
-	 * если null, то ошибки складываются в стандартный контейнер (_setError, hasError, getError)
-	 * @var null|callable
-	 */
-	private $_errorHandler = null;
-	
 	/** ресурс соединения с базой данных */
 	protected $_dbrs = null;
 	
@@ -292,27 +279,6 @@ abstract class DbAdapter {
 		$this->connUser = $user;
 		$this->connPass = $pass;
 		$this->connDatabase = $database;
-	}
-	
-	/**
-	 * Установить режим обработки ошибок адаптера
-	 * @param int $mode
-	 * @param null|callable $callback
-	 */
-	public function setErrorHandlingMode($mode, $callback = null) {
-		$all = array(self::ERROR_CALLBACK, self::ERROR_STORE, self::ERROR_THROW, self::ERROR_TRIGGER);
-		if (!in_array($mode, $all)) {
-			trigger_error("invalid sql error handling mode '$mode'", E_USER_ERROR);
-			exit;
-		}
-
-		if ($mode == self::ERROR_CALLBACK && !is_callable($callback)) {
-			trigger_error("db error mode 'callback' need real callback, passed - '".gettype($callback)."'", E_USER_ERROR);
-			exit;
-		}
-
-		$this->_errorHandlingMode = $mode;
-		$this->_errorHandler = $mode == self::ERROR_CALLBACK ? $callback : null;
 	}
 	
 	/** выполнено ли подключение к бд */
@@ -662,7 +628,6 @@ abstract class DbAdapter {
 	
 	/**
 	 * перехват ошибок выполнения sql-запросов
-	 * Дальнейший путь ошибки зависит от установки _errorHandlingMode
 	 * @access protected
 	 * @throws ExceptionDB
 	 * @param string $msg - сообщение, сгенерированное СУБД
@@ -679,58 +644,19 @@ abstract class DbAdapter {
 			.$msg
 			."\n\n--------".str_repeat('-', 80)."\n\n";
 
-		switch ($this->_errorHandlingMode) {
-			case self::ERROR_TRIGGER:
-				trigger_error(PHP_SAPI == 'cli' ? $fullmsg : '<pre>'.$fullmsg.'</pre>', E_USER_ERROR);
-				break;
-			case self::ERROR_THROW:
-				throw new ExceptionDB($fullmsg);
-				break;
-			case self::ERROR_STORE:
-				$this->_setError($fullmsg);
-				break;
-			case self::ERROR_CALLBACK:
-				call_user_func($this->_errorHandler, $msg, $sql, $fullmsg);
-				break;
-		}
-	}
-	
-	/** сохранить ошибку */
-	protected function _setError($error) {
-		$this->_error[] = $error;
-	}
-	
-	/** получить все ошибки */
-	public function getError($clear = false) {
-
-		$separator = PHP_SAPI == 'cli' ? "\n" : '<br />';
-		$output = implode($separator, $this->_error);
-
-		if ($clear) $this->resetError();
-
-		return $output;
-	}
-	
-	/** проверить, есть ли ошибки */
-	public function hasError() {
-		return !empty($this->_error);
-	}
-	
-	/** очистить накопившиеся ошибки */
-	public function resetError() {
-		$this->_error = array();
+		throw new ExceptionDB($fullmsg);
 	}
 	
 	/** загрузить дамп данных */
 	public function loadDump($fileName) {
 	
 		if(!$fileName) {
-			$this->_setError('Файл дампа не загружен');
+			$this->error('Файл дампа не загружен');
 			return FALSE;
 		}
 		
 		if(!file_exists($fileName)) {
-			$this->_setError('Файл дампа не найден');
+			$this->error('Файл дампа не найден');
 			return FALSE;
 		}
 		

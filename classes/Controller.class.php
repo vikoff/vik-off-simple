@@ -8,7 +8,7 @@ class Controller {
 		$method = $this->getActionMethodName($methodIdentifier);
 			
 		if(!method_exists($this, $method)){
-			$this->error_404();
+			$this->display_404();
 			exit;
 		}
 		
