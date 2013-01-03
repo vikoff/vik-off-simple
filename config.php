@@ -1,4 +1,4 @@
-<?
+<?php
 
 if(!defined('FS_ROOT'))
 	die('access denided (config file)');
@@ -31,5 +31,3 @@ db::create(array(
 	'fileLog' => FALSE,
 ));
 
-
-?>

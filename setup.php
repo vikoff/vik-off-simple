@@ -1,4 +1,4 @@
-<?
+<?php
 if(!defined('FS_ROOT'))
 	die('access denided (setup file)');
 
