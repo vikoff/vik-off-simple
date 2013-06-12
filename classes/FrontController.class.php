@@ -2,11 +2,15 @@
 
 class FrontController extends Controller{
 	
+	const DEFAULT_CONTROLLER = 'Front';
+
 	private static $_instance = null;
 	
 	public $requestMethod = null;
 	public $requestParams = array();
 	
+	private $_defaultControllerInstance = null;
+
 	/** контейнер обмена данными между методами */
 	public $data = array();
 	
@@ -27,17 +31,37 @@ class FrontController extends Controller{
 	 * Парсит полученную query string.
 	 * @access private
 	 */
-	private function __construct(){
+	private function __construct() {
 		
 		// авторизация
 		$this->_checkAuth();
 		
 		// парсинг запроса
-		$request = explode('/', getVar($_GET['r']));
+		$requestStr = CLI_MODE 
+			? (isset($GLOBALS['argv'][1]) ? $GLOBALS['argv'][1] : '')
+			: (isset($_GET['r']) ? $_GET['r'] : '');
+
+		$request = explode('/', $requestStr);
 		$_rMethod = array_shift($request);
 		
 		$this->requestMethod = !empty($_rMethod) ? $_rMethod : 'index';
 		$this->requestParams = $request;
+	}
+
+	public function getDefaultController() {
+
+		if ($this->_defaultControllerInstance === null) {
+			if (self::DEFAULT_CONTROLLER) {
+				$class = $this->getControllerClassName(self::DEFAULT_CONTROLLER);
+				if (!$class)
+					throw new Exception('default controller not found');
+				$this->_defaultControllerInstance = new $class;
+			} else {
+				$this->_defaultControllerInstance = $this;
+			}
+		}
+
+		return $this->_defaultControllerInstance;
 	}
 	
 	/** запуск приложения */
@@ -64,6 +88,12 @@ class FrontController extends Controller{
 			exit;
 		
 		$this->display_404();
+	}
+
+	public function run_cli(){
+
+		if (!$this->_checkCli())
+			echo "ERROR: method '$this->requestMethod' not found\n";
 	}
 	
 	/** проверка авторизации */
@@ -108,35 +138,37 @@ class FrontController extends Controller{
 		}
 		// если action вида 'action'
 		else{
-			return $this->action($action, getVar($_POST['redirect']));
+			return $this->getDefaultController()->action($action, getVar($_POST['redirect']));
 		}
 	}
 	
 	/** проверка необходимости выполнения отображения */
 	private function _checkDisplay(){
 		
-		return $this->display($this->requestMethod, $this->requestParams);
+		return $this->getDefaultController()->display($this->requestMethod, $this->requestParams);
 	}
 	
 	/** проверка необходимости выполнения ajax */
 	private function _checkAjax(){
 		
-		return $this->ajax($this->requestMethod, $this->requestParams);
+		return $this->getDefaultController()->ajax($this->requestMethod, $this->requestParams);
 	}
 	
-	
-	
-	/////////////////////
-	////// DISPLAY //////
-	/////////////////////
-	
-	public function display_index(){
+	/** проверка необходимости выполнения cli */
+	private function _checkCli(){
 		
+		return $this->getDefaultController()->cli($this->requestMethod, $this->requestParams);
+	}
+
+       /////////////////////
+       ////// DISPLAY //////
+       /////////////////////
+       
+	public function display_index(){
 		Layout::get()
 			->setContentPhpFile('index.php')
 			->render();
 	}
-	// <generation-skip>
 	
 	public function display_docs($params = array()){
 		

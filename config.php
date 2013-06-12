@@ -22,10 +22,10 @@ define('CFG_SITE_NAME', 'vik-off simple');
 
 // конфигурация подключения к БД
 db::create(array(
-	'adapter' => 'mysql',
+	'adapter' => 'PdoMysql',
 	'host' => 'localhost',
 	'user' => 'root',
-	'pass' => '0000',
+	'pass' => '',
 	'database' => 'mysql',
 	'encoding' => 'utf8',
 	'fileLog' => FALSE,
