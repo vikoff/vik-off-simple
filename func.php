@@ -57,7 +57,7 @@ function checkFormDuplication(){
 	}
 	$formcode = (int)$_POST['formCode'];
 	
-	if(!CHECK_FORM_DUPLICATION)
+	if(!Config::get('check_form_duplication'))
 		return TRUE;
 	
 	if(!$formcode)
@@ -72,6 +72,6 @@ function checkFormDuplication(){
 // ПОМЕТИТЬ FORMCODE ИСПОЛЬЗОВАННЫМ
 function lockFormCode(&$code){
 
-	if(CHECK_FORM_DUPLICATION && !empty($code))
+	if(Config::get('check_form_duplication') && !empty($code))
 		$_SESSION['userFormChecker']['used'][$code] = 1;
 }

@@ -14,13 +14,30 @@ if (CLI_MODE) {
 }
 define('FS_ROOT', dirname(__FILE__).'/');
 
-// определение ajax-запроса
-
 // отправка Content-type заголовка
 header('Content-Type: text/html; charset=utf-8');
 
-// подключение файлов CMF
-require_once(FS_ROOT.'setup.php');
+chdir(FS_ROOT);
+
+function __autoload($name) {
+
+	$filename = FS_ROOT.'classes/'.$name.'.class.php';
+	require($filename);
+}
+
+require_once('func.php');
+
+require_once('classes/Db.class.php');
+require_once('classes/DbAdapters/PdoAbstract.php');
+require_once('classes/DbAdapters/PdoMysql.php');
+
+Config::init();
+
+// создание подключения к БД
+db::create(Config::get('db'));
+
+// код для отсеивания дублирующихся форм
+define('FORMCODE', getFormCodeInput());
 
 // выполнение приложения
 if (CLI_MODE)
