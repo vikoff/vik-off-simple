@@ -3,7 +3,6 @@ session_start();
 
 // обозначение корня ресурса
 define('CLI_MODE', PHP_SAPI == 'cli');
-define('AJAX_MODE', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 if (CLI_MODE) {
 	define('WWW_ROOT', '');
 	define('WWW_URI', '');
