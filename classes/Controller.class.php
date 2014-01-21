@@ -43,7 +43,7 @@ class Controller {
 		return TRUE;
 	}
 	
-	/** выполнение ajax */
+	/** выполнение command line (cli) */
 	public function cli($methodIdentifier, $params){
 		$method = $this->getCliMethodName($methodIdentifier);
 			
@@ -66,7 +66,7 @@ class Controller {
 			return null;
 		
 		// если идентификатор контроллера содержит недопустимые символы, вернем null
-		if(!preg_match('/^[\w\-]$/', $controllerIdentifier))
+		if(!preg_match('/^[\w\-]+$/', $controllerIdentifier))
 			return null;
 			
 		// преобразует строку вида 'any-class-name' в 'AnyClassNameController'
@@ -98,7 +98,7 @@ class Controller {
 		return $method;
 	}
 	
-	/** получить имя ajax метода по идентификатору */
+	/** получить имя cli метода по идентификатору */
 	public function getCliMethodName($method){
 	
 		// преобразует строку вида 'any-Method-name' в 'any_method_name'

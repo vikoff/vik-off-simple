@@ -49,9 +49,11 @@ class Layout{
 	
 	public function prependTitle($title, $separator = ' » '){
 		
-		$this->_htmlTitle = strlen($this->_htmlTitle)
-			? $title.$separator.$this->_htmlTitle
-			: $title.$this->_htmlTitle;
+		if ($title) {
+			$this->_htmlTitle = strlen($this->_htmlTitle)
+				? $title.$separator.$this->_htmlTitle
+				: $title.$this->_htmlTitle;
+		}
 		return $this;
 	}
 	

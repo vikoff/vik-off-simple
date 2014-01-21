@@ -14,20 +14,26 @@ date_default_timezone_set('Europe/Kiev');
 // задать кодировку по умолчанию для mb_* функций
 mb_internal_encoding("utf8");
 
-// отсеивать дублируемые формы
-define('CHECK_FORM_DUPLICATION', 0);
+$config = array(
 
-// название сайта
-define('CFG_SITE_NAME', 'vik-off simple');
+	// название сайта
+	'site_name' => 'uz monitor',
 
-// конфигурация подключения к БД
-db::create(array(
-	'adapter' => 'mysql',
-	'host' => 'localhost',
-	'user' => 'root',
-	'pass' => '0000',
-	'database' => 'mysql',
-	'encoding' => 'utf8',
-	'fileLog' => FALSE,
-));
+	// отсеивать дублируемые формы
+	'check_form_duplication' => 0,
+
+	// конфигурация подключения к БД
+	'db' => array(
+		'adapter' => 'PdoMysql',
+		'host' => 'localhost',
+		'user' => 'root',
+		'pass' => '',
+		'database' => 'test',
+		'encoding' => 'utf8',
+		'fileLog' => FALSE,
+	)
+);
+
+return $config;
+
 
