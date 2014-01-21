@@ -33,7 +33,11 @@ class FrontController extends Controller{
 		$this->_checkAuth();
 		
 		// парсинг запроса
-		$request = explode('/', getVar($_GET['r']));
+		$requestStr = CLI_MODE 
+			? (isset($GLOBALS['argv'][1]) ? $GLOBALS['argv'][1] : '')
+			: (isset($_GET['r']) ? $_GET['r'] : '');
+
+		$request = explode('/', $requestStr);
 		$_rMethod = array_shift($request);
 		
 		$this->requestMethod = !empty($_rMethod) ? $_rMethod : 'index';
@@ -64,6 +68,12 @@ class FrontController extends Controller{
 			exit;
 		
 		$this->display_404();
+	}
+
+	public function run_cli(){
+
+		if (!$this->_checkCli())
+			echo "ERROR: method '$this->requestMethod' not found\n";
 	}
 	
 	/** проверка авторизации */
@@ -122,6 +132,12 @@ class FrontController extends Controller{
 	private function _checkAjax(){
 		
 		return $this->ajax($this->requestMethod, $this->requestParams);
+	}
+	
+	/** проверка необходимости выполнения cli */
+	private function _checkCli(){
+		
+		return $this->cli($this->requestMethod, $this->requestParams);
 	}
 	
 	
