@@ -3,7 +3,7 @@
  * 
  * 
  * @using:
- * 		const: CFG_SITE_NAME, FS_ROOT, WWW_ROOT, AJAX_MODE
+ * 		const: FS_ROOT, WWW_ROOT, AJAX_MODE
  * 
  */
 class Layout{
@@ -173,8 +173,8 @@ class Layout{
 	protected function _getHtmlTitle(){
 		
 		return !empty($this->_htmlTitle)
-			? $this->_htmlTitle.' - '.CFG_SITE_NAME
-			: CFG_SITE_NAME;
+			? $this->_htmlTitle.' - '.Config::get('site_name')
+			: Config::get('site_name');
 	}
 	
 	protected function _getHtmlLinkTags(){
