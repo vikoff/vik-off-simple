@@ -39,10 +39,13 @@ abstract class DbAdapter_PdoAbstract extends DbAdapter {
 		$bind = $bind === null ? array(null) : (array)$bind;
 
 		$sqlForLog = $sql.($bind ? '; BIND ['.implode('; ', $bind).']' : '');
-		$this->_saveQuery($sqlForLog);
-		$this->_queriesNum++;
-		
-		$start = microtime(1);
+		$start = null;
+
+		if ($this->_profiling) {
+			$this->_saveQuery($sqlForLog);
+			$this->_queriesNum++;
+			$start = microtime(1);
+		}
 
 		/** @var $stmt PDOStatement */
 		$stmt = $this->_dbrs->prepare($sql);
@@ -54,7 +57,9 @@ abstract class DbAdapter_PdoAbstract extends DbAdapter {
 			$stmt->execute($bind) or $this->_error($stmt->errorInfo(), $sqlForLog);
 		} catch (Exception $e) { $this->_error($e->getMessage(), $sql); }
 
-		$this->_saveQueryTime(microtime(1) - $start);
+		if ($this->_profiling) {
+			$this->_saveQueryTime(microtime(1) - $start);
+		}
 		
 		return $stmt;
 	}

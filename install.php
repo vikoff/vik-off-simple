@@ -4,7 +4,8 @@ if (PHP_SAPI != 'cli')
 	exit('command line run only!');
 
 define('FS_ROOT', dirname(__FILE__).'/');
-require_once(FS_ROOT.'setup.php');
+chdir(FS_ROOT);
+
 require_once(FS_ROOT.'classes/Cmd.class.php');
 
 function skipExcess($filename) {
@@ -43,7 +44,7 @@ elseif (count(scandir($args['dir'])) > 2)
 $trgDir = rtrim($args['dir'], '/').'/';
 
 echo "copy root files\n";
-foreach (array('config.php', 'func.php', 'index.php', 'setup.php') as $tpl)
+foreach (array('config.local.php', 'config.php', 'func.php', 'index.php') as $tpl)
 	copy(FS_ROOT.$tpl, $trgDir.$tpl);
 
 echo "copy classes\n";
