@@ -98,7 +98,7 @@ class Controller {
 		return $method;
 	}
 	
-	/** получить имя ajax метода по идентификатору */
+	/** получить имя cli метода по идентификатору */
 	public function getCliMethodName($method){
 	
 		// преобразует строку вида 'any-Method-name' в 'any_method_name'

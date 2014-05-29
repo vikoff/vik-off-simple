@@ -3,6 +3,7 @@
 if (PHP_SAPI != 'cli')
 	exit('command line run only!');
 
+
 define('FS_ROOT', dirname(__FILE__).'/');
 chdir(FS_ROOT);
 

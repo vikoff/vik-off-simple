@@ -3,7 +3,6 @@ session_start();
 
 // обозначение корня ресурса
 define('CLI_MODE', PHP_SAPI == 'cli');
-define('AJAX_MODE', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 if (CLI_MODE) {
 	define('WWW_ROOT', '');
 	define('WWW_URI', '');
@@ -13,6 +12,9 @@ if (CLI_MODE) {
 	define('WWW_URI', 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
 }
 define('FS_ROOT', dirname(__FILE__).'/');
+
+// определение ajax-запроса
+define('AJAX_MODE', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 
 // отправка Content-type заголовка
 header('Content-Type: text/html; charset=utf-8');
